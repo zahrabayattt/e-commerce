@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes } from 'react-router-dom';
 import Layout from './Layout';
+import ProfilePage from './pages/ProfilePage';
 // import { Button } from './components/ui/button';
 
 function App() {
@@ -7,7 +8,10 @@ function App() {
     <>
       <BrowserRouter>
         <Layout>
-          <div>صفحه اصلی</div>
+          <div>
+            <ProfilePage />
+            <button />
+          </div>
         </Layout>
         <Routes>
           {/* I commented Button component which was implanted as an instant
