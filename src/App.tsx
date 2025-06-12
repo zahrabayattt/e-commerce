@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Layout from './Layout';
 // import { Button } from './components/ui/button';
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar />
+        <Layout>
+          <div>صفحه اصلی</div>
+        </Layout>
         <Routes>
           {/* I commented Button component which was implanted as an instant
           <Button>کلیک</Button> */}
