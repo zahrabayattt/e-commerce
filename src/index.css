@@ -64,9 +64,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --primary-dark:#831747;
-  --primary-lighter:#F8D4E4;
-  --primary-main:##DB2777;
+  --primary-dark: #831747;
+  --primary-lighter: #f8d4e4;
+  --primary-main: ##db2777;
 }
 
 :root {
@@ -146,19 +146,18 @@
     @apply bg-background text-foreground;
   }
 
-  .productCard__img{
+  .productCard__img {
     @apply rounded-sm object-fill border border-b-gray-300;
   }
 
-    .badge{
+  .badge {
     background-color: var(--primary-dark);
     color: var(--primary-lighter);
     border-radius: 9999px;
   }
-
 }
 
 .checkbox {
-  @apply w-5 h-5 rounded-md bg-[#22C55E] appearance-none relative
-before:content-['✔'] before:absolute before:text-white before:text-sm before:top-0.5 before:left-1;
+  @apply w-4.5 h-4.5 rounded-sm bg-[#22C55E] appearance-none relative
+before:content-['✔'] before:absolute before:text-white before:text-sm before:top-0.25 before:left-1;
 }
