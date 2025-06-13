@@ -1,34 +1,34 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("./assets/fonts/IRANYekanWebLight.woff2");
+  font-family: 'IranYekan';
+  src: url('./assets/fonts/IRANYekanWebLight.woff2');
   font-weight: 300;
 }
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("./assets/fonts/IRANYekanWebRegular.woff2");
+  font-family: 'IranYekan';
+  src: url('./assets/fonts/IRANYekanWebRegular.woff2');
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("./assets/fonts/IRANYekanWebBold.woff2");
+  font-family: 'IranYekan';
+  src: url('./assets/fonts/IRANYekanWebBold.woff2');
   font-weight: 700;
 }
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("./assets/fonts/IRANYekanWebExtraBold.woff2");
+  font-family: 'IranYekan';
+  src: url('./assets/fonts/IRANYekanWebExtraBold.woff2');
   font-weight: 800;
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-iranYekan: "IranYekan";
+  --font-iranYekan: 'IranYekan';
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -156,4 +156,9 @@
     border-radius: 9999px;
   }
 
+}
+
+.checkbox {
+  @apply w-5 h-5 rounded-md bg-[#22C55E] appearance-none relative
+before:content-['✔'] before:absolute before:text-white before:text-sm before:top-0.5 before:left-1;
 }
