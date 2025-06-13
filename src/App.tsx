@@ -1,10 +1,5 @@
-<<<<<<< feature/create-stepper
-import { Button } from './components/ui/button';
-=======
 import { BrowserRouter, Routes } from 'react-router-dom';
 import Layout from './Layout';
-// import { Button } from './components/ui/button';
->>>>>>> dev
 
 function App() {
   return (
