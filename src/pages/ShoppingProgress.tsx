@@ -1,88 +1,44 @@
+import OrderShippingDetails from '@/components/OrderShippingDetails';
+import OrderSummary from '@/components/OrderSummary';
 import Stepper from '@/components/Stepper';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
-interface IShoppingProgress {
-  handleChangeValues: () => void;
-  handleSubmit: () => void;
-  currentStep: number;
+export interface ICartItem {
+  productId: number;
+  productTitle: string;
+  productImage: string;
+  productPrice: number;
+  productQuantity: number;
+  productTotalPrice: number;
 }
 
-const ShoppingProgress = ({ handleChangeValues, handleSubmit, currentStep }: IShoppingProgress) => {
+const ShoppingProgress = ({ cartItems }: { cartItems: ICartItem[] }) => {
+  const [currentStep, setCurrentStep] = useState(2);
+  const [formValues, setFormValues] = useState({
+    address: '',
+    city: '',
+    country: '',
+    postalCode: '',
+    paymentMethod: 'pasargad',
+  });
+
+  const handleChangeValues = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = event.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center gap-8">
-      <Stepper currentStep={1} />
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-[450px]">
-        <h3 className="font-bold">خرید</h3>
-        <div className="flex flex-col space-y-1.5">
-          <label htmlFor="address" className="text-sm">
-            آدرس
-          </label>
-          <Input
-            type="text"
-            name="address"
-            id="address"
-            onChange={handleChangeValues}
-            placeholder="آدرس را وارد نمایید"
-          />
-        </div>
-        <div className="flex flex-col space-y-1.5">
-          <label htmlFor="city" className="text-sm">
-            شهر
-          </label>
-          <Input
-            type="text"
-            name="city"
-            id="city"
-            onChange={handleChangeValues}
-            placeholder="شهر را وارد نمایید"
-          />
-        </div>
-        <div className="flex flex-col space-y-1.5">
-          <label htmlFor="country" className="text-sm">
-            کشور
-          </label>
-          <Input
-            type="text"
-            name="country"
-            id="country"
-            onChange={handleChangeValues}
-            placeholder="کشور را وارد نمایید"
-          />
-        </div>
-        <div className="flex flex-col space-y-1.5">
-          <label htmlFor="postalCode" className="text-sm">
-            کدپستی
-          </label>
-          <Input
-            type="text"
-            name="postalCode"
-            id="postalCode"
-            onChange={handleChangeValues}
-            placeholder="کدپستی را وارد نمایید"
-          />
-        </div>
-        <div className="flex flex-col space-y-1.5">
-          <label htmlFor="payment" className="text-sm text-[#58616C] mb-4">
-            روش پرداخت
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              name="payment"
-              value="pasargad"
-              defaultChecked
-              onChange={handleChangeValues}
-              className="hidden"
-            />
-            <div className="w-3 h-3 rounded-full bg-[#DB2777]" />
-            <p className="text-xs">درگاه پرداخت پاسارگاد</p>
-          </label>
-        </div>
-        <Button variant="default" size="lg" className="bg-[#DB2777] rounded-xl">
-          ادامه
-        </Button>
-      </form>
+    <div className="max-w-5xl mx-auto px-4">
+      <Stepper currentStep={currentStep} />
+
+      {currentStep === 2 && (
+        <OrderShippingDetails
+          handleChangeValues={handleChangeValues}
+          nextStep={() => setCurrentStep((step) => step + 1)}
+        />
+      )}
+
+      {currentStep === 3 && <OrderSummary cartItems={cartItems} orderShippingDetail={formValues} />}
     </div>
   );
 };
