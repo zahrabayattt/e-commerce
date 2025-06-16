@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import CartPage from "./pages/CartPage";
 import ProfilePage from "./pages/ProfilePage";
+// import CreateEdit from "./components/ui/CreateEdit";
+// import Create from "./components/ui/Create";
 
 function App() {
   return (
