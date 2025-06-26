@@ -8,48 +8,7 @@ import Navbar from "../components/Navbar";
 
 
 const ShopPage = () => {
-  const products = [
-    {
-      id: 1,
-      title: "آیفون 13",
-      image: "https://picsum.photos/200/300",
-      price: 500024,
-      brand: "Apple",
-      description:"heloooooooooo"
-    },
-    {
-     id: 2,
-      title: "آیفون 13",
-      image: "https://picsum.photos/200/300",
-      price: 5000000,
-      brand: "Microsoft",
-      description:"heloooooooooo"
-    },
-    {
-     id: 3,
-      title: "آیفون 13",
-      image: "https://picsum.photos/200/300",
-      price: 50000000,
-      brand: "Apple",
-      description:"heloooooooooo"
-    },
-  ];
-
-  // const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  // const [maxPrice, setMaxPrice] = useState<number | null>(null);
-  // const handleBrandChange = (brand: string) => {
-  //   setSelectedBrands(prev =>
-  //       prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
-  //   );
-  // };
-  // const filteredProducts = products.filter(product => {
-  //   const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
-  //   const matchPrice = maxPrice === null || product.price <= maxPrice;
-  //   return matchBrand && matchPrice;
-  // });
-
   
-
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [tempPrice, setTempPrice] = useState('');
