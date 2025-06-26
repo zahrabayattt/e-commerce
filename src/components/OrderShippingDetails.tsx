@@ -7,7 +7,7 @@ interface IOrderShippingDetails {
 const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDetails) => {
   return (
     <div className="flex flex-col items-center justify-center gap-8">
-      <form className="flex flex-col gap-4 w-[450px] mt-5">
+      <form className="flex flex-col gap-4 w-[450px] mt-8">
         <h3 className="font-bold">خرید</h3>
         <div className="flex flex-col space-y-1.5">
           <label htmlFor="address" className="text-sm">
