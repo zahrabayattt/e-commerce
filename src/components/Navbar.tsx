@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NavbarItems, authNavItems } from '@/utils/NavbarItems';
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -46,6 +47,7 @@ const Navbar = () => {
             <span
               className={`whitespace-nowrap transition-all duration-500 ease-in-out ${
                 isOpen ? 'opacity-100' : 'opacity-0 absolute'
+
               }`}
             >
               {item.title}
