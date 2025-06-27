@@ -1,5 +1,5 @@
-import ProductCard from "./ui/ProductCardAll";
-import { products } from "./ProductsForShow";
+import ProductCard from './ProductCardAll';
+import { products } from './ProductsForShow';
 
 const ProductList = () => {
   return (
@@ -12,4 +12,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-
