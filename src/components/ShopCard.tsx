@@ -1,17 +1,10 @@
 import { Heart} from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
+import { products, type Product } from "./ProductsForShow";
 
-interface IProduct{
-    id:number;
-    image : string;
-    title : string;
-    price : number;
-    description : string;
-    brand : string;
-}
-
-const ShopCard = ({image,title,price,description,brand}:IProduct) => {
+const ShopCard = ({product}:{product:Product}) => {
+  const { image, title, price, description, brand } = product;
   
   return (
    <div className="w-[280px] h-[330px] bg-gray-100 rounded-2xl inline-block overflow-hidden mt-6 mr-6">

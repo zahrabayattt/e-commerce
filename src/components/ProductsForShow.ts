@@ -5,6 +5,7 @@ export interface Product {
   price: string;
   date: string;
   image: string;
+  brand: string;
 }
 
 export  const products: Product[] = [
@@ -15,7 +16,8 @@ export  const products: Product[] = [
       "آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. دارای A16 Bionic و سیستم ProMotion",
     price: "100,000",
     date: "۳۱ مرداد ۱۴۰۳",
-    image: "assets/images/iphone.png",
+    image: "https://picsum.photos/200/300",
+    brand:"Apple"
   },
   {
     id: 2,
@@ -24,7 +26,18 @@ export  const products: Product[] = [
       "آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. دارای A16 Bionic و سیستم ProMotion",
     price: "100,000",
     date: "۳۱ مرداد ۱۴۰۳",
-    image: "./",
+    image: "https://picsum.photos/200/300",
+    brand:"Apple"
+  },
+  {
+    id: 3,
+    title: "Samaung S25 Ultra",
+    description:
+      "آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. دارای A16 Bionic و سیستم ProMotion",
+    price: "200,000",
+    date: "۳۱ مرداد ۱۴۰۳",
+    image: "https://picsum.photos/200/300",
+    brand:"Samsung"
   },
   // ... سایر آیتم‌ها
 ];

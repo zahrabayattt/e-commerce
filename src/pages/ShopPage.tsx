@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react";
 import ShopCard from "../components/ShopCard";
 import Navbar from "../components/Navbar";
-
+import { products,type Product } from "@/components/ProductsForShow";
 
 
 const ShopPage = () => {
@@ -22,7 +22,7 @@ const ShopPage = () => {
 
   const filteredProducts = products.filter(product => {
     const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
-    const matchPrice = maxPrice === null || product.price <= maxPrice;
+    const matchPrice =  maxPrice === null || parseInt(product.price.replace(/,/g, '')) <= maxPrice;
     return matchBrand && matchPrice;
   });
 
@@ -78,15 +78,7 @@ const ShopPage = () => {
         </div>
         <div className="grid grid-cols-3 grid-rows-2 gap-2 mr-10 mt-2">
                {filteredProducts.slice(0, 10).map(product => (
-                    <ShopCard
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
-                        image={product.image}
-                        price={product.price}
-                        brand={product.brand}
-                        description={product.description}
-                    />
+                    <ShopCard key={product.id} product={product} />
                 ))}
         </div> 
      </div>   
