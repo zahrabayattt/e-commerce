@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./Layout";
-import CartPage from "./pages/CartPage";
-import ProfilePage from "./pages/ProfilePage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './Layout';
+import CartPage from './pages/CartPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -11,14 +11,6 @@ function App() {
           <div>صفحه اصلی</div>
  
         </Layout>
-<<<<<<< Updated upstream
-=======
-
-
-          
-        
-       
->>>>>>> Stashed changes
         <Routes>
           {/* I commented Button component which was implanted as an instant
           <Button>کلیک</Button> */}

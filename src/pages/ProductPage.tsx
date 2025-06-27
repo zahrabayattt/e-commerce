@@ -6,16 +6,22 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import SubmitComment from './SubmitComment';
+import SubmitComment from '@/components/SubmitComment';
 interface IProduct {
   productId: number;
   productTitle: string;
-  productDescription:string;
+  productDescription: string;
   productImage: string;
   price: number;
 }
 
-const ProductPage = ({ productId, productTitle,productDescription, productImage, price }: IProduct) => {
+const ProductPage = ({
+  productId,
+  productTitle,
+  productDescription,
+  productImage,
+  price,
+}: IProduct) => {
   return (
     <>
       <div className="flex flex-row justify-around">
@@ -94,7 +100,7 @@ const ProductPage = ({ productId, productTitle,productDescription, productImage,
               </div>
             </div>
           </div>
-          <div className='flex flex-row justify-between'>
+          <div className="flex flex-row justify-between">
             <Button size={'md'}> افزودن به سبد خرید</Button>
             <Select>
               <SelectTrigger className="w-16">
@@ -113,10 +119,10 @@ const ProductPage = ({ productId, productTitle,productDescription, productImage,
           <p>مشاهده نظرات</p>
           <p>محصولات مرتبط</p>
         </div>
-        <SubmitComment/>
+        <SubmitComment />
       </div>
     </>
   );
 };
 
-export default ProductPage
+export default ProductPage;
