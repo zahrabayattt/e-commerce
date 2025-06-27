@@ -9,7 +9,16 @@ function App() {
       <BrowserRouter>
         <Layout>
           <div>صفحه اصلی</div>
+ 
         </Layout>
+<<<<<<< Updated upstream
+=======
+
+
+          
+        
+       
+>>>>>>> Stashed changes
         <Routes>
           {/* I commented Button component which was implanted as an instant
           <Button>کلیک</Button> */}
