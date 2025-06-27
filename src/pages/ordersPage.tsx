@@ -4,9 +4,9 @@ import type { Order } from '@/types/order';
 
 export default function OrdersPage({ orders, isAdmin }: { orders: Order[]; isAdmin: boolean }) {
   return (
-    <Table dir="rtl">
+    <Table dir="rtl" className="w-[95%] mx-[4%] mt-[3%]">
       <TableHeader>
-        <TableRow>
+        <TableRow className="border-none h-16">
           <TableHead className="text-center">عکس</TableHead>
           <TableHead className="text-center">نام محصول</TableHead>
           <TableHead className="text-center">تاریخ</TableHead>
