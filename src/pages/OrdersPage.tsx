@@ -1,5 +1,5 @@
 import { Table, TableHeader, TableRow, TableHead, TableBody } from '@/components/ui/table';
-import OrderRow from '@/components/orderRow';
+import OrderRow from '@/components/OrderRow';
 import type { Order } from '@/types/order';
 
 export default function OrdersPage({ orders, isAdmin }: { orders: Order[]; isAdmin: boolean }) {
