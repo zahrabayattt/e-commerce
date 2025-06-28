@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 import CartPage from './pages/CartPage';
 import ProfilePage from './pages/ProfilePage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -9,7 +10,6 @@ function App() {
       <BrowserRouter>
         <Layout>
           <div>صفحه اصلی</div>
- 
         </Layout>
         <Routes>
           {/* I commented Button component which was implanted as an instant
@@ -19,6 +19,7 @@ function App() {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="shop" />
           <Route path="favorite" />
+          <Route path="admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </>
