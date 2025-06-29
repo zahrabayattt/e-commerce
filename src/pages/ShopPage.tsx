@@ -26,7 +26,7 @@ const ShopPage = () => {
   return (
     <div className="flex ">
       <div className="fixed"></div>
-      <div className=" bg-gray-100  p-3 flex flex-col mt-8  max-w-2xs  items-center h-[600px] mr-60 ">
+      <div className=" bg-gray-200  p-3 flex flex-col mt-2  max-w-2xs  items-center h-[600px] mr-44 ">
         <div
           className="shadow-xs border-gray-200 bg-white rounded-2xl 
             w-[250px] text-center py-2 justify-center items-center  "
@@ -77,7 +77,7 @@ const ShopPage = () => {
           حذف فیلتر ها
         </Button>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-2 mr-10 mt-2">
+      <div className="grid grid-cols-3 grid-rows-2 gap-2 mr-10 mt-[-14px]">
         {filteredProducts.slice(0, 10).map((product) => (
           <ShopCard key={product.id} product={product} />
         ))}
