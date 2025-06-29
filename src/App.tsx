@@ -2,14 +2,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 import CartPage from './pages/CartPage';
 import ProfilePage from './pages/ProfilePage';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Layout>
-          <div>صفحه اصلی</div>
- 
+          <AuthPage />
         </Layout>
         <Routes>
           {/* I commented Button component which was implanted as an instant
