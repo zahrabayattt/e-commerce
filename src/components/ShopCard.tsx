@@ -7,7 +7,7 @@ const ShopCard = ({product}:{product:Product}) => {
   const { image, title, price, description, brand } = product;
   
   return (
-   <div className="w-[280px] h-[330px] bg-gray-100 rounded-2xl inline-block overflow-hidden mt-6 mr-6">
+   <div className="w-[280px] h-[330px] bg-gray-200 rounded-2xl inline-block overflow-hidden mt-6 mr-6">
     <div className="relative  rounded-2xl overflow-hidden">
         <img className="block w-full h-[150px] object-cover" src={image} alt="" />
         <button>
