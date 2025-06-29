@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from './productCard';
-import { products } from './products';
+import { products } from '../utils/products';
 
 const ProductRow: React.FC = () => (
   <section>

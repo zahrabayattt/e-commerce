@@ -1,6 +1,6 @@
 import { Table, TableHeader, TableBody, TableHead, TableRow } from '@/components/ui/table';
 import CartItemRow from '@/components/CartItemRow';
-import type { ICartItem } from '@/types/cart';
+import type { ICartItem } from '@/@types/cart';
 
 interface ICartItemsTable {
   cartItems: ICartItem[];

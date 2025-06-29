@@ -1,5 +1,5 @@
 import { TableRow, TableCell } from '@/components/ui/table';
-import type { ICartItem } from '@/types/cart';
+import type { ICartItem } from '@/@types/cart';
 
 const CartItemRow = ({
   item,

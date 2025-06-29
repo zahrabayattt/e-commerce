@@ -1,8 +1,8 @@
 import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from '@/components/OrderPriceSummary';
 import { Button } from '@/components/ui/button';
-import type { ICartItem } from '@/types/cart';
-import type { IOrderShippingDetail } from '@/types/orderShipping';
+import type { ICartItem } from '@/@types/cart';
+import type { IOrderShippingDetail } from '@/@types/orderShipping';
 
 const OrderDetailItem = ({ label, value }: { label: string; value: number | string }) => {
   return (

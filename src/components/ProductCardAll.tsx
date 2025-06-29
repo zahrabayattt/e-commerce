@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { Product } from './ProductsForShow';
+import type { Product } from '../utils/ProductsForShow';
 
 const ProductCard: FC<{ product: Product }> = ({ product }) => {
   return (

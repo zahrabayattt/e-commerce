@@ -1,4 +1,4 @@
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/stores/cartStore';
 import { Trash2 } from 'lucide-react';
 
 const CartPage = () => {

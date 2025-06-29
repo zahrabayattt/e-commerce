@@ -1,7 +1,7 @@
 import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from './OrderPriceSummary';
-import type { ICartItem } from '@/types/cart';
-import type { IOrderShippingDetail } from '@/types/orderShipping';
+import type { ICartItem } from '@/@types/cart';
+import type { IOrderShippingDetail } from '@/@types/orderShipping';
 import { Button } from '@/components/ui/button';
 
 interface IOrderSummary {

@@ -1,9 +1,24 @@
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
 // import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import type { OrderItem , OrderDetails } from '@/types/order';
+import type { OrderItem, OrderDetails } from '@/@types/order';
 
-const OrderDetailsPage = ({ orderItems, details ,isAdmin }: { orderItems: OrderItem[]; isAdmin: boolean; details: OrderDetails }) => {
+const OrderDetailsPage = ({
+  orderItems,
+  details,
+  isAdmin,
+}: {
+  orderItems: OrderItem[];
+  isAdmin: boolean;
+  details: OrderDetails;
+}) => {
   const totalPrice = orderItems.reduce((sum, item) => sum + item.total, 0);
   const taxRate = 0.2;
   const tax = totalPrice * taxRate;
@@ -13,10 +28,10 @@ const OrderDetailsPage = ({ orderItems, details ,isAdmin }: { orderItems: OrderI
     <div className="flex gap-6 p-6" dir="rtl">
       {/* table of the orders */}
       <div className="flex-1">
-        <div className='border border-gray-300 px-6 py-3'>
-          <Table dir='rtl' >
+        <div className="border border-gray-300 px-6 py-3">
+          <Table dir="rtl">
             <TableHeader>
-              <TableRow className='border-b border-gray-300'>
+              <TableRow className="border-b border-gray-300">
                 <TableHead className="text-right w-20">عکس</TableHead>
                 <TableHead className="text-right">نام محصول</TableHead>
                 <TableHead className="text-center">تعداد</TableHead>
@@ -45,16 +60,27 @@ const OrderDetailsPage = ({ orderItems, details ,isAdmin }: { orderItems: OrderI
 
       {/* orders details */}
       <div className="w-[30%] p-4 flex flex-col gap-4">
-        <div className='flex flex-col gap-4'>
+        <div className="flex flex-col gap-4">
           <h2 className="font-bold text-lg mb-2">آدرس دریافت</h2>
-          <p><span className="font-semibold text-[#DB2777]">شماره سفارش:</span> {details.id}</p>
-          <p><span className="font-semibold text-[#DB2777]">نام:</span> {details.name}</p>
-          <p><span className="font-semibold text-[#DB2777]">ایمیل:</span> {details.email}</p>
-          <p><span className="font-semibold text-[#DB2777]">آدرس:</span> {details.address}</p>
-          <p><span className="font-semibold text-[#DB2777]">روش پرداخت:</span> {details.paymentMethod}</p>
+          <p>
+            <span className="font-semibold text-[#DB2777]">شماره سفارش:</span> {details.id}
+          </p>
+          <p>
+            <span className="font-semibold text-[#DB2777]">نام:</span> {details.name}
+          </p>
+          <p>
+            <span className="font-semibold text-[#DB2777]">ایمیل:</span> {details.email}
+          </p>
+          <p>
+            <span className="font-semibold text-[#DB2777]">آدرس:</span> {details.address}
+          </p>
+          <p>
+            <span className="font-semibold text-[#DB2777]">روش پرداخت:</span>{' '}
+            {details.paymentMethod}
+          </p>
         </div>
 
-        <div className='rounded-lg border border-gray-300 bg-gray-200 mt-2 px-3 py-1'>
+        <div className="rounded-lg border border-gray-300 bg-gray-200 mt-2 px-3 py-1">
           <h3 className="font-bold text-lg m-2">Status</h3>
           {/* <Badge
             className={
@@ -69,21 +95,21 @@ const OrderDetailsPage = ({ orderItems, details ,isAdmin }: { orderItems: OrderI
 
         <div>
           <h2 className="font-bold text-lg mb-2">خلاصه خرید</h2>
-          <div className='flex flex-col gap-4'>
+          <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-              <span className='text-[#58616C]'>قیمت محصولات:</span>
+              <span className="text-[#58616C]">قیمت محصولات:</span>
               <span>{totalPrice.toLocaleString()} تومان</span>
             </div>
             <div className="flex justify-between">
-              <span className='text-[#58616C]'>هزینه ارسال:</span>
+              <span className="text-[#58616C]">هزینه ارسال:</span>
               <span>{shippingCost.toLocaleString()} تومان</span>
             </div>
             <div className="flex justify-between">
-              <span className='text-[#58616C]'>مالیات:</span>
+              <span className="text-[#58616C]">مالیات:</span>
               <span>{tax.toLocaleString()} تومان</span>
             </div>
             <div className="flex justify-between font-bold border-t pt-2">
-              <span className='text-[#58616C]'>مبلغ نهایی:</span>
+              <span className="text-[#58616C]">مبلغ نهایی:</span>
               <span>{totalAmount.toLocaleString()} تومان</span>
             </div>
           </div>
@@ -98,6 +124,6 @@ const OrderDetailsPage = ({ orderItems, details ,isAdmin }: { orderItems: OrderI
       </div>
     </div>
   );
-}
+};
 
-export default OrderDetailsPage
+export default OrderDetailsPage;

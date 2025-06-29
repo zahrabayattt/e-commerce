@@ -2,7 +2,7 @@ import OrderShippingDetails from '@/components/OrderShippingDetails';
 import OrderSummary from '@/components/OrderSummary';
 import Stepper from '@/components/Stepper';
 import { useState } from 'react';
-import type { ICartItem } from '@/types/cart';
+import type { ICartItem } from '@/@types/cart';
 
 const ShoppingProgress = ({ cartItems }: { cartItems: ICartItem[] }) => {
   const [currentStep, setCurrentStep] = useState(2);

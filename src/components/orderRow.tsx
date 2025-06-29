@@ -1,7 +1,7 @@
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import type { Order } from '@/types/order';
+import type { Order } from '@/@types/order';
 
 export default function OrderRow({ order, isAdmin }: { order: Order; isAdmin: boolean }) {
   return (

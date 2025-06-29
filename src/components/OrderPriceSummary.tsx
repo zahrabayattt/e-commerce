@@ -1,4 +1,4 @@
-import type { ICartItem } from '@/types/cart';
+import type { ICartItem } from '@/@types/cart';
 
 const PriceSummaryItem = ({ label, value }: { label: string; value: number }) => (
   <div className="flex justify-between text-[10px]">
