@@ -2,17 +2,11 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 
-// this data is just for test
-// const data = [
-//   { date: '5', sales: 0 },
-//   { date: '4', sales: 3 },
-//   { date: '3', sales: 0 },
-//   { date: '2', sales: 0 },
-//   { date: '1', sales: 0 },
-//   { date: '0', sales: 0 },
-// ];
+type SalesChartProps = {
+  data: { date: string; sales: number }[];
+};
 
-const SalesChart = (data:{date:string,sales:number}[]) => {
+const SalesChart = ({data}:SalesChartProps) => {
   return (
     <div className="w-[80%] md:h-[600px] h-[500px] mx-auto relative">
       <ResponsiveContainer width="100%" height="100%">
