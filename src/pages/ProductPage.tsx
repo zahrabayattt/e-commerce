@@ -8,6 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import CommentSubmit from '@/components/CommentSubmit';
 import CommentShow from '@/components/CommentShow';
+import ProductRelated from '@/components/ProductRelated';
 interface IProduct {
   productId: number;
   productTitle: string;
@@ -120,7 +121,7 @@ const ProductPage = ({
           <p>مشاهده نظرات</p>
           <p>محصولات مرتبط</p>
         </div>
-        <CommentShow />
+        <ProductRelated />
       </div>
     </>
   );
