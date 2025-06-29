@@ -6,9 +6,9 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex-1 bg-[#EEEFF1]">
+    <div className="overflow-y-hidden flex-1 bg-[#EEEFF1]">
       <Navbar />
-      <main className="flex-1 p-6">{children}</main>
+      <main className="p-30">{children}</main>
     </div>
   );
 };
