@@ -6,11 +6,11 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="overflow-y-hidden flex-1 bg-[#EEEFF1]">
+    <div className="overflow-y-hidden">
       <Navbar />
-      <main className="p-30">{children}</main>
+      <main className="pr-30">{children}</main>
     </div>
   );
 };
-
+ 
 export default Layout;
