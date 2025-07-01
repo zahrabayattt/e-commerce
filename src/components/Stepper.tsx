@@ -4,7 +4,7 @@ export interface IStepper {
 const steps = ['ورود', 'آدرس', 'خلاصه خرید'];
 const Stepper = ({ currentStep }: IStepper) => {
   return (
-    <div className="flex justify-center items-center gap-5">
+    <div className="flex justify-center items-center gap-5 h-7">
       {steps.map((step, index) => (
         <div key={index} className="flex items-center gap-2">
           <div className="flex flex-col items-center gap-2">

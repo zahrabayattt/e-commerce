@@ -5,7 +5,7 @@ import type { Order } from '@/types/order';
 
 export default function OrderRow({ order, isAdmin }: { order: Order; isAdmin: boolean }) {
   return (
-    <TableRow>
+    <TableRow className="border-none">
       <TableCell className="p-2">
         <div className="flex justify-center items-center h-full">
           <img src={order.image} alt={order.product} className="w-10 h-10 rounded-md" />

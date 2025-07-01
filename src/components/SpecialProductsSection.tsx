@@ -1,6 +1,6 @@
-import React from "react";
-import ProductCard from "./ui/productCard";
-import { products } from "./products";
+import React from 'react';
+import ProductCard from './productCard';
+import { products } from './products';
 
 const SpecialProductsSection: React.FC = () => (
   <section className="mt-14">

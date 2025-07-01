@@ -1,15 +1,14 @@
-import Navbar from "./components/Navbar";
+import { Outlet } from 'react-router';
+import Navbar from './components/Navbar';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = () => {
   return (
-    <div className="overflow-y-hidden">
+    <>
       <Navbar />
-      <main className="pr-30">{children}</main>
-    </div>
+      <div className="mr-14 px-8 py-3 min-h-screen bg-[#EEEFF1]">
+        <Outlet />
+      </div>
+    </>
   );
 };
  
