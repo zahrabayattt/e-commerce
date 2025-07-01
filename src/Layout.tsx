@@ -1,15 +1,14 @@
+import { Outlet } from 'react-router';
 import Navbar from './components/Navbar';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = () => {
   return (
-    <div className="flex-1 min-h-screen bg-[#EEEFF1]">
+    <>
       <Navbar />
-      <main className="flex-1 p-6">{children}</main>
-    </div>
+      <div className="mr-14 px-8 py-3 min-h-screen bg-[#EEEFF1]">
+        <Outlet />
+      </div>
+    </>
   );
 };
 
