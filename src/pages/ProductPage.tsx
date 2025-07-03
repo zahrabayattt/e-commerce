@@ -9,29 +9,26 @@ import { Button } from '@/components/ui/button';
 import CommentSubmit from '@/components/CommentSubmit';
 import CommentShow from '@/components/CommentShow';
 import ProductRelated from '@/components/ProductRelated';
+import { products } from '@/components/products';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
 interface IProduct {
   productId: number;
-  productTitle: string;
-  productDescription: string;
-  productImage: string;
-  price: number;
 }
 
-const ProductPage = ({
-  productId,
-  productTitle,
-  productDescription,
-  productImage,
-  price,
-}: IProduct) => {
+const ProductPage = ({productId}: IProduct) => {
+  const { id } = useParams();
+  const product = products.find((p) => p.id === Number(id));
+  console.log(product);
   return (
     <>
       <div className="flex flex-row justify-around">
-        <img className="w-2/6" src={productImage} alt={productTitle}></img>
-        <div className="flex flex-col w-2/5 justify-between">
-          <h5>{productTitle}</h5>
-          <p>{productDescription}</p>
-          <h2 className="font-bold text-3xl">{price.toLocaleString()} تومان</h2>
+        <img className="w-2/6" src={product?.image} alt={product?.title}></img>
+        <div className="flex flex-col w-2/5 justify-between gap-4">
+          <h5>{product?.title}</h5>
+          <p>{product?.title}</p>
+          <h2 className="font-bold text-3xl">{product?.price.toLocaleString()} تومان</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-row gap-2">
               <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
