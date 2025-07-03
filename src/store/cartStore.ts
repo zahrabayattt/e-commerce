@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface CartItem {
+export interface CartItem {
   productId: number;
   productTitle: string;
   productBrand: string;
