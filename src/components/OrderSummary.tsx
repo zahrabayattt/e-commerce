@@ -1,10 +1,12 @@
 import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from './OrderPriceSummary';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router';
 import { useOrderStore } from '@/store/orderShippingStore';
 
 const OrderSummary = () => {
   const { orderShippingDetail } = useOrderStore();
+  const navigate = useNavigate();
 
   return (
     <div className="mt-15">
@@ -27,7 +29,14 @@ const OrderSummary = () => {
         </div>
         <OrderPriceSummary />
       </div>
-      <Button variant="default" size="lg" className="bg-[#DB2777] rounded-xl w-full mt-5">
+      <Button
+        onClick={() => {
+          navigate('/checkout');
+        }}
+        variant="default"
+        size="lg"
+        className="bg-[#DB2777] rounded-xl w-full mt-5"
+      >
         ثبت سفارش
       </Button>
     </div>
