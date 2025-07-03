@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import {axiosInstance} from '../lib/utils'
-useEffect(()=>{
-    axios.get('https://qbc9.liara.run/api/products/:
-        ');
-},[]);
+import { axiosInstance } from "@/lib/utils";
+import type { ProductModel } from "@/types/product.model";
+
+export const fetchAllProducts = async (): Promise<ProductModel[]> => {
+  const response = await axiosInstance.get('/products/allproducts'); 
+  return response.data;
+}
