@@ -25,11 +25,10 @@ const ShopPage = () => {
   const brands = Array.from(new Set(products.map((p) => p.brand)));
   return (
     <div className="flex ">
-      <div className="fixed"></div>
-      <div className=" bg-gray-200  p-3 flex flex-col mt-2  max-w-2xs  items-center h-[600px] mr-44 ">
+      
+      <div className=" bg-gray-200 min-w-[230px] h-[600px] px-6 py-6 flex flex-col mt-2 mr-4 rounded-xl ">
         <div
-          className="shadow-xs border-gray-200 bg-white rounded-2xl 
-            w-[250px] text-center py-2 justify-center items-center  "
+          className="bg-white rounded-3xl text-sm text-center py-2 mb-4 shadow "
         >
           <h2>فیلتر برند</h2>
         </div>
@@ -37,25 +36,24 @@ const ShopPage = () => {
         {brands.map((brand) => (
           <div
             key={brand}
-            className="flex  items-center justify-start gap-2 w-full pr-2 mb-2 mt-3 "
+            className="flex  items-center justify-start gap-1 w-full pr-2 mb-2 mt-2   "
           >
             <Checkbox
               checked={selectedBrands.includes(brand)}
               onCheckedChange={() => handleBrandChange(brand)}
-              className="border border-gray-500 rounded-full cursor-pointer "
+              className="border border-gray-400 rounded-full cursor-pointer bg-white "
             />
             <span className="text-sm ">{brand}</span>
           </div>
         ))}
 
         <div
-          className="shadow-xs border-gray-200 bg-white rounded-2xl
-             w-[250px] text-center py-2 justify-center items-center "
+          className="bg-white rounded-3xl text-sm text-center py-2 shadow mt-4 "
         >
           <h2> فیلتر قیمت </h2>
         </div>
         <Input
-          className="mt-5 max-w-52 py-6 bg-white"
+          className="mt-5 bg-white placeholder:text-[12px] "
           value={tempPrice}
           onChange={(e) => {
             const value = e.target.value;
@@ -67,7 +65,7 @@ const ShopPage = () => {
 
         <Button
           variant="outline"
-          className="mt-5 w-52 bg-gray-100 cursor-pointer hover:bg-gray-200"
+          className="mt-5 w-full text-sm bg-gray-100 hover:bg-gray-300"
           onClick={() => {
             setSelectedBrands([]);
             setMaxPrice(null);
@@ -77,7 +75,7 @@ const ShopPage = () => {
           حذف فیلتر ها
         </Button>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-2 mr-10 mt-[-14px]">
+      <div className=" grid grid-cols-3 gap-6 mt-2  mr-14 ml-10">
         {filteredProducts.slice(0, 10).map((product) => (
           <ShopCard key={product.id} product={product} />
         ))}
