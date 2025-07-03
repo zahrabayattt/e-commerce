@@ -3,6 +3,7 @@ import OrderPriceSummary from './OrderPriceSummary';
 import type { ICartItem } from '@/types/cart';
 import type { IOrderShippingDetail } from '@/types/orderShipping';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router';
 
 interface IOrderSummary {
   cartItems: ICartItem[];
@@ -10,6 +11,7 @@ interface IOrderSummary {
 }
 
 const OrderSummary = ({ cartItems, orderShippingDetail }: IOrderSummary) => {
+  const navigate = useNavigate();
   return (
     <div className="mt-15">
       <CartItemsTable cartItems={cartItems} variant="summary" />
@@ -31,7 +33,14 @@ const OrderSummary = ({ cartItems, orderShippingDetail }: IOrderSummary) => {
         </div>
         <OrderPriceSummary cartItems={cartItems} />
       </div>
-      <Button variant="default" size="lg" className="bg-[#DB2777] rounded-xl w-full mt-5">
+      <Button
+        onClick={() => {
+          navigate('/checkout');
+        }}
+        variant="default"
+        size="lg"
+        className="bg-[#DB2777] rounded-xl w-full mt-5"
+      >
         ثبت سفارش
       </Button>
     </div>
