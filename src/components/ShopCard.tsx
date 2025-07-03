@@ -6,6 +6,7 @@ import { products, type Product } from "./ProductsForShow";
 const ShopCard = ({product}:{product:Product}) => {
   const { image, title, price, description, brand } = product;
   
+
    return (
     <div className="bg-gray-200 rounded-2xl overflow-hidden flex flex-col w-full max-w-xs h-fit">
       

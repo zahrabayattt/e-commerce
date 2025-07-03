@@ -1,14 +1,24 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useOrderStore } from '@/store/orderShippingStore';
+
 interface IOrderShippingDetails {
   nextStep: () => void;
-  handleChangeValues: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDetails) => {
+
+const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
+  const { setOrderShippingDetail } = useOrderStore();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setOrderShippingDetail(name, value);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-8">
       <form className="flex flex-col gap-4 w-[450px] mt-8">
         <h3 className="font-bold">خرید</h3>
+
         <div className="flex flex-col space-y-1.5">
           <label htmlFor="address" className="text-sm">
             آدرس
@@ -17,10 +27,11 @@ const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDe
             type="text"
             name="address"
             id="address"
-            onChange={handleChangeValues}
+            onChange={handleChange}
             placeholder="آدرس را وارد نمایید"
           />
         </div>
+
         <div className="flex flex-col space-y-1.5">
           <label htmlFor="city" className="text-sm">
             شهر
@@ -29,10 +40,11 @@ const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDe
             type="text"
             name="city"
             id="city"
-            onChange={handleChangeValues}
+            onChange={handleChange}
             placeholder="شهر را وارد نمایید"
           />
         </div>
+
         <div className="flex flex-col space-y-1.5">
           <label htmlFor="country" className="text-sm">
             کشور
@@ -41,10 +53,11 @@ const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDe
             type="text"
             name="country"
             id="country"
-            onChange={handleChangeValues}
+            onChange={handleChange}
             placeholder="کشور را وارد نمایید"
           />
         </div>
+
         <div className="flex flex-col space-y-1.5">
           <label htmlFor="postalCode" className="text-sm">
             کدپستی
@@ -53,10 +66,11 @@ const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDe
             type="text"
             name="postalCode"
             id="postalCode"
-            onChange={handleChangeValues}
+            onChange={handleChange}
             placeholder="کدپستی را وارد نمایید"
           />
         </div>
+
         <div className="flex flex-col space-y-1.5">
           <label htmlFor="payment" className="text-sm text-[#58616C] mb-4">
             روش پرداخت
@@ -64,16 +78,17 @@ const OrderShippingDetails = ({ nextStep, handleChangeValues }: IOrderShippingDe
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
-              name="payment"
+              name="paymentMethod"
               value="pasargad"
               defaultChecked
-              onChange={handleChangeValues}
+              onChange={handleChange}
               className="hidden"
             />
             <div className="w-3 h-3 rounded-full bg-[#DB2777]" />
             <p className="text-xs">درگاه پرداخت پاسارگاد</p>
           </label>
         </div>
+
         <Button
           type="button"
           variant="default"
