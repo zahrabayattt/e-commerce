@@ -1,18 +1,14 @@
 import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from './OrderPriceSummary';
-import type { ICartItem } from '@/types/cart';
-import type { IOrderShippingDetail } from '@/types/orderShipping';
 import { Button } from '@/components/ui/button';
+import { useOrderStore } from '@/store/orderShippingStore';
 
-interface IOrderSummary {
-  cartItems: ICartItem[];
-  orderShippingDetail: IOrderShippingDetail;
-}
+const OrderSummary = () => {
+  const { orderShippingDetail } = useOrderStore();
 
-const OrderSummary = ({ cartItems, orderShippingDetail }: IOrderSummary) => {
   return (
     <div className="mt-15">
-      <CartItemsTable cartItems={cartItems} variant="summary" />
+      <CartItemsTable variant="summary" />
       <h3 className="my-5 font-bold">خلاصه خرید</h3>
       <div className="flex justify-between bg-[#E6E8EB] rounded-md px-5 py-4">
         <div className="flex flex-col gap-2 text-sm">
@@ -29,7 +25,7 @@ const OrderSummary = ({ cartItems, orderShippingDetail }: IOrderSummary) => {
             <p className="text-black">{orderShippingDetail.address}</p>
           </div>
         </div>
-        <OrderPriceSummary cartItems={cartItems} />
+        <OrderPriceSummary />
       </div>
       <Button variant="default" size="lg" className="bg-[#DB2777] rounded-xl w-full mt-5">
         ثبت سفارش
