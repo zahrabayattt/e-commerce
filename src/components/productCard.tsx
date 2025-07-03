@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Interface } from 'readline';
 interface IProductCard {
-  productId: number;
+  productId: string;
   productTitle: string;
   productImage: string;
   price: number;
