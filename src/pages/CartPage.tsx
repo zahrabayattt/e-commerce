@@ -9,7 +9,7 @@ const CartPage = () => {
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <div className="bg-[#EEEFF1] h-screen w-full">
+    <div className="bg-[#EEEFF1] w-full h-screen">
       <div className="w-2/3 py-4 mx-auto">
         {cartItems.length === 0 ? (
           <p className="text-center mt-10 mx-auto">سبد خرید شما خالی است</p>
