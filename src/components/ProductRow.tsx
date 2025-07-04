@@ -16,17 +16,9 @@ const ProductRow: React.FC = () => {
   return (
     <section>
       <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto place-items-center">
-        {//products.slice(0, 4).map((p) => (
-        data?.map((product) => (
-          <Link to={`/product/${product.id}`} key={product.id}>
-            <ProductCard
-              key={product.id}
-              productId={product.id}
-              productTitle={product.description}
-              productImage={product.image}
-              price={product.price}
-              componentSize="small"
-            />
+        {data?.slice(0, 4).map((product) => (
+          <Link to={`/product/${product._id}`} key={product._id}>
+            <ProductCard key={product._id} product={product} componentSize="small" />
           </Link>
         ))}
       </div>

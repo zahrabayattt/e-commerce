@@ -9,26 +9,29 @@ import { Button } from '@/components/ui/button';
 import CommentSubmit from '@/components/CommentSubmit';
 import CommentShow from '@/components/CommentShow';
 import ProductRelated from '@/components/ProductRelated';
-import { products } from '@/components/products';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { fetchProductById } from '@/store/productsStore';
+import { useQuery } from '@tanstack/react-query';
 
-interface IProduct {
-  productId: number;
-}
+const ProductPage = () => {
 
-const ProductPage = ({productId}: IProduct) => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === Number(id));
-  console.log(product);
+const { id } = useParams();
+
+ const { data: product, isLoading, error } = fetchProductById(id!);
+
+
+  if (isLoading) return <p>در حال بارگذاری...</p>;
+  if (error) return <p>خطا در دریافت محصولات</p>;
+  if (!product) return <p>محصولی یافت نشد</p>;
+  console.log('product page:', JSON.stringify(product, null, 2));
   return (
-    <>
+    <section>
       <div className="flex flex-row justify-around">
-        <img className="w-2/6" src={product?.image} alt={product?.title}></img>
+        <img className="w-2/6" src={product?.image} alt={product?.name}></img>
         <div className="flex flex-col w-2/5 justify-between gap-4">
-          <h5>{product?.title}</h5>
-          <p>{product?.title}</p>
-          <h2 className="font-bold text-3xl">{product?.price.toLocaleString()} تومان</h2>
+          <h5>{product.name}</h5>
+          <p>{product.description}</p>
+          <h2 className="font-bold text-3xl">{product.price.toLocaleString()} تومان</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-row gap-2">
               <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -100,7 +103,10 @@ const ProductPage = ({productId}: IProduct) => {
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button size={'md'}> افزودن به سبد خرید</Button>
+            <Button variant="default" size={'md'}>
+              {' '}
+              افزودن به سبد خرید
+            </Button>
             <Select>
               <SelectTrigger className="w-16">
                 <SelectValue placeholder="1" />
@@ -112,15 +118,15 @@ const ProductPage = ({productId}: IProduct) => {
           </div>
         </div>
       </div>
+
       <div className="flex flex-row justify-around gap-24 m-4">
         <div className="flex flex-col">
           <p>ثبت نظر</p>
           <p>مشاهده نظرات</p>
           <p>محصولات مرتبط</p>
         </div>
-        <ProductRelated />
       </div>
-    </>
+    </section>
   );
 };
 

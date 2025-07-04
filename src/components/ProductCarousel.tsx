@@ -17,9 +17,9 @@ const ProductCarousel: React.FC = () => (
             {/* تصویر بالا */}
             <div className="w-full bg-gray-100 flex justify-center items-center">
               <img
-                src={p.image}
+                src="./src/assets/images/auth-light.png"
                 alt={p.title}
-                className="w-full max-h-[400px] object-contain"
+                className="w-full max-h-[200px] object-contain"
               />
             </div>
 
@@ -36,8 +36,8 @@ const ProductCarousel: React.FC = () => (
                 <span>🕒 زمان بروزرسانی : چند لحظه قبل</span>
               </div>
               <p className="text-xs leading-5 mt-2 text-gray-600">
-                آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است.
-                صفحه نمایش با فناوری ProMotion، تراشه A16 Bionic و سیستم دوربین سه‌گانه ...
+                آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. صفحه نمایش با فناوری
+                ProMotion، تراشه A16 Bionic و سیستم دوربین سه‌گانه ...
               </p>
             </div>
           </div>

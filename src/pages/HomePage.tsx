@@ -6,11 +6,11 @@ import SpecialProductsSection from "../components/SpecialProductsSection";
 export default function HomePage() {
   return (
     <main className="container mx-auto p-2">
-      <div className="flex justify-between	">
+      <div className="flex justify-between">
       <ProductRow />
       <ProductCarousel />
       </div>
-      <SpecialProductsSection />
+      {<SpecialProductsSection />}
     </main>
   );
 }
