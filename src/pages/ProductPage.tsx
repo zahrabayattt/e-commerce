@@ -12,15 +12,17 @@ import ProductRelated from '@/components/ProductRelated';
 import { products } from '@/components/products';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useCartStore } from '@/store/cartStore';
 
 interface IProduct {
   productId: number;
 }
 
-const ProductPage = ({productId}: IProduct) => {
+const ProductPage = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === Number(id));
   console.log(product);
+  const { addToCart } = useCartStore();
   return (
     <>
       <div className="flex flex-row justify-around">

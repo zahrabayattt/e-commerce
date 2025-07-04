@@ -1,4 +1,4 @@
-import type { LoginPayloadModel, AuthResponseModel } from '@/@types/auth.model';
+import type { LoginPayloadModel, AuthResponseModel } from '@/types/auth.model';
 import { axiosInstance } from '@/lib/utils';
 import useAuthStore from '@/store/use-auth-store';
 import { useMutation } from '@tanstack/react-query';

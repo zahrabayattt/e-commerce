@@ -1,7 +1,10 @@
 import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from '@/components/OrderPriceSummary';
 import { Button } from '@/components/ui/button';
+import { useCartStore } from '@/store/cartStore';
 import { useOrderStore } from '@/store/orderShippingStore';
+import type { CreateOrderPayload } from '@/types/order.model';
+import useCreateOrder from '@/hooks/use-create-order';
 
 const OrderDetailItem = ({ label, value }: { label: string; value: number | string }) => {
   return (
@@ -13,7 +16,26 @@ const OrderDetailItem = ({ label, value }: { label: string; value: number | stri
 };
 
 const CheckoutPage = () => {
+  const { cartItems } = useCartStore();
   const { orderShippingDetail } = useOrderStore();
+  const { mutate: OrderMutate, status: OrderStatus } = useCreateOrder();
+
+  const handleSubmitOrder = () => {
+    const payload: CreateOrderPayload = {
+      orderItems: cartItems.map((item) => ({
+        _id: item.productId,
+        name: item.productTitle,
+        qty: item.quantity,
+      })),
+      paymentMethod: orderShippingDetail.paymentMethod,
+      shippingAddress: {
+        address: orderShippingDetail.address,
+        city: orderShippingDetail.city,
+        postalcode: orderShippingDetail.postalCode,
+      },
+    };
+    OrderMutate(payload);
+  };
 
   return (
     <div className="flex gap-15 mt-10 justify-center align-center">
@@ -30,7 +52,13 @@ const CheckoutPage = () => {
           <h3 className="my-3 font-bold">خلاصه خرید</h3>
           <OrderPriceSummary />
         </div>
-        <Button variant="default" size="lg" className="bg-[#DB2777] rounded-xl w-full mt-5">
+        <Button
+          variant="default"
+          size="lg"
+          className="bg-[#DB2777] rounded-xl w-full mt-5"
+          onClick={handleSubmitOrder}
+          disabled={OrderStatus === 'pending'}
+        >
           پرداخت
         </Button>
       </div>

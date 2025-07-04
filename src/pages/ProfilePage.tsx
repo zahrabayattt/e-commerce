@@ -60,7 +60,7 @@ const ProfilePage = () => {
           <Button variant="default" size="lg">
             بروزرسانی
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="default" size="lg">
             سفارشات من
           </Button>
         </CardFooter>
