@@ -15,6 +15,23 @@ const Navbar = () => {
   const authItems = getAuthNavItems(isAdmin);
   const userNavItem = authItems[0];
   const dashboardNavItem = NavbarItems.find((item) => item.menuId === 'dashboard-menu');
+  const dropdownIcon = (
+    <svg
+      className="w-2.5 h-2.5 ms-3"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 10 6"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m1 1 4 4 4-4"
+      />
+    </svg>
+  );
 
   const handleDashboard = (menuId: string) => {
     if (menuId === 'dashboard-menu') {
@@ -54,8 +71,12 @@ const Navbar = () => {
               >
                 {item.title}
               </span>
+              {isOpen && item.menuId === 'dashboard-menu' && (
+                <span id="dropdownIcon">{dropdownIcon}</span>
+              )}
             </NavLink>
 
+            {/* dashboard dropdown */}
             {item.menuId === 'dashboard-menu' && dashboardDropdownOpen && (
               <div
                 id="dropdown"
@@ -123,21 +144,7 @@ const Navbar = () => {
                   {userNavItem.title}
                 </span>
               </span>
-              <svg
-                className="w-2.5 h-2.5 ms-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
+              {dropdownIcon}
             </button>
 
             {userDropdownOpen && (
@@ -163,7 +170,11 @@ const Navbar = () => {
                         ) : (
                           <NavLink
                             to={subItem.address || '#'}
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            className={({ isActive }) =>
+                              `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 ${
+                                isActive ? 'text-red-500' : ''
+                              }`
+                            }
                             onClick={() => setUserDropdownOpen(false)}
                           >
                             {subItem.title}
