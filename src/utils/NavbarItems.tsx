@@ -23,6 +23,7 @@ export type NavItem = {
 export const NavbarItems: NavItem[] = [
   {
     title: 'داشبورد',
+    address: '/dashboard',
     menuId: 'dashboard-menu',
     icon: <House size={20} />,
     subItems: [
@@ -53,7 +54,6 @@ export const getAuthNavItems = (isAdmin: boolean): NavItem[] => [
             { title: 'محصول جدید', address: 'shop' },
             { title: 'مدیریت کاربران', address: 'users' },
             { title: 'سفارشات', address: 'cart' },
-            { title: 'پروفایل', address: 'profile' },
           ]
         : []),
       { title: 'خروج از حساب', address: 'auth?mode=logout' },

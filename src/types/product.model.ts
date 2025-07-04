@@ -9,7 +9,7 @@ export type ReviewModel = {
 };
 
 export type ProductModel = {
-  id: string;
+  _id: string;
   name: string;
   image: string;
   quantity: number;
