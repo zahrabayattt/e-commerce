@@ -1,33 +1,23 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import CommentSubmit from '@/components/CommentSubmit';
-import CommentShow from '@/components/CommentShow';
-import ProductRelated from '@/components/ProductRelated';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '@/store/productsStore';
-import { useQuery } from '@tanstack/react-query';
+import { useProduct } from '@/hooks/useProduct';
 
 const ProductPage = () => {
 
 const { id } = useParams();
 
- const { data: product, isLoading, error } = fetchProductById(id!);
+ const { data: product, isLoading, error } = useProduct(id!);
 
 
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت محصولات</p>;
   if (!product) return <p>محصولی یافت نشد</p>;
-  console.log('product page:', JSON.stringify(product, null, 2));
+
   return (
     <section>
       <div className="flex flex-row justify-around">
-        <img className="w-2/6" src={product?.image} alt={product?.name}></img>
+        <img className="w-2/6" src={product.image} alt={product.name}></img>
         <div className="flex flex-col w-2/5 justify-between gap-4">
           <h5>{product.name}</h5>
           <p>{product.description}</p>
@@ -37,7 +27,7 @@ const { id } = useParams();
               <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                 <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
               </svg>
-              <p>امتیاز:5</p>
+              <p>امتیاز:{product.rating}</p>
             </div>
 
             <div className="flex flex-row gap-2">
@@ -53,7 +43,7 @@ const { id } = useParams();
                 <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
               </svg>
 
-              <p>تعداد:52</p>
+              <p>تعداد:{product.countInStock}</p>
             </div>
 
             <div className="flex flex-row gap-2">
@@ -103,7 +93,7 @@ const { id } = useParams();
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button variant="default" size={'md'}>
+            <Button size={'md'}>
               افزودن به سبد خرید
             </Button>
             <Select>
@@ -111,7 +101,11 @@ const { id } = useParams();
                 <SelectValue placeholder="1" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">1</SelectItem>
+                {Array.from({ length: product.quantity }).map((_, index) => (
+                  <SelectItem key={index} value={(index + 1).toString()}>
+                    {index + 1}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

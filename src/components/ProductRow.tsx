@@ -2,12 +2,12 @@ import React from 'react';
 import ProductCard from './productCard';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchAllProducts } from '@/store/productsStore';
+import { useProducts } from '@/hooks/useProducts';
 
 const ProductRow: React.FC = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchAllProducts,
+    queryFn: useProducts,
   });
 
   if (isLoading) return <p>در حال بارگذاری...</p>;
