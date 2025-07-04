@@ -7,7 +7,7 @@ const FavoritePage = () => {
         
         {favorites.slice(0,20).map((p)=>(
           <ProductCard productId={p.id} productImage={p.image} productTitle={p.title}
-          price={p.price} componentSize={"small"}/>
+          price={p.price} componentSize={"large"}/>
         ))}
         
 

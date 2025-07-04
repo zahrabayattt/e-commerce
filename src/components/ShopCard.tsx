@@ -1,7 +1,6 @@
-import { Heart} from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
-import { products, type Product } from "./ProductsForShow";
+import {  type Product } from "./ProductsForShow";
 import FavoriteButton from "./FavoriteButton";
 
 const ShopCard = ({product}:{product:Product}) => {
