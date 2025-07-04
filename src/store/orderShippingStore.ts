@@ -4,7 +4,7 @@ import type { IOrderShippingDetail } from '@/types/orderShipping';
 interface IOrderState {
   orderShippingDetail: IOrderShippingDetail;
   setOrderShippingDetail: (name: string, value: string) => void;
-  reset: () => void;
+  resetOrderShipping: () => void;
 }
 
 export const useOrderStore = create<IOrderState>((set) => ({
@@ -24,7 +24,7 @@ export const useOrderStore = create<IOrderState>((set) => ({
       },
     })),
 
-  reset: () =>
+  resetOrderShipping: () =>
     set({
       orderShippingDetail: {
         address: '',
