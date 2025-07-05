@@ -2,13 +2,16 @@ import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/com
 import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
+import { useCartStore } from '@/store/cartStore';
+import type { Product } from '@/components/products';
+import type { ProductModel } from '@/types/product.model';
 
 const ProductPage = () => {
 
 const { id } = useParams();
 
  const { data: product, isLoading, error } = useProduct(id!);
-
+ const { cartItems, addToCart, updateQuantity } = useCartStore();
 
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت محصولات</p>;
@@ -93,7 +96,7 @@ const { id } = useParams();
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button size={'md'}>
+            <Button onClick={() => addToCart(product)} size={'md'}>
               افزودن به سبد خرید
             </Button>
             <Select>
@@ -101,8 +104,12 @@ const { id } = useParams();
                 <SelectValue placeholder="1" />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: product.quantity }).map((_, index) => (
-                  <SelectItem key={index} value={(index + 1).toString()}>
+                {Array.from({ length: product.countInStock }).map((_, index) => (
+                  <SelectItem
+                    onClick={() => updateQuantity(product._id,index)}
+                    key={index}
+                    value={(index + 1).toString()}
+                  >
                     {index + 1}
                   </SelectItem>
                 ))}
@@ -124,3 +131,4 @@ const { id } = useParams();
 };
 
 export default ProductPage;
+

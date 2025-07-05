@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { create } from 'zustand';
 
 interface CartItem {
@@ -28,6 +29,7 @@ export const useCartStore = create<CartState>((set) => ({
           ),
         };
       }
+      toast.success('محصول به سبد کالا اضافه شد');
       return { cartItems: [...state.cartItems, item] };
     }),
   removeFromCart: (productId) =>
