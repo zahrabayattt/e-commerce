@@ -1,7 +1,7 @@
-import { Heart} from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
-import { products, type Product } from "./ProductsForShow";
+import {  type Product } from "./ProductsForShow";
+import FavoriteButton from "./FavoriteButton";
 
 const ShopCard = ({product}:{product:Product}) => {
   const { image, title, price, description, brand } = product;
@@ -12,9 +12,7 @@ const ShopCard = ({product}:{product:Product}) => {
       
       <div className="relative   ">
         <img src={image} alt="" className="w-full aspect-[5/2] object-cover " />
-        <button>
-          <Heart className="absolute top-2 right-4 text-gray-900 hover:fill-pink-600 hover:text-pink-600" />
-        </button>
+        <FavoriteButton product={product}/>
         <span className="absolute top-23  right-3 text-[12px] bg-pink-900 text-center py-1 px-2 rounded-2xl text-pink-200">
           {brand}
         </span>
