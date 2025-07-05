@@ -1,4 +1,5 @@
 import type { ProductModel } from '@/types/product.model';
+import FavoriteButton from './FavoriteButton';
 
 interface IProductCard {
   product: ProductModel;
@@ -15,12 +16,13 @@ const ProductCard = ({product,componentSize,}: IProductCard) => {
   };
   
   return (
-    <div key={product._id} className={`${productSizeClasses[componentSize]}`}>
+    <div key={product._id} className={`relative ${productSizeClasses[componentSize]}`}>
       <img
         src={product.image}
         alt={product.name}
         className={`productCard__img ${productImageSizeClasses[componentSize]}`}
       ></img>
+      <FavoriteButton product={product}/>
       <div className={'flex flex-row justify-between gap-8 mt-2'}>
         <p className={'w-4/5 text-[8px] font-normal'}>{product.name}</p>
         <p className="">
