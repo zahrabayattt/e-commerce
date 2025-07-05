@@ -2,11 +2,30 @@ import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import {  type Product } from "./ProductsForShow";
 import FavoriteButton from "./FavoriteButton";
+import { useCartStore } from "@/store/cartStore";
 
 const ShopCard = ({product}:{product:Product}) => {
   const { image, title, price, description, brand } = product;
   
+  const addToCart = useCartStore((state)=> state.addToCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const isInCart = useCartStore((state) => state.cartItems.some((item) => item.productId === product.id.toString()));
 
+  const handleCartClick = () =>{
+    if(isInCart){
+      removeFromCart(product.id.toString());
+    }
+    else{
+      addToCart({
+        productId: product.id.toString(),
+        productTitle: product.title,
+        productImage: product.image,
+        productBrand: product.brand,
+        price: product.price,
+        quantity: 1,
+      })
+    }
+  }
    return (
     <div className="bg-gray-200 rounded-2xl overflow-hidden flex flex-col w-full max-w-xs h-fit">
       
@@ -37,7 +56,10 @@ const ShopCard = ({product}:{product:Product}) => {
             مشاهده بیشتر
             <ArrowLeft className="w-3 h-3" />
           </button>
-          <ShoppingCart className="text-gray-700 ml-4 hover:text-pink-700 cursor-pointer" />
+          <ShoppingCart onClick={handleCartClick} className={`ml-4  cursor-pointer transition-colors ${isInCart?'text-pink-700' : 
+          "text-gray-700 hover:text-pink-700" 
+
+          }`} />
         </div>
       </div>
     </div>
