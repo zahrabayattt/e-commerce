@@ -7,6 +7,7 @@ const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useCartStore();
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0)
   const handleProceedToOrderPage = () => {
     navigate('/shoppingprogress');
   }
@@ -42,7 +43,7 @@ const CartPage = () => {
                   value={item.quantity}
                   onChange={(e) => updateQuantity(item.productId, Number(e.target.value))}
                 >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((q) => (
+                  {[0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((q) => (
                     <option key={q + 1} value={q + 1}>
                       {q + 1}
                     </option>
@@ -60,7 +61,7 @@ const CartPage = () => {
         )}
         {/* Total */}
         <div className="px-8 mt-6">
-          <p className="text-sm mb-1">تعداد ({cartItems.length})</p>
+          <p className="text-sm mb-1">تعداد ({totalQuantity})</p>
           <p className="font-bold text-lg">{totalPrice.toLocaleString()} تومان</p>
           <button
             type="submit"
