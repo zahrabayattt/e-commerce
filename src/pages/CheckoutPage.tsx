@@ -3,7 +3,7 @@ import OrderPriceSummary from '@/components/OrderPriceSummary';
 import { Button } from '@/components/ui/button';
 import useAuthStore from '@/store/use-auth-store';
 import { useCartStore } from '@/store/use-cart-store';
-import { useOrderStore } from '@/store/orderShippingStore';
+import { useOrderStore } from '@/store/use-order-shipping-store';
 import type { CreateOrderPayload } from '@/types/order.model';
 import useCreateOrder from '@/hooks/use-create-order';
 
@@ -33,7 +33,7 @@ const CheckoutPage = () => {
       shippingAddress: {
         address: orderShippingDetail.address,
         city: orderShippingDetail.city,
-        postalcode: orderShippingDetail.postalCode,
+        postalCode: orderShippingDetail.postalCode,
       },
     };
     OrderMutate(payload);

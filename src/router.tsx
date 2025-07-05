@@ -26,12 +26,12 @@ const router = createBrowserRouter([
       { path: 'product/:id', Component: ProductPage },
       { path: 'shop', Component: ShopPage },
       { path: 'cart', Component: CartPage },
-      {path: 'favorite' , Component: FavoritePage},
+      { path: 'favorite', Component: FavoritePage },
       {
         Component: PrivateRoutes,
         children: [
           { path: 'profile', Component: ProfilePage },
-          { path: 'shoppingprogress', Component: ShoppingProgress },
+          { path: 'shopping-progress', Component: ShoppingProgress },
           { path: 'checkout', Component: CheckoutPage },
           { path: 'order', Component: OrdersPage },
           { path: 'orderdetail', Component: OrderDetailsPage },

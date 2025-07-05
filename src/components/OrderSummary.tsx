@@ -2,7 +2,7 @@ import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from './OrderPriceSummary';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router';
-import { useOrderStore } from '@/store/orderShippingStore';
+import { useOrderStore } from '@/store/use-order-shipping-store';
 
 const OrderSummary = () => {
   const { orderShippingDetail } = useOrderStore();

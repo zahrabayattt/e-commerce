@@ -1,13 +1,13 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useOrderStore } from '@/store/orderShippingStore';
+import { useOrderStore } from '@/store/use-order-shipping-store';
 
 interface IOrderShippingDetails {
   nextStep: () => void;
 }
 
 const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
-  const { setOrderShippingDetail } = useOrderStore();
+  const { orderShippingDetail, setOrderShippingDetail } = useOrderStore();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -27,6 +27,7 @@ const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
             type="text"
             name="address"
             id="address"
+            value={orderShippingDetail.address}
             onChange={handleChange}
             placeholder="آدرس را وارد نمایید"
           />
@@ -40,6 +41,7 @@ const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
             type="text"
             name="city"
             id="city"
+            value={orderShippingDetail.city}
             onChange={handleChange}
             placeholder="شهر را وارد نمایید"
           />
@@ -53,6 +55,7 @@ const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
             type="text"
             name="country"
             id="country"
+            value={orderShippingDetail.country}
             onChange={handleChange}
             placeholder="کشور را وارد نمایید"
           />
@@ -66,6 +69,7 @@ const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
             type="text"
             name="postalCode"
             id="postalCode"
+            value={orderShippingDetail.postalCode}
             onChange={handleChange}
             placeholder="کدپستی را وارد نمایید"
           />
@@ -80,7 +84,7 @@ const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
               type="radio"
               name="paymentMethod"
               value="pasargad"
-              defaultChecked
+              checked={orderShippingDetail.paymentMethod === 'pasargad'}
               onChange={handleChange}
               className="hidden"
             />
