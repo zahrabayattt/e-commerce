@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router';
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCartStore();
+  const { cartItems, removeFromCart, updateQuantity } = useCartStore();
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   const handleProceedToOrderPage = () => {
     navigate('/shoppingprogress');
-    clearCart();
   }
 
   return (
