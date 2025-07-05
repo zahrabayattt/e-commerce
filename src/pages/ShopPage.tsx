@@ -18,7 +18,7 @@ const ShopPage = () => {
 
   const filteredProducts = products.filter((product) => {
     const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
-    const matchPrice = maxPrice === null || parseInt(product.price.replace(/,/g, '')) <= maxPrice;
+    const matchPrice = maxPrice === null || product.price <= maxPrice;
     return matchBrand && matchPrice;
   });
 
