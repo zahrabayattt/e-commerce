@@ -1,4 +1,4 @@
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/store/use-cart-store';
 import { Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
