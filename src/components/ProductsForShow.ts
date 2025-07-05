@@ -1,43 +1,55 @@
-export interface Product {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  date: string;
-  image: string;
-  brand: string;
-}
+import type { ProductModel } from '@/types/product.model';
 
-export  const products: Product[] = [
+export const products: ProductModel[] = [
   {
-    id: "1",
-    title: "Apple iPhone 14 Pro",
+    _id: "1",
+    name: "Apple iPhone 14 Pro",
     description:
       "آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. دارای A16 Bionic و سیستم ProMotion",
     price: 100000,
-    date: "۳۱ مرداد ۱۴۰۳",
     image: "https://picsum.photos/200/300",
-    brand:"Apple"
+    quantity: 10,
+    category: "Apple",
+    rating: 4.5,
+    numReviews: 20,
+    countInStock: 5,
+    reviews: [],
+    createdAt: new Date("2024-08-22"),
+    updatedAt: new Date("2024-08-22"),
+    __v: 0,
   },
   {
-    id: "2",
-    title: "Apple iPhone 14 Pro",
+    _id: "2",
+    name: "Apple iPhone 14 Pro",
     description:
       "آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. دارای A16 Bionic و سیستم ProMotion",
     price: 100000,
-    date: "۳۱ مرداد ۱۴۰۳",
     image: "https://picsum.photos/200/300",
-    brand:"Apple"
+    quantity: 15,
+    category: "Apple",
+    rating: 4.2,
+    numReviews: 12,
+    countInStock: 7,
+    reviews: [],
+    createdAt: new Date("2024-08-22"),
+    updatedAt: new Date("2024-08-22"),
+    __v: 0,
   },
   {
-    id: "3",
-    title: "Samaung S25 Ultra",
+    _id: "3",
+    name: "Samsung S25 Ultra",
     description:
-      "آیفون 14 پرو دارای صفحه نمایش 6.1 اینچی Super Retina XDR است. دارای A16 Bionic و سیستم ProMotion",
+      "گوشی سامسونگ با صفحه‌نمایش بزرگ، دوربین قوی و باتری بادوام برای تجربه‌ای حرفه‌ای از موبایل",
     price: 200000,
-    date: "۳۱ مرداد ۱۴۰۳",
     image: "https://picsum.photos/200/300",
-    brand:"Samsung"
+    quantity: 8,
+    category: "Samsung",
+    rating: 4.7,
+    numReviews: 25,
+    countInStock: 6,
+    reviews: [],
+    createdAt: new Date("2024-08-22"),
+    updatedAt: new Date("2024-08-22"),
+    __v: 0,
   },
-  // ... سایر آیتم‌ها
 ];

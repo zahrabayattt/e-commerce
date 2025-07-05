@@ -3,26 +3,26 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import ShopCard from '../components/ShopCard';
-import { products, type Product } from '@/components/ProductsForShow';
+import { products } from '@/components/ProductsForShow';
 
 const ShopPage = () => {
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [tempPrice, setTempPrice] = useState('');
 
-  const handleBrandChange = (brand: string) => {
-    setSelectedBrands((prev) =>
-      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory((prev) =>
+      prev.includes(category) ? prev.filter((b) => b !== category) : [...prev, category]
     );
   };
 
   const filteredProducts = products.filter((product) => {
-    const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+    const matchCategory = selectedCategory.length === 0 || selectedCategory.includes(product.category);
     const matchPrice = maxPrice === null || product.price <= maxPrice;
-    return matchBrand && matchPrice;
+    return matchCategory && matchPrice;
   });
 
-  const brands = Array.from(new Set(products.map((p) => p.brand)));
+  const categories = Array.from(new Set(products.map((p) => p.category)));
   return (
     <div className="flex ">
       
@@ -33,17 +33,17 @@ const ShopPage = () => {
           <h2>فیلتر برند</h2>
         </div>
 
-        {brands.map((brand) => (
+        {categories.map((category) => (
           <div
-            key={brand}
+            key={category}
             className="flex  items-center justify-start gap-1 w-full pr-2 mb-2 mt-2   "
           >
             <Checkbox
-              checked={selectedBrands.includes(brand)}
-              onCheckedChange={() => handleBrandChange(brand)}
+              checked={selectedCategory.includes(category)}
+              onCheckedChange={() => handleCategoryChange(category)}
               className="border border-gray-400 rounded-full cursor-pointer bg-white "
             />
-            <span className="text-sm ">{brand}</span>
+            <span className="text-sm ">{category}</span>
           </div>
         ))}
 
@@ -67,7 +67,7 @@ const ShopPage = () => {
           variant="outline"
           className="mt-5 w-full text-sm bg-gray-100 hover:bg-gray-300"
           onClick={() => {
-            setSelectedBrands([]);
+            setSelectedCategory([]);
             setMaxPrice(null);
             setTempPrice('');
           }}
@@ -77,7 +77,7 @@ const ShopPage = () => {
       </div>
       <div className=" grid grid-cols-3 gap-6 mt-2  mr-14 ml-10">
         {filteredProducts.slice(0, 10).map((product) => (
-          <ShopCard key={product.id} product={product} />
+          <ShopCard key={product._id} product={product} />
         ))}
       </div>
     </div>

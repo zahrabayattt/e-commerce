@@ -1,12 +1,31 @@
 import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
-import {  type Product } from "./ProductsForShow";
 import FavoriteButton from "./FavoriteButton";
+import { useCartStore } from "@/store/cartStore";
+import type { ProductModel } from "@/types/product.model";
 
-const ShopCard = ({product}:{product:Product}) => {
-  const { image, title, price, description, brand } = product;
+const ShopCard = ({product}:{product:ProductModel}) => {
+  const { image,name, price, description,category } = product;
   
+  const addToCart = useCartStore((state)=> state.addToCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const isInCart = useCartStore((state) => state.cartItems.some((item) => item.productId === product._id.toString()));
 
+  const handleCartClick = () =>{
+    if(isInCart){
+      removeFromCart(product._id.toString());
+    }
+    else{
+      addToCart({
+        productId: product._id.toString(),
+        productTitle: product.name,
+        productImage: product.image,
+        productBrand: product.category,
+        price: product.price,
+        quantity: 1,
+      })
+    }
+  }
    return (
     <div className="bg-gray-200 rounded-2xl overflow-hidden flex flex-col w-full max-w-xs h-fit">
       
@@ -14,7 +33,7 @@ const ShopCard = ({product}:{product:Product}) => {
         <img src={image} alt="" className="w-full aspect-[5/2] object-cover " />
         <FavoriteButton product={product}/>
         <span className="absolute top-23  right-3 text-[12px] bg-pink-900 text-center py-1 px-2 rounded-2xl text-pink-200">
-          {brand}
+          {category}
         </span>
       </div>
 
@@ -22,7 +41,7 @@ const ShopCard = ({product}:{product:Product}) => {
       <div className=" flex flex-col  px-4 ">
         <div>
           <div className="flex items-center justify-between  font-medium">
-            <h2 className="truncate text-[16px]">{title}</h2>
+            <h2 className="truncate text-[16px]">{name}</h2>
             <span className="text-pink-700 whitespace-nowrap text-sm">
               {price.toLocaleString()} تومان
             </span>
@@ -37,7 +56,10 @@ const ShopCard = ({product}:{product:Product}) => {
             مشاهده بیشتر
             <ArrowLeft className="w-3 h-3" />
           </button>
-          <ShoppingCart className="text-gray-700 ml-4 hover:text-pink-700 cursor-pointer" />
+          <ShoppingCart onClick={handleCartClick} className={`ml-4  cursor-pointer transition-colors ${isInCart?'text-pink-700' : 
+          "text-gray-700 hover:text-pink-700" 
+
+          }`} />
         </div>
       </div>
     </div>
