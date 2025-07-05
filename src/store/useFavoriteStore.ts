@@ -1,11 +1,11 @@
 import { create } from 'zustand';
-import type { Product } from "@/components/ProductsForShow";
+import type { ProductModel } from '@/types/product.model';
 
 
 
 type FavoriteStoreType = {
-    favorites : Product[];
-    addFavorite :(product:Product)=>void;
+    favorites : ProductModel[];
+    addFavorite :(product:ProductModel)=>void;
     removeFavorite :(id:string)=>void;
     isFavorite :(id:string)=>boolean;
 };
@@ -14,7 +14,7 @@ type FavoriteStoreType = {
 const useFavoriteStore= create <FavoriteStoreType>()((set,get)=>({
     favorites:[],
     addFavorite:(product)=>{
-        const exists = get().favorites.find((p)=>p.id===product.id);
+        const exists = get().favorites.find((p)=>p._id===product._id);
         if(!exists){
             set((state)=>({
                 favorites:[...state.favorites,product],
@@ -22,10 +22,10 @@ const useFavoriteStore= create <FavoriteStoreType>()((set,get)=>({
         }
     },
     removeFavorite:(id)=>{
-        set((state)=>({favorites:state.favorites.filter((p)=>p.id!==id),}))
+        set((state)=>({favorites:state.favorites.filter((p)=>p._id!==id),}))
     },
     isFavorite:(id)=>{
-        return get().favorites.some((p)=>p.id===id)
+        return get().favorites.some((p)=>p._id===id)
     }
 }));
 

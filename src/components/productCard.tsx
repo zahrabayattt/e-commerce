@@ -15,7 +15,7 @@ const ProductCard = ({product,componentSize,}: IProductCard) => {
   };
   
   return (
-    <div key={product.id} className={`${productSizeClasses[componentSize]}`}>
+    <div key={product._id} className={`${productSizeClasses[componentSize]}`}>
       <img
         src={product.image}
         alt={product.name}

@@ -1,26 +1,26 @@
 import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
-import {  type Product } from "./ProductsForShow";
 import FavoriteButton from "./FavoriteButton";
 import { useCartStore } from "@/store/cartStore";
+import type { ProductModel } from "@/types/product.model";
 
-const ShopCard = ({product}:{product:Product}) => {
-  const { image, title, price, description, brand } = product;
+const ShopCard = ({product}:{product:ProductModel}) => {
+  const { image,name, price, description,category } = product;
   
   const addToCart = useCartStore((state)=> state.addToCart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
-  const isInCart = useCartStore((state) => state.cartItems.some((item) => item.productId === product.id.toString()));
+  const isInCart = useCartStore((state) => state.cartItems.some((item) => item.productId === product._id.toString()));
 
   const handleCartClick = () =>{
     if(isInCart){
-      removeFromCart(product.id.toString());
+      removeFromCart(product._id.toString());
     }
     else{
       addToCart({
-        productId: product.id.toString(),
-        productTitle: product.title,
+        productId: product._id.toString(),
+        productTitle: product.name,
         productImage: product.image,
-        productBrand: product.brand,
+        productBrand: product.category,
         price: product.price,
         quantity: 1,
       })
@@ -33,7 +33,7 @@ const ShopCard = ({product}:{product:Product}) => {
         <img src={image} alt="" className="w-full aspect-[5/2] object-cover " />
         <FavoriteButton product={product}/>
         <span className="absolute top-23  right-3 text-[12px] bg-pink-900 text-center py-1 px-2 rounded-2xl text-pink-200">
-          {brand}
+          {category}
         </span>
       </div>
 
@@ -41,7 +41,7 @@ const ShopCard = ({product}:{product:Product}) => {
       <div className=" flex flex-col  px-4 ">
         <div>
           <div className="flex items-center justify-between  font-medium">
-            <h2 className="truncate text-[16px]">{title}</h2>
+            <h2 className="truncate text-[16px]">{name}</h2>
             <span className="text-pink-700 whitespace-nowrap text-sm">
               {price.toLocaleString()} تومان
             </span>

@@ -1,14 +1,14 @@
 import { Heart } from "lucide-react";
 import useFavoriteStore from "@/store/useFavoriteStore";
-import { type Product } from "./ProductsForShow";
+import type { ProductModel } from "@/types/product.model";
 
-const FavoriteButton = ({product}:{product:Product}) => {
-  const isFavorite = useFavoriteStore((state) => state.isFavorite(product.id));
+const FavoriteButton = ({product}:{product:ProductModel}) => {
+  const isFavorite = useFavoriteStore((state) => state.isFavorite(product._id));
   const removeFavorite = useFavoriteStore((state) => state.removeFavorite);
   const addFavorite = useFavoriteStore((state)=> state.addFavorite);
   
   const toggleFavorite=() =>{
-    isFavorite?removeFavorite(product.id):addFavorite(product);
+    isFavorite?removeFavorite(product._id):addFavorite(product);
   }
 
   return (
