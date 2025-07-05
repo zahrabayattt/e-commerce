@@ -2,7 +2,7 @@ import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from '@/components/OrderPriceSummary';
 import { Button } from '@/components/ui/button';
 import useAuthStore from '@/store/use-auth-store';
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/store/use-cart-store';
 import { useOrderStore } from '@/store/orderShippingStore';
 import type { CreateOrderPayload } from '@/types/order.model';
 import useCreateOrder from '@/hooks/use-create-order';

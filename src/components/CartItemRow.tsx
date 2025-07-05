@@ -1,5 +1,5 @@
 import { TableRow, TableCell } from '@/components/ui/table';
-import type { CartItem } from '@/store/cartStore';
+import type { CartItem } from '@/store/use-cart-store';
 
 const CartItemRow = ({
   item,

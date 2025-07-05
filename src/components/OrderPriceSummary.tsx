@@ -1,4 +1,4 @@
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/store/use-cart-store';
 
 const PriceSummaryItem = ({ label, value }: { label: string; value: number }) => (
   <div className="flex justify-between text-[10px]">

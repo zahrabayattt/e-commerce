@@ -1,6 +1,6 @@
 import { Table, TableHeader, TableBody, TableHead, TableRow } from '@/components/ui/table';
 import CartItemRow from '@/components/CartItemRow';
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/store/use-cart-store';
 
 interface ICartItemsTable {
   variant?: 'checkout' | 'summary';

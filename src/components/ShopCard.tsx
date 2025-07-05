@@ -1,7 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/store/use-cart-store";
 import type { ProductModel } from "@/types/product.model";
 
 const ShopCard = ({product}:{product:ProductModel}) => {
