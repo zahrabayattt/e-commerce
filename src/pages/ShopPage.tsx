@@ -3,12 +3,25 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import ShopCard from '../components/ShopCard';
-import { products } from '@/components/ProductsForShow';
+import { useQuery } from '@tanstack/react-query';
+import { useProducts } from '@/hooks/useProducts';
 
 const ShopPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [tempPrice, setTempPrice] = useState('');
+
+  
+
+const { data, isLoading, isError } = useQuery({
+  queryKey: ['products'],
+  queryFn: useProducts,
+});
+
+
+
+  if (isLoading) return <p>در حال بارگذاری...</p>;
+  if (isError) return <p>خطا در دریافت محصولات</p>;
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory((prev) =>
@@ -16,13 +29,20 @@ const ShopPage = () => {
     );
   };
 
-  const filteredProducts = products.filter((product) => {
-    const matchCategory = selectedCategory.length === 0 || selectedCategory.includes(product.category);
+  const filteredProducts = data?.filter((product) => {
+    const matchCategory = selectedCategory.length === 0 || selectedCategory.includes(product.category._id);
     const matchPrice = maxPrice === null || product.price <= maxPrice;
     return matchCategory && matchPrice;
   });
 
-  const categories = Array.from(new Set(products.map((p) => p.category)));
+  const categories: { _id: string; name: string }[] = [];
+  data?.forEach((p) => {
+  if (!categories.some(c => c.name === p.category.name)) {
+    categories.push(p.category);
+  }
+  });
+
+
   return (
     <div className="flex ">
       
@@ -35,18 +55,18 @@ const ShopPage = () => {
 
         {categories.map((category) => (
           <div
-            key={category}
+            key={category._id}
             className="flex  items-center justify-start gap-1 w-full pr-2 mb-2 mt-2   "
           >
             <Checkbox
-              checked={selectedCategory.includes(category)}
-              onCheckedChange={() => handleCategoryChange(category)}
+              checked={selectedCategory.includes(category._id)}
+              onCheckedChange={() => handleCategoryChange(category._id)}
               className="border border-gray-400 rounded-full cursor-pointer bg-white "
             />
-            <span className="text-sm ">{category}</span>
+            <span className="text-sm ">{category.name}</span>
           </div>
         ))}
-
+        
         <div
           className="bg-white rounded-3xl text-sm text-center py-2 shadow mt-4 "
         >
@@ -76,12 +96,11 @@ const ShopPage = () => {
         </Button>
       </div>
       <div className=" grid grid-cols-3 gap-6 mt-2  mr-14 ml-10">
-        {filteredProducts.slice(0, 10).map((product) => (
+        {(filteredProducts??[]).slice(0, 10).map((product) => (
           <ShopCard key={product._id} product={product} />
         ))}
       </div>
     </div>
   );
 };
-
 export default ShopPage;

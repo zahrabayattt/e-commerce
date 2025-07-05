@@ -3,9 +3,15 @@ import { ArrowLeft } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
 import { useCartStore } from "@/store/use-cart-store";
 import type { ProductModel } from "@/types/product.model";
+import { Link } from "react-router-dom";
+
+
 
 const ShopCard = ({product}:{product:ProductModel}) => {
+
   const { image,name, price, description,category } = product;
+
+  
   
   const addToCart = useCartStore((state)=> state.addToCart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
@@ -20,7 +26,7 @@ const ShopCard = ({product}:{product:ProductModel}) => {
         productId: product._id.toString(),
         productTitle: product.name,
         productImage: product.image,
-        productBrand: product.category,
+        productBrand: product.category.name,
         price: product.price,
         quantity: 1,
       })
@@ -33,7 +39,7 @@ const ShopCard = ({product}:{product:ProductModel}) => {
         <img src={image} alt="" className="w-full aspect-[5/2] object-cover " />
         <FavoriteButton product={product}/>
         <span className="absolute top-23  right-3 text-[12px] bg-pink-900 text-center py-1 px-2 rounded-2xl text-pink-200">
-          {category}
+          {category.name}
         </span>
       </div>
 
@@ -52,14 +58,19 @@ const ShopCard = ({product}:{product:ProductModel}) => {
         </div>
 
         <div className="flex items-center justify-between pt-3 pb-4">
-          <button className="flex items-center gap-1 bg-pink-600 text-white text-xs px-2 py-2 rounded-sm hover:bg-pink-700">
-            مشاهده بیشتر
-            <ArrowLeft className="w-3 h-3" />
-          </button>
-          <ShoppingCart onClick={handleCartClick} className={`ml-4  cursor-pointer transition-colors ${isInCart?'text-pink-700' : 
-          "text-gray-700 hover:text-pink-700" 
+          <Link to={`/product/${product._id}`}>
+            <button className="flex items-center gap-1 bg-pink-600 text-white text-xs px-2 py-2 rounded-sm hover:bg-pink-700 cursor-pointer">
+                مشاهده بیشتر
+                <ArrowLeft className="w-3 h-3" />
+            </button>
+          </Link>
+            
 
-          }`} />
+          <ShoppingCart onClick={handleCartClick} className={`ml-4  cursor-pointer transition-colors ${isInCart?'text-pink-700' : 
+            "text-gray-700 hover:text-pink-700" 
+
+            }`} />
+             
         </div>
       </div>
     </div>
