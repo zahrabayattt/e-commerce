@@ -1,3 +1,4 @@
+import type { NavItem } from '@/types/navbar.model';
 import {
   House,
   ShoppingBag,
@@ -8,34 +9,13 @@ import {
   User,
   UserCog,
 } from 'lucide-react';
-import type { ReactNode } from 'react';
 
-export type NavItem = {
-  title: string;
-  menuId?: string;
-  address?: string;
-  icon?: ReactNode;
-  subItems?: NavItem[];
-  adminOnly?: boolean;
-  userOnly?: boolean;
-};
 
 export const NavbarItems: NavItem[] = [
-  {
-    title: 'داشبورد',
-    address: '/dashboard',
-    menuId: 'dashboard-menu',
-    icon: <House size={20} />,
-    subItems: [
-      { title: 'داشبورد', address: 'dashboard' },
-      { title: 'محصول جدید', address: 'shop/new', adminOnly: true },
-      { title: 'مدیریت کاربران', address: 'users', adminOnly: true },
-      { title: 'سفارشات', address: 'orders', adminOnly: true },
-    ],
-  },
+  { title: 'داشبورد', address: 'dashboard', icon: <House size={20} /> },
   { title: 'فروشگاه', address: 'shop', icon: <ShoppingBag size={20} /> },
   { title: 'سبد خرید', address: 'cart', icon: <ShoppingCart size={20} /> },
-  { title: 'علاقه‌مندی‌ها', address: 'favorite', icon: <Heart size={20} className="fill-black" /> },
+  { title: 'علاقه‌مندی‌ها', address: 'favorite', icon: <Heart size={20} /> },
 ];
 
 export const authNavItems: NavItem[] = [
@@ -51,6 +31,7 @@ export const getAuthNavItems = (isAdmin: boolean): NavItem[] => [
       { title: 'پروفایل', address: 'profile' },
       ...(isAdmin
         ? [
+            { title: 'داشبورد', address: 'dashboard' },
             { title: 'محصول جدید', address: 'shop' },
             { title: 'مدیریت کاربران', address: 'users' },
             { title: 'سفارشات', address: 'cart' },
