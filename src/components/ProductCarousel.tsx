@@ -9,21 +9,19 @@ import { products } from "./products";
 
 
 const ProductCarousel: React.FC = () => (
-  <Carousel className="w-full max-w-2xl mx-auto p-4">
+  <Carousel className="w-full max-w-2xl mx-auto p-4 rounded-lg shadow-md">
     <CarouselContent>
       {products.map((p) => (
         <CarouselItem key={p.id} className="w-full">
           <div className="bg-white rounded shadow border flex flex-col overflow-hidden">
-            {/* تصویر بالا */}
             <div className="w-full bg-gray-100 flex justify-center items-center">
               <img
                 src="./src/assets/images/auth-light.png"
                 alt={p.title}
-                className="w-full max-h-[200px] object-contain"
+                className="w-full h-[300px] object-contain"
               />
             </div>
 
-            {/* کپشن پایین */}
             <div className="p-4 text-right text-sm gap-2 flex flex-col">
               <h3 className="text-base font-bold">{p.title}</h3>
               <p className="text-sm font-semibold">{p.price.toLocaleString()} تومان</p>

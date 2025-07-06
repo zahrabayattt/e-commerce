@@ -1,13 +1,11 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useOrderStore } from '@/store/use-order-shipping-store';
+import { useNavigate } from 'react-router-dom';
 
-interface IOrderShippingDetails {
-  nextStep: () => void;
-}
-
-const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
+const OrderShippingDetails = () => {
   const { orderShippingDetail, setOrderShippingDetail } = useOrderStore();
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -97,7 +95,7 @@ const OrderShippingDetails = ({ nextStep }: IOrderShippingDetails) => {
           type="button"
           variant="default"
           size="lg"
-          onClick={nextStep}
+          onClick={() => navigate('/shopping-progress/summary')}
           className="bg-[#DB2777] rounded-xl"
         >
           ادامه

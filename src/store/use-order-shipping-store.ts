@@ -4,6 +4,7 @@ import type { IOrderShippingDetail } from '@/types/orderShipping';
 
 interface IOrderState {
   orderShippingDetail: IOrderShippingDetail;
+  currentStep: number;
   setOrderShippingDetail: (name: string, value: string) => void;
   resetOrderShipping: () => void;
 }
@@ -18,7 +19,7 @@ export const useOrderStore = create<IOrderState>()(
         postalCode: '',
         paymentMethod: 'pasargad',
       },
-
+      currentStep: 2,
       setOrderShippingDetail: (name, value) =>
         set((state) => ({
           orderShippingDetail: {
@@ -26,7 +27,6 @@ export const useOrderStore = create<IOrderState>()(
             [name]: value,
           },
         })),
-
       resetOrderShipping: () =>
         set({
           orderShippingDetail: {
@@ -36,6 +36,7 @@ export const useOrderStore = create<IOrderState>()(
             postalCode: '',
             paymentMethod: 'pasargad',
           },
+          currentStep: 2,
         }),
     }),
     {
