@@ -1,20 +1,18 @@
-import OrderShippingDetails from '@/components/OrderShippingDetails';
-import OrderSummary from '@/components/OrderSummary';
 import Stepper from '@/components/Stepper';
-import { useState } from 'react';
+import { useLocation, Outlet } from 'react-router-dom';
 
 const ShoppingProgress = () => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const location = useLocation();
 
-  const nextStep = () => setCurrentStep((prev) => prev + 1);
+  let currentStep = 2;
+  if (location.pathname.endsWith('/summary')) {
+    currentStep = 3;
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4">
       <Stepper currentStep={currentStep} />
-
-      {currentStep === 2 && <OrderShippingDetails nextStep={nextStep} />}
-
-      {currentStep === 3 && <OrderSummary />}
+      <Outlet />
     </div>
   );
 };
