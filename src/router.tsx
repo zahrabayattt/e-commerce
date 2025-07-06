@@ -14,6 +14,7 @@ import OrderDetailsPage from './pages/OrderDetailsPage';
 import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage';
 import FavoritePage from './pages/FavoritePage';
+import UsersPage from './pages/UsersPage';
 
 const router = createBrowserRouter([
   {
@@ -33,9 +34,10 @@ const router = createBrowserRouter([
           { path: 'profile', Component: ProfilePage },
           { path: 'shopping-progress', Component: ShoppingProgress },
           { path: 'checkout', Component: CheckoutPage },
-          { path: 'order', Component: OrdersPage },
+          { path: 'orders', Component: OrdersPage },
           { path: 'orderdetail', Component: OrderDetailsPage },
           { path: 'dashboard', Component: Dashboard },
+          { path: 'users', Component: UsersPage },
         ],
       },
     ],
