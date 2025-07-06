@@ -1,21 +1,24 @@
+import { Link } from 'react-router-dom';
 import ProductCard from './productCard';
-import { products } from './products';
+import { useQuery } from '@tanstack/react-query';
+import { useProducts } from '@/hooks/useProducts';
 
 const ProductRelated = () => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['products'],
+    queryFn: useProducts,
+  });
+
+  if (isLoading) return <p>در حال بارگذاری...</p>;
+  if (isError) return <p>خطا در دریافت محصولات</p>;
+
   return (
-    <div className='w-3/5'>
-      <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto place-items-center">
-        {products.slice(0, 4).map((p) => (
-          <ProductCard
-            key={p.id}
-            productId={p.id}
-            productTitle={p.title}
-            productImage={p.image}
-            price={p.price}
-            componentSize="small"
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-3 gap-6 justify-center items-center">
+      {data?.slice(0, 6).map((product) => (
+        <Link to={`/product/${product._id}`} key={product._id}>
+          <ProductCard product={product} componentSize="large" />
+        </Link>
+      ))}
     </div>
   );
 };

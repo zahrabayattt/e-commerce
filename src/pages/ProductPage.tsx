@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
 import { useCartStore } from '@/store/use-cart-store';
+import ProductRelated from '@/components/ProductRelated';
 
 const ProductPage = () => {
 
@@ -118,12 +119,13 @@ const { id } = useParams();
         </div>
       </div>
 
-      <div className="flex flex-row justify-around gap-24 m-4">
+      <div className="flex flex-row justify-around gap-24 mt-12">
         <div className="flex flex-col">
           <p>ثبت نظر</p>
           <p>مشاهده نظرات</p>
           <p>محصولات مرتبط</p>
         </div>
+        <ProductRelated/>
       </div>
     </section>
   );
