@@ -7,7 +7,7 @@ export type OrderItem = {
 export type ShippingAddress = {
   address: string;
   city: string;
-  postalcode: string;
+  postalCode: string;
 };
 
 export type OrderModel = {
