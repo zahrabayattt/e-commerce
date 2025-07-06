@@ -1,19 +1,11 @@
-import React from 'react';
-import type { Interface } from 'readline';
+import type { ProductModel } from '@/types/product.model';
+import FavoriteButton from './FavoriteButton';
+
 interface IProductCard {
-  productId: number;
-  productTitle: string;
-  productImage: string;
-  price: number;
+  product: ProductModel;
   componentSize: 'small' | 'large';
 }
-const ProductCard = ({
-  productId,
-  productTitle,
-  productImage,
-  price,
-  componentSize,
-}: IProductCard) => {
+const ProductCard = ({product,componentSize,}: IProductCard) => {
   const productSizeClasses: Record<'small' | 'large', string> = {
     small: 'w-48 h-[180px]',
     large: 'w-72 h-64',
@@ -22,17 +14,19 @@ const ProductCard = ({
     small: 'w-48 h-[150px]',
     large: 'w-72 h-64',
   };
+  
   return (
-    <div key={productId} className={`${productSizeClasses[componentSize]}`}>
+    <div key={product._id} className={`relative ${productSizeClasses[componentSize]}`}>
       <img
-        src={productImage}
-        alt={productTitle}
+        src={product.image}
+        alt={product.name}
         className={`productCard__img ${productImageSizeClasses[componentSize]}`}
       ></img>
+      <FavoriteButton product={product}/>
       <div className={'flex flex-row justify-between gap-8 mt-2'}>
-        <p className={'w-4/5 text-[8px] font-normal'}>{productTitle}</p>
+        <p className={'w-4/5 text-[8px] font-normal'}>{product.name}</p>
         <p className="">
-          <p className={'px-2 py-1 text-[8px] badge'}>{price.toLocaleString()}تومان</p>
+          <p className={'px-2 py-1 text-[8px] badge'}>{product.price.toLocaleString()}تومان</p>
         </p>
       </div>
     </div>

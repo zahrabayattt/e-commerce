@@ -1,11 +1,11 @@
 import { TableRow, TableCell } from '@/components/ui/table';
-import type { ICartItem } from '@/types/cart';
+import type { CartItem } from '@/store/use-cart-store';
 
 const CartItemRow = ({
   item,
   variant = 'checkout',
 }: {
-  item: ICartItem;
+  item: CartItem;
   variant?: 'checkout' | 'summary';
 }) => {
   return (
@@ -14,9 +14,11 @@ const CartItemRow = ({
         <img src={item.productImage} alt={item.productTitle} className="w-10 h-10 object-cover" />
       </TableCell>
       <TableCell className="text-right">{item.productTitle}</TableCell>
-      <TableCell className="text-center">{item.productQuantity}</TableCell>
-      <TableCell className="text-center">${item.productPrice.toLocaleString()}</TableCell>
-      <TableCell className="text-center">${item.productTotalPrice.toLocaleString()}</TableCell>
+      <TableCell className="text-center">{item.quantity}</TableCell>
+      <TableCell className="text-center">${item.price.toLocaleString()}</TableCell>
+      <TableCell className="text-center">
+        ${(item.price * item.quantity).toLocaleString()}
+      </TableCell>
     </TableRow>
   );
 };

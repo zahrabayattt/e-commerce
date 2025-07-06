@@ -3,59 +3,77 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import ShopCard from '../components/ShopCard';
-import { products, type Product } from '@/components/ProductsForShow';
+import { useQuery } from '@tanstack/react-query';
+import { useProducts } from '@/hooks/useProducts';
 
 const ShopPage = () => {
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [tempPrice, setTempPrice] = useState('');
 
-  const handleBrandChange = (brand: string) => {
-    setSelectedBrands((prev) =>
-      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
+  
+
+const { data, isLoading, isError } = useQuery({
+  queryKey: ['products'],
+  queryFn: useProducts,
+});
+
+
+
+  if (isLoading) return <p>در حال بارگذاری...</p>;
+  if (isError) return <p>خطا در دریافت محصولات</p>;
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory((prev) =>
+      prev.includes(category) ? prev.filter((b) => b !== category) : [...prev, category]
     );
   };
 
-  const filteredProducts = products.filter((product) => {
-    const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
-    const matchPrice = maxPrice === null || parseInt(product.price.replace(/,/g, '')) <= maxPrice;
-    return matchBrand && matchPrice;
+  const filteredProducts = data?.filter((product) => {
+    const matchCategory = selectedCategory.length === 0 || selectedCategory.includes(product.category._id);
+    const matchPrice = maxPrice === null || product.price <= maxPrice;
+    return matchCategory && matchPrice;
   });
 
-  const brands = Array.from(new Set(products.map((p) => p.brand)));
+  const categories: { _id: string; name: string }[] = [];
+  data?.forEach((p) => {
+  if (!categories.some(c => c.name === p.category.name)) {
+    categories.push(p.category);
+  }
+  });
+
+
   return (
     <div className="flex ">
-      <div className="fixed"></div>
-      <div className=" bg-gray-100  p-3 flex flex-col mt-8  max-w-2xs  items-center h-[600px] mr-60 ">
+      
+      <div className=" bg-gray-200 min-w-[230px] h-[600px] px-6 py-6 flex flex-col mt-2 mr-4 rounded-xl ">
         <div
-          className="shadow-xs border-gray-200 bg-white rounded-2xl 
-            w-[250px] text-center py-2 justify-center items-center  "
+          className="bg-white rounded-3xl text-sm text-center py-2 mb-4 shadow "
         >
           <h2>فیلتر برند</h2>
         </div>
 
-        {brands.map((brand) => (
+        {categories.map((category) => (
           <div
-            key={brand}
-            className="flex  items-center justify-start gap-2 w-full pr-2 mb-2 mt-3 "
+            key={category._id}
+            className="flex  items-center justify-start gap-1 w-full pr-2 mb-2 mt-2   "
           >
             <Checkbox
-              checked={selectedBrands.includes(brand)}
-              onCheckedChange={() => handleBrandChange(brand)}
-              className="border border-gray-500 rounded-full cursor-pointer "
+              checked={selectedCategory.includes(category._id)}
+              onCheckedChange={() => handleCategoryChange(category._id)}
+              className="border border-gray-400 rounded-full cursor-pointer bg-white "
             />
-            <span className="text-sm ">{brand}</span>
+            <span className="text-sm ">{category.name}</span>
           </div>
         ))}
-
+        
         <div
-          className="shadow-xs border-gray-200 bg-white rounded-2xl
-             w-[250px] text-center py-2 justify-center items-center "
+          className="bg-white rounded-3xl text-sm text-center py-2 shadow mt-4 "
         >
           <h2> فیلتر قیمت </h2>
         </div>
         <Input
-          className="mt-5 max-w-52 py-6 bg-white"
+          className="mt-5 bg-white placeholder:text-[12px] "
           value={tempPrice}
           onChange={(e) => {
             const value = e.target.value;
@@ -67,9 +85,9 @@ const ShopPage = () => {
 
         <Button
           variant="outline"
-          className="mt-5 w-52 bg-gray-100 cursor-pointer hover:bg-gray-200"
+          className="mt-5 w-full text-sm bg-gray-100 hover:bg-gray-300"
           onClick={() => {
-            setSelectedBrands([]);
+            setSelectedCategory([]);
             setMaxPrice(null);
             setTempPrice('');
           }}
@@ -77,13 +95,12 @@ const ShopPage = () => {
           حذف فیلتر ها
         </Button>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-2 mr-10 mt-2">
-        {filteredProducts.slice(0, 10).map((product) => (
-          <ShopCard key={product.id} product={product} />
+      <div className=" grid grid-cols-3 gap-6 mt-2  mr-14 ml-10">
+        {(filteredProducts??[]).slice(0, 10).map((product) => (
+          <ShopCard key={product._id} product={product} />
         ))}
       </div>
     </div>
   );
 };
-
 export default ShopPage;

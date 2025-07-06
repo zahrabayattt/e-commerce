@@ -5,6 +5,10 @@ type AuthStoreType = {
   setId: (id: string) => void;
   isAdmin: boolean;
   setIsAdmin: (isAdmin: boolean) => void;
+  username: string | null;
+  setUserName: (username: string) => void;
+  email: string | null;
+  setEmail: (email: string) => void;
   reset: () => void;
 };
 
@@ -19,10 +23,22 @@ const useAuthStore = create<AuthStoreType>((set) => ({
     set({ isAdmin });
     localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
   },
+  username: localStorage.getItem('username'),
+  setUserName: (username: string) => {
+    set({ username });
+    localStorage.setItem('username', username);
+  },
+  email: localStorage.getItem('email'),
+  setEmail: (email: string) => {
+    set({ email });
+    localStorage.setItem('email', email);
+  },
   reset: () => {
     set({ id: null, isAdmin: false });
     localStorage.removeItem('id');
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
   },
 }));
 

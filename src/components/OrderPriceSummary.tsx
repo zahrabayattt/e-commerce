@@ -1,4 +1,4 @@
-import type { ICartItem } from '@/types/cart';
+import { useCartStore } from '@/store/use-cart-store';
 
 const PriceSummaryItem = ({ label, value }: { label: string; value: number }) => (
   <div className="flex justify-between text-[10px]">
@@ -7,8 +7,10 @@ const PriceSummaryItem = ({ label, value }: { label: string; value: number }) =>
   </div>
 );
 
-const OrderPriceSummary = ({ cartItems }: { cartItems: ICartItem[] }) => {
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.productTotalPrice, 0);
+const OrderPriceSummary = () => {
+  const { cartItems } = useCartStore();
+
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = totalPrice * 0.2;
   const shippingCost = 55000;
   const totalAmount = totalPrice + tax + shippingCost;

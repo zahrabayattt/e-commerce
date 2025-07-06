@@ -1,13 +1,19 @@
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/store/use-cart-store';
 import { Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const { cartItems, removeFromCart, updateQuantity } = useCartStore();
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const handleProceedToOrderPage = () => {
+    navigate('/shopping-progress');
+  };
 
   return (
-    <div className="bg-[#EEEFF1] h-screen w-full">
+    <div className="bg-[#EEEFF1] w-full">
       <div className="w-2/3 py-4 mx-auto">
         {cartItems.length === 0 ? (
           <p className="text-center mt-10 mx-auto">سبد خرید شما خالی است</p>
@@ -37,7 +43,7 @@ const CartPage = () => {
                   value={item.quantity}
                   onChange={(e) => updateQuantity(item.productId, Number(e.target.value))}
                 >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((q) => (
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((q) => (
                     <option key={q + 1} value={q + 1}>
                       {q + 1}
                     </option>
@@ -55,9 +61,13 @@ const CartPage = () => {
         )}
         {/* Total */}
         <div className="px-8 mt-6">
-          <p className="text-sm mb-1">تعداد ({cartItems.length})</p>
+          <p className="text-sm mb-1">تعداد ({totalQuantity})</p>
           <p className="font-bold text-lg">{totalPrice.toLocaleString()} تومان</p>
-          <button className="mt-3 bg-pink-600 hover:bg-pink-700 text-white w-1/3 px-8 py-2 rounded-full text-sm">
+          <button
+            type="submit"
+            onClick={handleProceedToOrderPage}
+            className="mt-3 bg-pink-600 hover:bg-pink-700 text-white w-1/3 px-8 py-2 rounded-full text-sm"
+          >
             تکمیل خرید
           </button>
         </div>

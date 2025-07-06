@@ -1,13 +1,14 @@
 import { Table, TableHeader, TableBody, TableHead, TableRow } from '@/components/ui/table';
 import CartItemRow from '@/components/CartItemRow';
-import type { ICartItem } from '@/types/cart';
+import { useCartStore } from '@/store/use-cart-store';
 
 interface ICartItemsTable {
-  cartItems: ICartItem[];
   variant?: 'checkout' | 'summary';
 }
 
-const CartItemsTable = ({ cartItems, variant = 'checkout' }: ICartItemsTable) => {
+const CartItemsTable = ({ variant = 'checkout' }: ICartItemsTable) => {
+  const { cartItems } = useCartStore();
+
   return (
     <Table
       className={`table-fixed text-xs ${variant === 'checkout' ? 'w-2/5 h-1/5 border' : 'w-full'}`}

@@ -1,4 +1,4 @@
-import type { LoginPayloadModel, AuthResponseModel } from '@/@types/auth.model';
+import type { LoginPayloadModel, AuthResponseModel } from '@/types/auth.model';
 import { axiosInstance } from '@/lib/utils';
 import useAuthStore from '@/store/use-auth-store';
 import { useMutation } from '@tanstack/react-query';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const { setIsAdmin, setId } = useAuthStore();
+  const { setIsAdmin, setId, setUserName, setEmail } = useAuthStore();
 
   return useMutation({
     mutationFn: async (payload: LoginPayloadModel) => {
@@ -19,6 +19,8 @@ const useLogin = () => {
 
       setIsAdmin(res.data.isAdmin);
       setId(res.data._id);
+      setUserName(res.data.username);
+      setEmail(res.data.email);
 
       return res.data;
     },
