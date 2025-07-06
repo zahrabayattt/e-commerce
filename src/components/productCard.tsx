@@ -1,30 +1,42 @@
 import type { ProductModel } from '@/types/product.model';
 import FavoriteButton from './FavoriteButton';
 import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
 
 interface IProductCard {
   product: ProductModel;
   componentSize: 'small' | 'large';
 }
-const ProductCard = ({product,componentSize,}: IProductCard) => {
-  const productSizeClasses: Record<'small' | 'large', string> = {
-    small: 'w-1/2 h-1/2',
-    large: 'w-3/5 h-3/5',
-  };
+const ProductCard = ({ product, componentSize }: IProductCard) => {
+  const isSmall = componentSize === 'small';
 
-  
   return (
-    <section key={product._id} className={`w-${productSizeClasses[componentSize]}`}>
-      <img
-        src={product.image}
-        alt={product.name}
-        className={`productCard__img`}
-      ></img>
-      <div className={'flex flex-row justify-between gap-8 mt-2'}>
-        <p className={'w-4/5 font-normal'}>{product.name}</p>
-        <Badge variant="primary">{product.price.toLocaleString()}تومان</Badge>
+    <div className="relative">
+      <div className="absolute top-2 right-2 z-20">
+        <FavoriteButton product={product} />
       </div>
-    </section>
+      <Link to={`/product/${product._id}`} key={product._id}>
+        <div
+          className={`relative rounded-lg shadow-md overflow-hidden border${isSmall ? 'w-64 h-64' : 'w-80 h-80'}flex flex-col bg-white`}
+        >
+          <div className={`${isSmall ? 'h-44' : 'h-48'} w-full relative overflow-hidden`}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            />
+          </div>
+          <div className="p-2 flex flex-col justify-between flex-1">
+            <p className="text-base font-medium line-clamp-2">{product.name}</p>
+            <div className="flex justify-between items-center mt-2">
+              <Badge variant="primary" className="text-sm">
+                {product.price.toLocaleString()} تومان
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 };
 

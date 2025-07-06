@@ -17,9 +17,7 @@ const ProductRow: React.FC = () => {
     <section>
       <div className="grid grid-cols-2 gap-4 max-w-xl justify-center items-center">
         {data?.slice(0, 4).map((product) => (
-          <Link to={`/product/${product._id}`} key={product._id}>
             <ProductCard key={product._id} product={product} componentSize="small" />
-          </Link>
         ))}
       </div>
     </section>
