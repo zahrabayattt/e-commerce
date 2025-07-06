@@ -15,15 +15,15 @@ const OrderSummary = () => {
       <div className="flex justify-between bg-[#E6E8EB] rounded-md px-5 py-4">
         <div className="flex flex-col gap-2 text-sm">
           <h4 className="font-bold">روش پرداخت</h4>
-          <div className="flex gap-1 text-xs text-[#58616C]">
-            <p>روش:</p>
+          <div className="flex gap-1 text-sm text-[#58616C]">
+            <p>روش :</p>
             <p className="text-black">{orderShippingDetail.paymentMethod}</p>
           </div>
         </div>
         <div className="flex flex-col gap-2 text-sm">
           <h4 className="font-bold">آدرس دریافت</h4>
-          <div className="flex gap-1 text-xs text-[#58616C]">
-            <p>آدرس:</p>
+          <div className="flex gap-1 text-sm text-[#58616C]">
+            <p>آدرس :</p>
             <p className="text-black">{orderShippingDetail.address}</p>
           </div>
         </div>

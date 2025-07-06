@@ -10,9 +10,7 @@ const CartItemsTable = ({ variant = 'checkout' }: ICartItemsTable) => {
   const { cartItems } = useCartStore();
 
   return (
-    <Table
-      className={`table-fixed text-xs ${variant === 'checkout' ? 'w-2/5 h-1/5 border' : 'w-full'}`}
-    >
+    <Table className={`table-fixed ${variant === 'checkout' ? 'w-2/5 h-1/5 border' : 'w-full'}`}>
       <TableHeader>
         <TableRow>
           <TableHead className="text-right w-20 font-bold">عکس</TableHead>

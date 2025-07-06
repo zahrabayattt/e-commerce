@@ -15,10 +15,8 @@ const CartItemRow = ({
       </TableCell>
       <TableCell className="text-right">{item.productTitle}</TableCell>
       <TableCell className="text-center">{item.quantity}</TableCell>
-      <TableCell className="text-center">${item.price.toLocaleString()}</TableCell>
-      <TableCell className="text-center">
-        ${(item.price * item.quantity).toLocaleString()}
-      </TableCell>
+      <TableCell className="text-center">{item.price.toLocaleString()}</TableCell>
+      <TableCell className="text-center">{(item.price * item.quantity).toLocaleString()}</TableCell>
     </TableRow>
   );
 };
