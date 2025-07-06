@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage';
 import FavoritePage from './pages/FavoritePage';
 import UsersPage from './pages/UsersPage';
+import CreateProduct from './pages/CreateProduct';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
           { path: 'orderdetail', Component: OrderDetailsPage },
           { path: 'dashboard', Component: Dashboard },
           { path: 'users', Component: UsersPage },
+          { path: 'create-product', Component: CreateProduct }
         ],
       },
     ],
