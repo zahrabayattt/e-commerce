@@ -1,5 +1,6 @@
 import type { ProductModel } from '@/types/product.model';
 import FavoriteButton from './FavoriteButton';
+import { Badge } from '@/components/ui/badge';
 
 interface IProductCard {
   product: ProductModel;
@@ -7,29 +8,23 @@ interface IProductCard {
 }
 const ProductCard = ({product,componentSize,}: IProductCard) => {
   const productSizeClasses: Record<'small' | 'large', string> = {
-    small: 'w-48 h-[180px]',
-    large: 'w-72 h-64',
+    small: 'w-1/2 h-1/2',
+    large: 'w-3/5 h-3/5',
   };
-  const productImageSizeClasses: Record<'small' | 'large', string> = {
-    small: 'w-48 h-[150px]',
-    large: 'w-72 h-64',
-  };
+
   
   return (
-    <div key={product._id} className={`relative ${productSizeClasses[componentSize]}`}>
+    <section key={product._id} className={`w-${productSizeClasses[componentSize]}`}>
       <img
         src={product.image}
         alt={product.name}
-        className={`productCard__img ${productImageSizeClasses[componentSize]}`}
+        className={`productCard__img`}
       ></img>
-      <FavoriteButton product={product}/>
       <div className={'flex flex-row justify-between gap-8 mt-2'}>
-        <p className={'w-4/5 text-[8px] font-normal'}>{product.name}</p>
-        <p className="">
-          <p className={'px-2 py-1 text-[8px] badge'}>{product.price.toLocaleString()}تومان</p>
-        </p>
+        <p className={'w-4/5 font-normal'}>{product.name}</p>
+        <Badge variant="primary">{product.price.toLocaleString()}تومان</Badge>
       </div>
-    </div>
+    </section>
   );
 };
 
