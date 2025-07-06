@@ -26,7 +26,7 @@ export type ProductModel = {
   price: number;
   countInStock: number;
   reviews: ReviewModel[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   __v: number;
 };
