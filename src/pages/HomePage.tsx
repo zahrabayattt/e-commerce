@@ -1,4 +1,3 @@
-import React from "react";
 import ProductRow from "../components/ProductRow";
 import ProductCarousel from "../components/ProductCarousel";
 import SpecialProductsSection from "../components/SpecialProductsSection";
