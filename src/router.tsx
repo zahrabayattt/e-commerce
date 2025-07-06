@@ -14,6 +14,7 @@ import OrderDetailsPage from './pages/OrderDetailsPage';
 import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage';
 import FavoritePage from './pages/FavoritePage';
+import UsersPage from './pages/UsersPage';
 
 const router = createBrowserRouter([
   {
@@ -26,16 +27,17 @@ const router = createBrowserRouter([
       { path: 'product/:id', Component: ProductPage },
       { path: 'shop', Component: ShopPage },
       { path: 'cart', Component: CartPage },
-      {path: 'favorite' , Component: FavoritePage},
+      { path: 'favorite', Component: FavoritePage },
       {
         Component: PrivateRoutes,
         children: [
           { path: 'profile', Component: ProfilePage },
           { path: 'shoppingprogress', Component: ShoppingProgress },
           { path: 'checkout', Component: CheckoutPage },
-          { path: 'order', Component: OrdersPage },
+          { path: 'orders', Component: OrdersPage },
           { path: 'orderdetail', Component: OrderDetailsPage },
           { path: 'dashboard', Component: Dashboard },
+          { path: 'users', Component: UsersPage },
         ],
       },
     ],
