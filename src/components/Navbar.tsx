@@ -16,6 +16,7 @@ const Navbar = () => {
   const authItems = getAuthNavItems(isAdmin);
   const navbarItems = NavbarItems(isAdmin);
   const userNavItem = authItems[0];
+
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
   const dropdownIcon = (
     <svg

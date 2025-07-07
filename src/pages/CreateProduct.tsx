@@ -67,7 +67,6 @@ const NewProductForm: React.FC = () => {
               </div>
             </div>
             <div className="mt-6">
-              {/* <Button size={'sm'}>ثبت نظر</Button> */}
               <Button type="submit">ساخت محصول جدید</Button>
             </div>
           </form>
