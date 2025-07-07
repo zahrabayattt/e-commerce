@@ -2,7 +2,7 @@ import React from 'react'
 
 const ShowComment = () => {
   return (
-    <div className="flex flex-col bg-neutral-100 m-8 w-3/5 rounded-xs">
+    <div className="flex flex-col bg-neutral-100 w-11/12 rounded-xs">
       <div className="flex flex-row justify-between m-2">
         <p className="text-neutral-400">زهرا کیانی</p>
         <p>1404/04/05</p>

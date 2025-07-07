@@ -11,13 +11,13 @@ import { Button } from '@/components/ui/button';
 
 const CommentSubmit = () => {
   return (
-    <div className="flex flex-col gap-2 w-3/5">
+    <div className="flex flex-col gap-4 w-[700px]">
       <label className="font-medium">امتیاز</label>
       <Select>
-        <SelectTrigger className="w-[580px]">
+        <SelectTrigger className="w-[700px] bg-white">
           <SelectValue placeholder="انتخاب امتیاز" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white">
           <SelectItem value="light">عالی</SelectItem>
           <SelectItem value="system">خوب</SelectItem>
           <SelectItem value="system">متوسط</SelectItem>
@@ -25,7 +25,7 @@ const CommentSubmit = () => {
         </SelectContent>
       </Select>
       <label className="font-medium">نظر</label>
-      <Textarea placeholder="نظر خود را وارد نمایید" className="w-[580px]" />
+      <Textarea placeholder="نظر خود را وارد نمایید" className="w-[700px] bg-white" />
       <Button size={'sm'}>ثبت نظر</Button>
     </div>
   );
