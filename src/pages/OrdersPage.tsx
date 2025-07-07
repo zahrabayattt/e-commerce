@@ -11,17 +11,17 @@ export default function OrdersPage() {
     return <p className="text-center mx-auto">سفارشی برای نمایش وجود ندارد.</p>;
   }
   return (
-    <Table dir="rtl" className="w-[80%] mx-auto mt-[3%]">
+    <Table dir="rtl" className="w-[80%] mx-auto">
       <TableHeader>
         <TableRow className="border-none h-16">
-          <TableHead className="text-center">عکس</TableHead>
-          <TableHead className="text-center">نام محصول</TableHead>
-          <TableHead className="text-center">تاریخ</TableHead>
-          {isAdmin && <TableHead className="text-center">کاربر</TableHead>}
-          <TableHead className="text-center">قیمت نهایی</TableHead>
-          <TableHead className="text-center">پرداخت</TableHead>
-          <TableHead className="text-center">ارسال</TableHead>
-          <TableHead className="text-center">عملیات</TableHead>
+          <TableHead className="text-center text-lg font-bold">عکس</TableHead>
+          <TableHead className="text-center text-lg font-bold">نام محصول</TableHead>
+          <TableHead className="text-center text-lg font-bold">تاریخ</TableHead>
+          {isAdmin && <TableHead className="text-center text-lg font-bold">کاربر</TableHead>}
+          <TableHead className="text-center text-lg font-bold">قیمت نهایی</TableHead>
+          <TableHead className="text-center text-lg font-bold">پرداخت</TableHead>
+          <TableHead className="text-center text-lg font-bold">ارسال</TableHead>
+          <TableHead className="text-center text-lg font-bold">عملیات</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

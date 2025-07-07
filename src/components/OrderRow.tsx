@@ -40,7 +40,7 @@ export default function OrderRow({ order, isAdmin }: { order: OrderRowModel; isA
           onClick={() => navigate(`/orders/${order._id}`)}
           variant="secondary"
           size="sm"
-          className="bg-[#DB2777] text-white cursor-pointer"
+          className="bg-[#DB2777] text-white cursor-pointer hover:bg-[#871849]"
         >
           جزئیات
         </Button>
