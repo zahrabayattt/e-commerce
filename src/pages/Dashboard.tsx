@@ -5,7 +5,7 @@ import usePersianNumbers from '@/hooks/use-persian-numbers';
 import useSales from '@/hooks/use-sales';
 import useSalesByDate from '@/hooks/use-sales-by-date';
 import useUsers from '@/hooks/use-users';
-import { miladiToShamsi } from '@/lib/miladiToShamsi';
+import { formatDate } from '@/lib/utils';
 const Dashboard = () => {
   const { data: users } = useUsers();
   const { data } = useSalesByDate();
@@ -18,7 +18,7 @@ const Dashboard = () => {
       ?.slice()
       .sort((a, b) => new Date(b._id).getTime() - new Date(a._id).getTime())
       .map((item) => ({
-        date: miladiToShamsi(item._id),
+        date: formatDate(item._id),
         sales: item.totalSales,
       })) || [];
 

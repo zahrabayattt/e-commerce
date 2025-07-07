@@ -4,8 +4,8 @@ export type ReviewModel = {
   comment: string;
   user: string;
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };
 type category={
   _id :string,

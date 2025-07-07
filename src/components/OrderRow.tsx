@@ -2,14 +2,15 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { OrderRowModel } from '@/types/order.model';
-import useMiladiToShamsi from '@/hooks/useMiladiToShamsi';
 import usePersianNumbers from '@/hooks/use-persian-numbers';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '@/lib/utils';
 
 export default function OrderRow({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }) {
-  const createdAt = useMiladiToShamsi(order.createdAt);
   const toPersianNumber = usePersianNumbers();
   const navigate = useNavigate();
+  const createdAt = formatDate(order.createdAt);
+  const tax = 0.1;
   return (
     <TableRow className="border-none">
       <TableCell className="p-2">
@@ -22,7 +23,7 @@ export default function OrderRow({ order, isAdmin }: { order: OrderRowModel; isA
       <TableCell className="mx-auto text-center">{createdAt}</TableCell>
       {isAdmin && <TableCell className="mx-auto text-center">{order.user}</TableCell>}
       <TableCell className="mx-auto text-center">
-        {toPersianNumber(((order.price + order.price * 0.1) * order.qty).toLocaleString())}
+        {toPersianNumber(((order.price + order.price * tax) * order.qty).toLocaleString())}
       </TableCell>
       <TableCell className="mx-auto text-center">
         <Badge className={order.isPaid ? 'bg-[#22C55E]' : 'bg-[#B71D18]'}>

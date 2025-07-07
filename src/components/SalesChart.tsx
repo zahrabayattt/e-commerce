@@ -20,7 +20,7 @@ const SalesChart = ({data}:SalesChartProps) => {
             tick={{ fill: '#58616C', fontSize: 12, fontWeight: 400 }}
           />
           <CartesianGrid vertical={false} />
-          <Bar dataKey="sales" fill="#D61F69" barSize={120} />
+          <Bar dataKey="sales" fill="#D61F69" barSize={data.length > 7 ? 60 : 120} />
         </BarChart>
       </ResponsiveContainer>
       <p className="absolute -top-4 right-14 text-[10px]">نمودار فروش</p>
