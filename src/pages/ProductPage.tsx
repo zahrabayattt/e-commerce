@@ -2,9 +2,11 @@ import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/com
 import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
-import ProductRelated from '@/components/ProductRelated';
-import { useCartStore, type CartItem } from '@/store/use-cart-store';
+import { useCartStore } from '@/store/use-cart-store';
 import { useState } from 'react';
+import CommentSubmit from '@/components/CommentSubmit';
+import CommentShow from '@/components/CommentShow';
+import ProductRelated from '@/components/ProductRelated';
 
 const ProductPage = () => {
 
@@ -12,6 +14,7 @@ const { id } = useParams();
 const { data: product, isLoading, error } = useProduct(id!);
 const {addToCart} = useCartStore();
 const [selectedQuantity, setSelectedQuantity] = useState(1); 
+const [activeTab, setActiveTab] = useState('CommentSubmit');
   
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت محصولات</p>;
@@ -36,10 +39,28 @@ const [selectedQuantity, setSelectedQuantity] = useState(1);
    addToCart(cartItem);
   }
 
+    const renderComponenet = () => {
+      switch (activeTab) {
+        case 'CommentSubmit':
+          return <CommentSubmit />;
+        case 'CommentShow':
+          return <CommentShow />;
+        case 'ProductRelated':
+          return <ProductRelated />;
+        default:
+          return null;
+      }
+    };
+
+     const tabs = [
+       { id: 'CommentSubmit', label: 'ثبت نظر' },
+       { id: 'CommentShow', label: 'مشاهده نظرات' },
+       { id: 'ProductRelated', label: 'محصولات مرتبط' },
+     ];
   return (
     <section>
       <div className="flex flex-row justify-around">
-        <img className="w-2/6" src={product.image} alt={product.name}></img>
+        <img className="w-2/6 rounded-lg" src={product.image} alt={product.name}></img>
         <div className="flex flex-col w-2/5 justify-between gap-4">
           <h5>{product.name}</h5>
           <p>{product.description}</p>
@@ -137,13 +158,20 @@ const [selectedQuantity, setSelectedQuantity] = useState(1);
         </div>
       </div>
 
-      <div className="flex flex-row justify-around gap-24 mt-12">
-        <div className="flex flex-col">
-          <p>ثبت نظر</p>
-          <p>مشاهده نظرات</p>
-          <p>محصولات مرتبط</p>
+      <div className="flex flex-row fixed right-52 justify-around gap-24 mt-12">
+        <div className="flex flex-col m-8">
+          {tabs.map((tab) => (
+            <p
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`cursor-pointer pb-1 transition-all duration-300 
+                ${activeTab === tab.id ? 'font-extrabold' : 'font-normal'}`}
+            >
+              {tab.label}
+            </p>
+          ))}
         </div>
-        <ProductRelated/>
+        <div className="m-8">{renderComponenet()}</div>
       </div>
     </section>
   );
