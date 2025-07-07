@@ -7,6 +7,7 @@ import { useState } from 'react';
 import CommentSubmit from '@/components/CommentSubmit';
 import CommentShow from '@/components/CommentShow';
 import ProductRelated from '@/components/ProductRelated';
+import type { CartItem } from '@/types/cart.model';
 
 const ProductPage = () => {
 
@@ -42,9 +43,9 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
     const renderComponenet = () => {
       switch (activeTab) {
         case 'CommentSubmit':
-          return <CommentSubmit />;
+          return <CommentSubmit product={product} />
         case 'CommentShow':
-          return <CommentShow />;
+          return <CommentShow product={product} />;
         case 'ProductRelated':
           return <ProductRelated />;
         default:
@@ -140,7 +141,7 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
               افزودن به سبد خرید
             </Button>
             <Select onValueChange={handleQuantityClick} defaultValue="1">
-              <SelectTrigger className="w-16">
+              <SelectTrigger className="w-16 bg-white">
                 <SelectValue placeholder="1" />
               </SelectTrigger>
               <SelectContent>
