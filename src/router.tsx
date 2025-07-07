@@ -18,6 +18,7 @@ import UsersPage from './pages/UsersPage';
 import CreateProduct from './pages/CreateProduct';
 import OrderShippingDetails from '@/components/OrderShippingDetails';
 import OrderSummary from '@/components/OrderSummary';
+import AllProducts from './pages/AllProducts';
 
 
 const router = createBrowserRouter([
@@ -49,7 +50,8 @@ const router = createBrowserRouter([
           { path: 'orderdetail', Component: OrderDetailsPage },
           { path: 'dashboard', Component: Dashboard },
           { path: 'users', Component: UsersPage },
-          { path: 'create-product', Component: CreateProduct }
+          { path: 'create-product', Component: CreateProduct },
+          {path: 'all-products', Component: AllProducts}
         ],
       },
     ],
