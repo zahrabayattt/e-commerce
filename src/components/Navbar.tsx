@@ -9,11 +9,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
-  const { id, isAdmin } = useAuthStore();
   const { cartItems } = useCartStore();
   const logout = useLogout();
 
+  const { id, isAdmin } = useAuthStore();
   const authItems = getAuthNavItems(isAdmin);
+  const navbarItems = NavbarItems(isAdmin);
   const userNavItem = authItems[0];
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
   const dropdownIcon = (
@@ -44,9 +45,9 @@ const Navbar = () => {
         setIsOpen(false);
         setUserDropdownOpen(false);
       }}
-    >
+    > 
       <nav className="flex flex-col gap-2 p-2">
-        {NavbarItems.map((item) => (
+        {navbarItems.map((item) => (
           <div key={item.address} className="relative">
             <NavLink
               to={item.address ?? '#'}

@@ -11,8 +11,8 @@ import {
 } from 'lucide-react';
 
 
-export const NavbarItems: NavItem[] = [
-  { title: 'داشبورد', address: 'dashboard', icon: <House size={20} /> },
+export const NavbarItems = (isAdmin: boolean): NavItem[] => [
+  { title: 'داشبورد', address: isAdmin ? 'dashboard' : '/', icon: <House size={20} /> },
   { title: 'فروشگاه', address: 'shop', icon: <ShoppingBag size={20} /> },
   { title: 'سبد خرید', address: 'cart', icon: <ShoppingCart size={20} /> },
   { title: 'علاقه‌مندی‌ها', address: 'favorite', icon: <Heart size={20} /> },
@@ -32,7 +32,7 @@ export const getAuthNavItems = (isAdmin: boolean): NavItem[] => [
       ...(isAdmin
         ? [
             { title: 'داشبورد', address: 'dashboard' },
-            { title: 'محصول جدید', address: 'shop' },
+            { title: 'محصول جدید', address: 'create-product' },
             { title: 'مدیریت کاربران', address: 'users' },
             { title: 'سفارشات', address: 'orders' },
           ]
