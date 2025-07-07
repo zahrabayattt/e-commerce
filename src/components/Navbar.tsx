@@ -3,16 +3,21 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { authNavItems, getAuthNavItems, NavbarItems } from '@/components/NavbarItems';
 import useLogout from '@/hooks/use-logout';
+import { useCartStore } from '@/store/use-cart-store';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
-  const { id, isAdmin } = useAuthStore();
+  const { cartItems } = useCartStore();
   const logout = useLogout();
 
+  const { id, isAdmin } = useAuthStore();
   const authItems = getAuthNavItems(isAdmin);
+  const navbarItems = NavbarItems(isAdmin);
   const userNavItem = authItems[0];
+
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
   const dropdownIcon = (
     <svg
       className="w-2.5 h-2.5 ms-3"
@@ -41,9 +46,9 @@ const Navbar = () => {
         setIsOpen(false);
         setUserDropdownOpen(false);
       }}
-    >
+    > 
       <nav className="flex flex-col gap-2 p-2">
-        {NavbarItems.map((item) => (
+        {navbarItems.map((item) => (
           <div key={item.address} className="relative">
             <NavLink
               to={item.address ?? '#'}
@@ -53,7 +58,17 @@ const Navbar = () => {
                 }`
               }
             >
-              {item.icon}
+              {item.title === 'سبد خرید' && totalQuantity > 0 ? (
+                <div className="relative">
+                  {item.icon}
+                  <span className="absolute -top-3 -right-3 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {totalQuantity}
+                  </span>
+                </div>
+              ) : (
+                item.icon
+              )}
+
               <span
                 className={`transition-all duration-500 ease-in-out ${
                   isOpen ? 'opacity-100' : 'opacity-0 absolute'
