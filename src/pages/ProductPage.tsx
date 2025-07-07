@@ -2,6 +2,7 @@ import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/com
 import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
+import ProductRelated from '@/components/ProductRelated';
 import { useCartStore, type CartItem } from '@/store/use-cart-store';
 import { useState } from 'react';
 
@@ -136,12 +137,13 @@ const [selectedQuantity, setSelectedQuantity] = useState(1);
         </div>
       </div>
 
-      <div className="flex flex-row justify-around gap-24 m-4">
+      <div className="flex flex-row justify-around gap-24 mt-12">
         <div className="flex flex-col">
           <p>ثبت نظر</p>
           <p>مشاهده نظرات</p>
           <p>محصولات مرتبط</p>
         </div>
+        <ProductRelated/>
       </div>
     </section>
   );
