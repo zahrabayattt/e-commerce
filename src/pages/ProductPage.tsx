@@ -2,20 +2,39 @@ import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/com
 import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
-import { useCartStore } from '@/store/use-cart-store';
 import ProductRelated from '@/components/ProductRelated';
+import { useCartStore, type CartItem } from '@/store/use-cart-store';
+import { useState } from 'react';
 
 const ProductPage = () => {
 
 const { id } = useParams();
-
- const { data: product, isLoading, error } = useProduct(id!);
-  const { cartItems, addToCart, updateQuantity } = useCartStore();
-
-
+const { data: product, isLoading, error } = useProduct(id!);
+const {addToCart} = useCartStore();
+const [selectedQuantity, setSelectedQuantity] = useState(1); 
+  
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت محصولات</p>;
   if (!product) return <p>محصولی یافت نشد</p>;
+
+
+  const handleQuantityClick = (value: number) => {
+    setSelectedQuantity(value);
+  };
+
+  const handleAddClick=()=>{
+   const quantity=selectedQuantity;
+   const cartItem: CartItem = {
+     productId: product!._id,
+     productTitle: product!.name,
+     productBrand: '',
+     productImage: product!.image,
+     price: Number(product!.price),
+     quantity: Number(quantity),
+   };
+
+   addToCart(cartItem);
+  }
 
   return (
     <section>
@@ -96,23 +115,22 @@ const { id } = useParams();
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button size={'md'} onClick={() => addToCart(product)}>
+            <Button size={'md'} onClick={() => handleAddClick()}>
               افزودن به سبد خرید
             </Button>
-            <Select>
+            <Select onValueChange={handleQuantityClick} defaultValue="1">
               <SelectTrigger className="w-16">
                 <SelectValue placeholder="1" />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: product.quantity }).map((_, index) => (
-                  <SelectItem
-                    onClick={() => updateQuantity(product._id, index)}
-                    key={index}
-                    value={(index + 1).toString()}
-                  >
-                    {index + 1}
-                  </SelectItem>
-                ))}
+                {Array.from({ length: product.quantity }).map((_, index) => {
+                  const value = (index + 1).toString();
+                  return (
+                    <SelectItem key={value} value={value}>
+                      {value}
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
           </div>
