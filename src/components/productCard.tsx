@@ -12,7 +12,7 @@ const ProductCard = ({ product, componentSize }: IProductCard) => {
 
   return (
     <div className="relative">
-      <div className="absolute top-2 right-2 z-20">
+      <div className="absolute top-2 right-2 z-5">
         <FavoriteButton product={product} />
       </div>
       <Link to={`/product/${product._id}`} key={product._id}>
