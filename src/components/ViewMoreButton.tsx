@@ -8,7 +8,6 @@ interface ViewMoreButtonProps {
 }
 
 export default function ViewMoreButton({
-  onClick,
   text = "مشاهده بیشتر",
   _id,
 }: ViewMoreButtonProps) {

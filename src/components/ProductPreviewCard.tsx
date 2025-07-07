@@ -1,5 +1,5 @@
-import { miladiToShamsi } from '@/lib/miladiToShamsi';
 import ViewMoreButton from './ViewMoreButton';
+import { formatDate } from '@/lib/utils';
 
 interface ProductPreviewCardProps {
   _id: string;
@@ -25,7 +25,7 @@ const ProductPreviewCard = (props: ProductPreviewCardProps) => {
         <div className="flex justify-between items-center">
           <p className="text-base font-semibold text-black">{props.name}</p>
           <p className="text-sm text-[#58616C]">
-            {miladiToShamsi(props.createdAt)}
+            {formatDate(props.createdAt)}
           </p>
         </div>
 
