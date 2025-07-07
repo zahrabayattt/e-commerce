@@ -24,7 +24,7 @@ const useCreateOrder = () => {
       clearCart();
       resetOrderShipping();
       queryClient.invalidateQueries({ queryKey: ['orders'] });
-      navigate('/order');
+      navigate('/orders');
       toast.success('سفارش با موفقیت ثبت شد');
     },
     onError: () => {

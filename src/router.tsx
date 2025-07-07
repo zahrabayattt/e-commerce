@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       { path: 'product/:id', Component: ProductPage },
       { path: 'shop', Component: ShopPage },
       { path: 'cart', Component: CartPage },
-      { path: 'favorite', Component: FavoritePage },
+      { path: 'favorites', Component: FavoritePage },
       {
         Component: PrivateRoutes,
         children: [
