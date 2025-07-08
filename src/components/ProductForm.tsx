@@ -14,6 +14,7 @@ import useUploadImage from '@/hooks/use-upload-image';
 import useCreateProduct from '@/hooks/use-create-product';
 import type { CategoryResponseModel } from '@/types/category.model';
 import type { CreateProductPayload } from '@/types/product.model';
+import { Input } from './ui/input';
 
 const ProductForm: React.FC = () => {
   const { productForm, setProductForm } = useProductStore();
@@ -53,26 +54,25 @@ const ProductForm: React.FC = () => {
             <img
               src={baseUrl + uploadedImageUrl}
               alt="Uploaded"
-              className="mb-2 h-32 object-contain mx-auto"
+              className="mb-4 h-96 w-full max-w-md rounded-lg object-cover shadow-lg mx-auto"
             />
           )}
           <label
             htmlFor="product-image"
-            className="bg-white w-full cursor-pointer border-2 border-dashed border-gray-300 rounded-md h-24 flex items-center justify-center text-gray-500"
+            className="bg-white w-full cursor-pointer border-1 border-dashed border-gray-200 rounded-lg h-24 flex items-center justify-center text-gray-500"
           >
             آپلود عکس
           </label>
-          <input id="product-image" type="file" className="hidden" onChange={handleFileChange} />
+          <Input id="product-image" type="file" className="hidden" onChange={handleFileChange} />
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label className="block mb-1 text-sm">نام</label>
-            <input
+            <Input
               type="text"
               name="name"
               placeholder="نام محصول"
-              className="bg-white w-full border border-gray-300 rounded px-3 py-2"
               value={productForm.name}
               onChange={handleChange}
             />
@@ -80,10 +80,9 @@ const ProductForm: React.FC = () => {
 
           <div>
             <label className="block mb-1 text-sm">قیمت</label>
-            <input
+            <Input
               name="price"
               placeholder="قیمت محصول"
-              className="bg-white w-full border border-gray-300 rounded px-3 py-2"
               value={productForm.price}
               onChange={handleChange}
             />
@@ -95,7 +94,7 @@ const ProductForm: React.FC = () => {
               name="description"
               placeholder="توضیحات محصول"
               rows={4}
-              className="bg-white w-full border border-gray-300 rounded px-3 py-2 resize-none"
+              className="bg-white w-full border border-gray-200 rounded-md px-3 py-2"
               value={productForm.description}
               onChange={handleChange}
             />
