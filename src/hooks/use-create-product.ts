@@ -9,21 +9,30 @@ const useCreateProduct = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  return useMutation({
+  return useMutation<ProductResponseModel, unknown, CreateProductPayload>({
     mutationFn: async (payload: CreateProductPayload) => {
-      const res = await axiosInstance.post<
-        CreateProductPayload,
-        AxiosResponse<ProductResponseModel>
-      >('/products', payload);
+      const formData = new FormData();
+
+      formData.append('name', payload.name);
+      formData.append('description', payload.description);
+      formData.append('price', payload.price.toString());
+      formData.append('quantity', payload.quantity.toString());
+      formData.append('category', payload.category);
+      formData.append('image', payload.image);
+
+      const res: AxiosResponse<ProductResponseModel> = await axiosInstance.post('/products', formData);
       return res.data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-      navigate('/products');
+
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['products'] });
       toast.success('محصول با موفقیت ایجاد شد');
+      navigate('/products');
     },
-    onError: () => {
-      toast.error('ثبت محصول با خطا مواجه شد، لطفا دوباره امتحان کنید');
+
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || 'ثبت محصول با خطا مواجه شد';
+      toast.error(message);
     },
   });
 };

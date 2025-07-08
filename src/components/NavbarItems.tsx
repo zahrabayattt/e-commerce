@@ -36,7 +36,7 @@ export const getAuthNavItems = (isAdmin: boolean): NavItem[] => [
         ? [
             { title: 'داشبورد', address: 'dashboard' },
             { title: 'محصول جدید', address: 'create-product' },
-            { title: 'مدیریت محصولات', address: 'all-products' },
+            { title: 'مدیریت محصولات', address: 'products' },
             { title: 'مدیریت کاربران', address: 'users' },
             { title: 'سفارشات', address: 'orders' },
           ]

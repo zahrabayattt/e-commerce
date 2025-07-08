@@ -54,7 +54,7 @@ const router = createBrowserRouter([
           { path: 'dashboard', Component: Dashboard },
           { path: 'users', Component: UsersPage },
           { path: 'create-product', Component: CreateProduct },
-          {path: 'all-products', Component: AllProducts}
+          {path: 'products', Component: AllProducts}
         ],
       },
     ],
