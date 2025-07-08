@@ -39,17 +39,21 @@ const CartPage = () => {
               </div>
               {/* Left: Quantity + Delete */}
               <div className="flex justify-center items-center gap-3 min-w-[80px]">
-                <select
-                  className="bg-white border border-gray-300 rounded px-2 py-1 text-sm"
-                  value={item.quantity}
-                  onChange={(e) => updateQuantity(item.productId, Number(e.target.value))}
-                >
-                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((q) => (
-                    <option key={q + 1} value={q + 1}>
-                      {q + 1}
-                    </option>
-                  ))}
-                </select>
+                {item.countInStock > 0 ? (
+                  <select
+                    className="bg-white border border-gray-300 rounded px-2 py-1 text-sm"
+                    value={item.quantity}
+                    onChange={(e) => updateQuantity(item.productId, Number(e.target.value))}
+                  >
+                    {Array.from({ length: item.countInStock }, (_, i) => i + 1).map((q) => (
+                      <option key={q} value={q}>
+                        {q}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p className="text-red-500 text-sm mt-1">ناموجود</p>
+                )}
                 <button
                   className="text-red-600 hover:text-red-800"
                   onClick={() => removeFromCart(item.productId)}
