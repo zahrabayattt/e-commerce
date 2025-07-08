@@ -52,7 +52,6 @@ export const useCartStore = create<CartState>()(
       },
       clearCart: () => {
         set({ cartItems: [] });
-        toast.success("محصول  از سبد خرید حذف شد");
       },
     }),
     {
