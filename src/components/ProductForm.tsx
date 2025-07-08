@@ -47,7 +47,7 @@ const ProductForm: React.FC = () => {
   return (
     <div className="flex flex-1 justify-center">
       <div className="w-full max-w-3xl">
-        <h2 className="text-lg font-bold mb-4 text-right">محصول جدید</h2>
+        <h2 className="text-lg font-bold mb-4">محصول جدید</h2>
 
         <div className="w-full mb-6">
           {uploadedImageUrl && (
@@ -59,7 +59,7 @@ const ProductForm: React.FC = () => {
           )}
           <label
             htmlFor="product-image"
-            className="bg-white w-full cursor-pointer border-1 border-dashed border-gray-200 rounded-lg h-24 flex items-center justify-center text-gray-500"
+            className="bg-white w-full cursor-pointer border-1 border-dashed border-gray-200 rounded-lg h-24 flex items-center justify-center text-gray-500 text-md"
           >
             آپلود عکس
           </label>
@@ -68,46 +68,48 @@ const ProductForm: React.FC = () => {
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 text-sm">نام</label>
+            <label className="block mb-1 text-lg">نام</label>
             <Input
               type="text"
               name="name"
               placeholder="نام محصول"
+              className='py-6 text-md'
               value={productForm.name}
               onChange={handleChange}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">قیمت</label>
+            <label className="block mb-1 text-md">قیمت</label>
             <Input
               name="price"
               placeholder="قیمت محصول"
+              className='py-6 text-md'
               value={productForm.price}
               onChange={handleChange}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">توضیحات</label>
+            <label className="block mb-1 text-md">توضیحات</label>
             <textarea
               name="description"
               placeholder="توضیحات محصول"
               rows={4}
-              className="bg-white w-full border border-gray-200 rounded-md px-3 py-2"
+              className="bg-white w-full border border-gray-200 rounded-md px-3 py-6"
               value={productForm.description}
               onChange={handleChange}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">دسته‌بندی</label>
+            <label className="block mb-1 text-md">دسته‌بندی</label>
             <div className="flex items-center gap-2">
               <Select
                 onValueChange={(value) => setProductForm('category', value)}
                 value={productForm.category}
               >
-                <SelectTrigger className="w-full text-right h-12 bg-white" dir="rtl">
+                <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-white" dir="rtl">
                   <SelectValue placeholder="انتخاب دسته‌بندی" />
                 </SelectTrigger>
                 <SelectContent>
@@ -125,12 +127,12 @@ const ProductForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">موجودی</label>
+            <label className="block mb-1 text-md">موجودی</label>
             <Select
               value={productForm.quantity.toString()}
               onValueChange={(value) => setProductForm('quantity', Number(value))}
             >
-              <SelectTrigger className="w-full text-right h-12 bg-white" dir="rtl">
+              <SelectTrigger className="w-full text-right text-md py-6 h-12 bg-white" dir="rtl">
                 <SelectValue placeholder="انتخاب موجودی" />
               </SelectTrigger>
               <SelectContent>
@@ -141,8 +143,8 @@ const ProductForm: React.FC = () => {
             </Select>
           </div>
 
-          <div className="mt-6">
-            <Button type="submit" disabled={status === 'pending'}>
+          <div className="mt-8">
+            <Button type="submit" className='text-md py-6' disabled={status === 'pending'}>
               {status === 'pending' ? 'در حال ساخت...' : 'ساخت محصول جدید'}
             </Button>
           </div>
