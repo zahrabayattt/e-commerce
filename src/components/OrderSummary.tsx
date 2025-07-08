@@ -1,12 +1,49 @@
 import CartItemsTable from '@/components/CartItemsTable';
-import OrderPriceSummary from './OrderPriceSummary';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router';
 import { useOrderStore } from '@/store/use-order-shipping-store';
+import useCreateOrder from '@/hooks/use-create-order';
+import { useCartStore } from '@/store/use-cart-store';
+import type { CreateOrderPayload } from '@/types/order.model';
+import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
+import OrderPriceFromCart from './OrderPriceFromCart';
 
 const OrderSummary = () => {
-  const { orderShippingDetail } = useOrderStore();
+  const { mutate: createOrder } = useCreateOrder();
+  const { orderShippingDetail, resetOrderShipping } = useOrderStore();
+  const { cartItems } = useCartStore();
   const navigate = useNavigate();
+  const { clearCart } = useCartStore();
+  const queryClient = useQueryClient();
+
+  const handleSubmitOrder = () => {
+    const payload: CreateOrderPayload = {
+      orderItems: cartItems.map((item) => ({
+        _id: item.productId,
+        name: item.productTitle,
+        qty: item.quantity,
+      })),
+      paymentMethod: orderShippingDetail.paymentMethod,
+      shippingAddress: {
+        address: orderShippingDetail.address,
+        city: orderShippingDetail.city,
+        postalCode: orderShippingDetail.postalCode,
+      },
+    };
+    createOrder(payload, {
+      onSuccess: (data) => {
+        clearCart();
+        resetOrderShipping();
+        queryClient.invalidateQueries({ queryKey: ['orders'] });
+        toast.success('سفارش با موفقیت ثبت شد');
+        navigate(`/checkout?id=${data._id}`);
+      },
+      onError: () => {
+        toast.error('لطفا مجدد امتحان کنید');
+      },
+    });
+  };
 
   return (
     <div className="mt-15">
@@ -27,15 +64,13 @@ const OrderSummary = () => {
             <p className="text-black">{orderShippingDetail.address}</p>
           </div>
         </div>
-        <OrderPriceSummary />
+        <OrderPriceFromCart />
       </div>
       <Button
-        onClick={() => {
-          navigate('/checkout');
-        }}
+        onClick={handleSubmitOrder}
         variant="default"
         size="lg"
-        className="bg-[#DB2777] rounded-xl w-full mt-5"
+        className="bg-[#DB2777] rounded-xl w-full mt-5 cursor-pointer"
       >
         ثبت سفارش
       </Button>

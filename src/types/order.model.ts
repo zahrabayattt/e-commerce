@@ -23,6 +23,7 @@ export type CreateOrderPayload = {
 };
 
 export type OrderResponseModel = {
+  _id: string;
   orderItems: OrderItem[];
   paymentMethod: string;
   shippingAddress: ShippingAddress;
@@ -69,6 +70,24 @@ export type AdminOrder = {
   user: {
     _id: string;
     username: string;
+  };
+  orderItems: IOrderItem[];
+  shippingAddress: ShippingAddress;
+  itemsPrice: number;
+  taxPrice: number;
+  shippingPrice: number;
+  totalPrice: number;
+  isPaid: boolean;
+  isDelivered: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+export type UserOrderPopulated = {
+  _id: string | null;
+  user: {
+    _id: string;
+    username: string;
+    email?: string;
   };
   orderItems: IOrderItem[];
   shippingAddress: ShippingAddress;
