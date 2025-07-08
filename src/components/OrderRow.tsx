@@ -18,12 +18,12 @@ const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }
   const { mutate, isPending } = useMakeOrderDelivered();
   const queryClient = useQueryClient();
 
-  const handleClickDelivery = (_id: string) => {
+  const handleClick = (_id: string,setState:React.Dispatch<React.SetStateAction<boolean>>) => {
     if (isDelivered || isPending) return;
 
     mutate(_id, {
       onSuccess: () => {
-        setIsDelivered(true);
+        setState(true);
         queryClient.invalidateQueries({ queryKey: ['orders'] });
         toast.success('تغییر وضعیت سفارش موفقیت آمیز بود.');
       },
@@ -33,20 +33,20 @@ const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }
     });
   };
 
-  const handleClickPaying = (_id: string) => {
-    if (isPaid || isPending) return;
+  // const handleClickPaying = (_id: string) => {
+  //   if (isPaid || isPending) return;
 
-    mutate(_id, {
-      onSuccess: () => {
-        setIsPaid(true);
-        queryClient.invalidateQueries({ queryKey: ['orders'] });
-        toast.success('تغییر وضعیت سفارش موفقیت آمیز بود.');
-      },
-      onError: () => {
-        toast.error('تغییر وضعیت سفارش با خطا مواجه شد');
-      },
-    });
-  };
+  //   mutate(_id, {
+  //     onSuccess: () => {
+  //       setIsPaid(true);
+  //       queryClient.invalidateQueries({ queryKey: ['orders'] });
+  //       toast.success('تغییر وضعیت سفارش موفقیت آمیز بود.');
+  //     },
+  //     onError: () => {
+  //       toast.error('تغییر وضعیت سفارش با خطا مواجه شد');
+  //     },
+  //   });
+  // };
 
   const createdAt = formatDate(order.createdAt);
   const tax = 0.1;
@@ -67,7 +67,7 @@ const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }
       <TableCell className="mx-auto text-center">
         <Badge
           className={isPaid ? 'bg-[#22C55E]' : 'bg-[#B71D18] text-white cursor-pointer'}
-          onClick={() => handleClickPaying(order._id)}
+          onClick={() => handleClick(order._id, setIsPaid)}
         >
           {isPaid ? 'پرداخت شده' : 'پرداخت نشده'}
         </Badge>
@@ -75,7 +75,7 @@ const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }
       <TableCell className="mx-auto text-center">
         <Badge
           className={`${isDelivered ? 'bg-[#22C55E]' : 'bg-[#B71D18]'} text-white cursor-pointer`}
-          onClick={() => handleClickDelivery(order._id)}
+          onClick={() => handleClick(order._id, setIsDelivered)}
         >
           {isDelivered ? 'ارسال شده' : 'ارسال نشده'}
         </Badge>
