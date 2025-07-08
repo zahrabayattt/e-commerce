@@ -1,9 +1,13 @@
 import ProductCard from '@/components/productCard';
 import useFavoriteStore from '@/store/useFavoriteStore';
+import useAuthStore from '@/store/use-auth-store';
 
 const FavoritePage = () => {
-  const getUserFavorites = useFavoriteStore((state) => state.getUserFavorites);
-  const favorites = getUserFavorites();
+  const favorites = useFavoriteStore((state) => {
+    const userId = useAuthStore.getState().id;
+    if (!userId) return [];
+    return state.favorites[userId] ?? [];
+  });
 
   return (
     <div className="mr-30 grid grid-cols-3 gap-18">
