@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { IOrderShippingDetail } from '@/types/orderShipping';
+import type { IOrderShippingDetail } from '@/types/orderShipping.model';
 
 interface IOrderState {
   orderShippingDetail: IOrderShippingDetail;
