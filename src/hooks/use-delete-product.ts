@@ -1,15 +1,16 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '@/lib/utils';
+import { axiosInstance } from "@/lib/utils";
+import type { ProductModel } from "@/types/product.model";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useDeleteProduct = () => {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (id: string) => axiosInstance.delete(`/products/${id}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-    },
-  });
+    return useMutation({
+        mutationFn:(_id:string) => axiosInstance.delete<ProductModel>(`products/${_id}`).then((res) => res.data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["all-products"] });
+          },
+    })
 };
 
 export default useDeleteProduct;
