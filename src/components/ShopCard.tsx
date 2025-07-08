@@ -14,14 +14,10 @@ const ShopCard = ({product}:{product:ProductModel}) => {
   
   
   const addToCart = useCartStore((state)=> state.addToCart);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
   const isInCart = useCartStore((state) => state.cartItems.some((item) => item.productId === product._id.toString()));
 
   const handleCartClick = () =>{
-    if(isInCart){
-      removeFromCart(product._id.toString());
-    }
-    else{
+  
       addToCart({
         productId: product._id.toString(),
         productTitle: product.name,
@@ -31,7 +27,7 @@ const ShopCard = ({product}:{product:ProductModel}) => {
         quantity: 1,
         countInStock: product.countInStock,
       })
-    }
+    
   }
    return (
     <div className="bg-gray-200 rounded-2xl overflow-hidden flex flex-col w-full max-w-xs h-fit">
