@@ -14,6 +14,12 @@ import OrderDetailsPage from './pages/OrderDetailsPage';
 import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage';
 import FavoritePage from './pages/FavoritePage';
+import UsersPage from './pages/UsersPage';
+import CreateProduct from './pages/CreateProduct';
+import OrderShippingDetails from '@/components/OrderShippingDetails';
+import OrderSummary from '@/components/OrderSummary';
+import AllProducts from './pages/AllProducts';
+
 
 const router = createBrowserRouter([
   {
@@ -26,16 +32,29 @@ const router = createBrowserRouter([
       { path: 'product/:id', Component: ProductPage },
       { path: 'shop', Component: ShopPage },
       { path: 'cart', Component: CartPage },
-      {path: 'favorite' , Component: FavoritePage},
+      { path: 'favorites', Component: FavoritePage },
       {
         Component: PrivateRoutes,
         children: [
           { path: 'profile', Component: ProfilePage },
-          { path: 'shoppingprogress', Component: ShoppingProgress },
+          {
+            path: 'shopping-progress',
+            Component: ShoppingProgress,
+            children: [
+              { path: 'address', Component: OrderShippingDetails },
+              { path: 'summary', Component: OrderSummary },
+            ],
+          },
           { path: 'checkout', Component: CheckoutPage },
-          { path: 'order', Component: OrdersPage },
-          { path: 'orderdetail', Component: OrderDetailsPage },
+          { path: 'orders', children: [
+              { index: true, Component: OrdersPage },
+              { path: ':id', Component: OrderDetailsPage }
+            ],
+          },
           { path: 'dashboard', Component: Dashboard },
+          { path: 'users', Component: UsersPage },
+          { path: 'create-product', Component: CreateProduct },
+          {path: 'all-products', Component: AllProducts}
         ],
       },
     ],

@@ -7,6 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Input } from '@/components/ui/input';
 import { useUpdateUser } from '@/hooks/useUpdateUser';
 import type { UserUpdatePayload } from '@/types/UserUpdatePayload';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
   // State for input fields
@@ -41,7 +42,7 @@ const ProfilePage = () => {
 
     mutate(payload);
   };
-
+  const navigate = useNavigate();
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-950 p-4 font-sans" dir="rtl">
       <Card className="w-full max-w-lg">
@@ -78,7 +79,7 @@ const ProfilePage = () => {
               {isPending && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
               بروزرسانی
             </Button>
-            <Button type="button" variant="outline" size="lg">سفارشات من</Button>
+            <Button type="button" variant="default" size="lg" onClick={() => navigate("/orders")}>سفارشات من</Button>
           </CardFooter>
         </form>
       </Card>

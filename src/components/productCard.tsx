@@ -1,34 +1,41 @@
 import type { ProductModel } from '@/types/product.model';
 import FavoriteButton from './FavoriteButton';
+import { Link } from 'react-router-dom';
+import { Badge } from './ui/badge';
 
 interface IProductCard {
   product: ProductModel;
   componentSize: 'small' | 'large';
 }
-const ProductCard = ({product,componentSize,}: IProductCard) => {
-  const productSizeClasses: Record<'small' | 'large', string> = {
-    small: 'w-48 h-[180px]',
-    large: 'w-72 h-64',
-  };
-  const productImageSizeClasses: Record<'small' | 'large', string> = {
-    small: 'w-48 h-[150px]',
-    large: 'w-72 h-64',
-  };
-  
+const ProductCard = ({ product, componentSize }: IProductCard) => {
+  const isSmall = componentSize === 'small';
+
   return (
-    <div key={product._id} className={`relative ${productSizeClasses[componentSize]}`}>
-      <img
-        src={product.image}
-        alt={product.name}
-        className={`productCard__img ${productImageSizeClasses[componentSize]}`}
-      ></img>
-      <FavoriteButton product={product}/>
-      <div className={'flex flex-row justify-between gap-8 mt-2'}>
-        <p className={'w-4/5 text-[8px] font-normal'}>{product.name}</p>
-        <p className="">
-          <p className={'px-2 py-1 text-[8px] badge'}>{product.price.toLocaleString()}تومان</p>
-        </p>
+    <div className="relative">
+      <div className="absolute top-2 right-2 z-5">
+        <FavoriteButton product={product} />
       </div>
+      <Link to={`/product/${product._id}`} key={product._id}>
+        <div
+          className={`relative rounded-lg shadow-md overflow-hidden border${isSmall ? 'w-64 h-64' : 'w-80 h-80'}flex flex-col bg-white`}
+        >
+          <div className={`${isSmall ? 'h-44' : 'h-48'} w-full relative overflow-hidden`}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            />
+          </div>
+          <div className="p-2 flex flex-col justify-between flex-1">
+            <p className="text-base font-medium line-clamp-2">{product.name}</p>
+            <div className="flex justify-between items-center mt-2">
+              <Badge variant="primary" className="text-sm">
+                {product.price.toLocaleString()} تومان
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };

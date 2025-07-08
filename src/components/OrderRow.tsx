@@ -1,44 +1,105 @@
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import type { Order } from '@/types/order';
+import type { OrderRowModel } from '@/types/order.model';
+import usePersianNumbers from '@/hooks/use-persian-numbers';
+import { useNavigate } from 'react-router-dom';
+import { formatDate } from '@/lib/utils';
+import useMakeOrderDelivered from '@/hooks/use-make-order-delivered';
+import useMakeOrderPaid from '@/hooks/use-make-order-paid';
+import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
-export default function OrderRow({ order, isAdmin }: { order: Order; isAdmin: boolean }) {
+type MutateFn = (
+  id: string,
+  options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+  }
+) => void;
+
+const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }) => {
+  const toPersianNumber = usePersianNumbers();
+  const navigate = useNavigate();
+  const [isDelivered, setIsDelivered] = useState(order.isDelivered);
+  const [isPaid, setIsPaid] = useState(order.isPaid);
+
+  const { mutate: mutateDelivered, isPending: isDelivering } = useMakeOrderDelivered();
+  const { mutate: mutatePaid, isPending: isPaying } = useMakeOrderPaid();
+  const queryClient = useQueryClient();
+
+  const handleClick = (
+    id: string,
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    mutateFn: MutateFn,
+    isProcessing: boolean,
+    currentState: boolean,
+    successMsg: string
+  ) => {
+    if (currentState || isProcessing) return;
+
+    mutateFn(id, {
+      onSuccess: () => {
+        setState(true);
+        queryClient.invalidateQueries({ queryKey: ['orders'] });
+        toast.success(successMsg);
+      },
+      onError: () => {
+        toast.error('تغییر وضعیت با خطا مواجه شد');
+      },
+    });
+  };
+
+  const createdAt = formatDate(order.createdAt);
+  const tax = 0.1;
+
   return (
     <TableRow className="border-none">
       <TableCell className="p-2">
         <div className="flex justify-center items-center h-full">
-          <img src={order.image} alt={order.product} className="w-10 h-10 rounded-md" />
+          <img src={order.image} alt={order.name} className="w-10 h-10 rounded-md" />
         </div>
       </TableCell>
 
-      <TableCell className="mx-auto text-center">{order.product}</TableCell>
-      <TableCell className="mx-auto text-center">{order.date}</TableCell>
+      <TableCell className="mx-auto text-center">{order.name}</TableCell>
+      <TableCell className="mx-auto text-center">{createdAt}</TableCell>
       {isAdmin && <TableCell className="mx-auto text-center">{order.user}</TableCell>}
-      <TableCell className="mx-auto text-center">{order.price}</TableCell>
       <TableCell className="mx-auto text-center">
-        <Badge className={order.paid ? 'bg-[#22C55E]' : 'bg-[#B71D18]'}>
-          {order.paid ? 'پرداخت شده' : 'پرداخت نشده'}
+        {toPersianNumber(((order.price + order.price * tax) * order.qty).toLocaleString())}
+      </TableCell>
+      <TableCell className="mx-auto text-center">
+        <Badge
+          className={isPaid ? 'bg-[#22C55E]' : 'bg-[#B71D18] text-white cursor-pointer'}
+          onClick={() =>
+            handleClick(order._id, setIsPaid, mutatePaid, isPaying, isPaid, 'پرداخت با موفقیت انجام شد')
+          }
+        >
+          {isPaid ? 'پرداخت شده' : 'پرداخت نشده'}
         </Badge>
       </TableCell>
       <TableCell className="mx-auto text-center">
         <Badge
-          className={`${
-            order.shipped === 'در حال ارسال'
-              ? 'bg-[#00B8D9]'
-              : order.shipped === 'ارسال شده'
-                ? 'bg-[#22C55E]'
-                : 'bg-[#B71D18]'
-          } text-white`}
+          className={`${isDelivered ? 'bg-[#22C55E]' : 'bg-[#B71D18]'} text-white cursor-pointer`}
+          onClick={() =>
+            handleClick(order._id, setIsDelivered, mutateDelivered, isDelivering, isDelivered, 'ارسال سفارش با موفقیت انجام شد')
+          }
         >
-          {order.shipped}
+          {isDelivered ? 'ارسال شده' : 'ارسال نشده'}
         </Badge>
       </TableCell>
       <TableCell className="mx-auto text-center">
-        <Button variant="secondary" size="sm" className="bg-[#DB2777] text-white">
+        <Button
+          onClick={() => navigate(`/orders/${order._id}`)}
+          variant="secondary"
+          size="sm"
+          className="bg-[#DB2777] text-white cursor-pointer hover:bg-[#871849]"
+        >
           جزئیات
         </Button>
       </TableCell>
     </TableRow>
   );
-}
+};
+
+export default OrderRow;

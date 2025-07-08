@@ -4,8 +4,13 @@ export type ReviewModel = {
   comment: string;
   user: string;
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
+};
+type category = {
+  _id: string;
+  name: string;
+  __v: number;
 };
 
 export type ProductModel = {
@@ -13,7 +18,33 @@ export type ProductModel = {
   name: string;
   image: string;
   quantity: number;
+  category: category;
+  description: string;
+  rating: number;
+  numReviews: number;
+  price: number;
+  countInStock: number;
+  reviews: ReviewModel[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type CreateProductPayload = {
+  name: string;
+  description: string;
+  price: number;
   category: string;
+  quantity: number;
+  image: string;
+};
+
+export type ProductResponseModel = {
+  _id: string;
+  name: string;
+  image: string;
+  quantity: number;
+  category: category;
   description: string;
   rating: number;
   numReviews: number;

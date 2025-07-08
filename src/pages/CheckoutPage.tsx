@@ -2,14 +2,14 @@ import CartItemsTable from '@/components/CartItemsTable';
 import OrderPriceSummary from '@/components/OrderPriceSummary';
 import { Button } from '@/components/ui/button';
 import useAuthStore from '@/store/use-auth-store';
-import { useCartStore } from '@/store/cartStore';
-import { useOrderStore } from '@/store/orderShippingStore';
+import { useCartStore } from '@/store/use-cart-store';
+import { useOrderStore } from '@/store/use-order-shipping-store';
 import type { CreateOrderPayload } from '@/types/order.model';
 import useCreateOrder from '@/hooks/use-create-order';
 
 const OrderDetailItem = ({ label, value }: { label: string; value: number | string | null }) => {
   return (
-    <div className="flex gap-1 text-[11px] text-[#58616C]">
+    <div className="flex gap-1 text-[13px] text-[#58616C]">
       <p className="text-[#DB2777]">{label}</p>
       <p className="text-black">{value}</p>
     </div>
@@ -33,7 +33,7 @@ const CheckoutPage = () => {
       shippingAddress: {
         address: orderShippingDetail.address,
         city: orderShippingDetail.city,
-        postalcode: orderShippingDetail.postalCode,
+        postalCode: orderShippingDetail.postalCode,
       },
     };
     OrderMutate(payload);
@@ -43,7 +43,7 @@ const CheckoutPage = () => {
     <div className="flex gap-15 mt-10 justify-center align-center">
       <CartItemsTable variant="checkout" />
       <div className="w-1/3">
-        <div className="flex flex-col justify-between gap-2">
+        <div className="flex flex-col justify-between gap-3">
           <h4 className="font-bold">آدرس دریافت</h4>
           <OrderDetailItem label="شماره سفارش :" value={Math.floor(1000 + Math.random() * 9000)} />
           <OrderDetailItem label="نام :" value={username} />
@@ -51,7 +51,7 @@ const CheckoutPage = () => {
           <OrderDetailItem label="آدرس :" value={orderShippingDetail.address} />
           <OrderDetailItem label="درگاه پرداخت :" value={orderShippingDetail.paymentMethod} />
           <span className="bg-[#E6E8EB] text-xs rounded-md px-3 py-2 mt-1">تکمیل نشده</span>
-          <h3 className="my-3 font-bold">خلاصه خرید</h3>
+          <h3 className="my-2 font-bold">خلاصه خرید</h3>
           <OrderPriceSummary />
         </div>
         <Button

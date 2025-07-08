@@ -2,23 +2,66 @@ import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/com
 import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
-import useMiladiToShamsi from '@/hooks/useMiladiToShamsi';
+import { useCartStore } from '@/store/use-cart-store';
+import { useState } from 'react';
+import CommentSubmit from '@/components/CommentSubmit';
+import CommentShow from '@/components/CommentShow';
+import ProductRelated from '@/components/ProductRelated';
+import type { CartItem } from '@/types/cart.model';
 
 const ProductPage = () => {
 
 const { id } = useParams();
-
- const { data: product, isLoading, error } = useProduct(id!);
-
-
+const { data: product, isLoading, error } = useProduct(id!);
+const {addToCart} = useCartStore();
+const [selectedQuantity, setSelectedQuantity] = useState(1); 
+const [activeTab, setActiveTab] = useState('CommentSubmit');
+  
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت محصولات</p>;
   if (!product) return <p>محصولی یافت نشد</p>;
 
+
+  const handleQuantityClick = (value: number) => {
+    setSelectedQuantity(value);
+  };
+
+  const handleAddClick=()=>{
+   const quantity=selectedQuantity;
+   const cartItem: CartItem = {
+     productId: product!._id,
+     productTitle: product!.name,
+     productBrand: '',
+     productImage: product!.image,
+     price: Number(product!.price),
+     quantity: Number(quantity),
+   };
+
+   addToCart(cartItem);
+  }
+
+    const renderComponenet = () => {
+      switch (activeTab) {
+        case 'CommentSubmit':
+          return <CommentSubmit product={product} />
+        case 'CommentShow':
+          return <CommentShow product={product} />;
+        case 'ProductRelated':
+          return <ProductRelated />;
+        default:
+          return null;
+      }
+    };
+
+     const tabs = [
+       { id: 'CommentSubmit', label: 'ثبت نظر' },
+       { id: 'CommentShow', label: 'مشاهده نظرات' },
+       { id: 'ProductRelated', label: 'محصولات مرتبط' },
+     ];
   return (
     <section>
       <div className="flex flex-row justify-around">
-        <img className="w-2/6" src={product.image} alt={product.name}></img>
+        <img className="w-2/6 rounded-lg" src={product.image} alt={product.name}></img>
         <div className="flex flex-col w-2/5 justify-between gap-4">
           <h5>{product.name}</h5>
           <p>{product.description}</p>
@@ -52,7 +95,7 @@ const { id } = useParams();
                 <path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
               </svg>
 
-              <p>زمان به روز رسانی:{useMiladiToShamsi(product.updatedAt)}</p>
+              <p>زمان به روز رسانی:</p>
             </div>
 
             <div className="flex flex-row gap-2">
@@ -94,31 +137,42 @@ const { id } = useParams();
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button size={'md'}>
+            <Button size={'md'} onClick={() => handleAddClick()}>
               افزودن به سبد خرید
             </Button>
-            <Select>
-              <SelectTrigger className="w-16">
+            <Select onValueChange={handleQuantityClick} defaultValue="1">
+              <SelectTrigger className="w-16 bg-white">
                 <SelectValue placeholder="1" />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: product.quantity }).map((_, index) => (
-                  <SelectItem key={index} value={(index + 1).toString()}>
-                    {index + 1}
-                  </SelectItem>
-                ))}
+                {Array.from({ length: product.quantity }).map((_, index) => {
+                  const value = (index + 1).toString();
+                  return (
+                    <SelectItem key={value} value={value}>
+                      {value}
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-row justify-around gap-24 m-4">
-        <div className="flex flex-col">
-          <p>ثبت نظر</p>
-          <p>مشاهده نظرات</p>
-          <p>محصولات مرتبط</p>
+      <div className="flex flex-row fixed right-52 justify-around gap-24 mt-12">
+        <div className="flex flex-col m-8">
+          {tabs.map((tab) => (
+            <p
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`cursor-pointer pb-1 transition-all duration-300 
+                ${activeTab === tab.id ? 'font-extrabold' : 'font-normal'}`}
+            >
+              {tab.label}
+            </p>
+          ))}
         </div>
+        <div className="m-8">{renderComponenet()}</div>
       </div>
     </section>
   );
