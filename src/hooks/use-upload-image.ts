@@ -14,14 +14,12 @@ const useUploadImage = () => {
       const res = await axiosInstance.post<ImageResponseModel>('/upload', formData);
       return res.data;
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['images'] });
       toast.success('عکس با موفقیت آپلود شد');
-      console.log('Upload success:', data.image);
     },
-    onError: (error: any) => {
+    onError: () => {
       toast.error('آپلود عکس با خطا مواجه شد، لطفا دوباره امتحان کنید');
-      console.error('Upload failed:', error.response?.data || error.message);
     },
   });
 };

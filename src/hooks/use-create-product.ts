@@ -33,7 +33,7 @@ const useCreateProduct = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products'] });
-      navigate('/products');
+      navigate('/all-products');
       toast.success('محصول با موفقیت ایجاد شد');
     },
     onError: () => {
