@@ -1,35 +1,24 @@
-export interface Order {
-  id: number;
-  product: string;
-  image: string;
-  user: string;
-  date: string;
-  price: string;
-  paid: boolean;
-  shipped: 'در حال ارسال' | 'ارسال شده' | 'ارسال نشده';
-}
+import type { IOrderItem, ShippingAddress } from "./order.model";
 
-export type OrderItem = {
-  id: number;
-  image: string;
-  product: string;
-  quantity: number;
-  price: number;
-  total: number;
-};
-
-
-export type OrderDetails = {
-  id: number;
-  name: string;
-  email: string;
-  address: string;
-  paymentMethod: string;
-  status: 'در حال پردازش' | 'ارسال شده';
-  summary: {
-    itemsPrice: number;
-    shippingPrice: number;
-    taxPrice: number;
-    totalPrice: number;
+// get order type
+export type GetOrder = {
+  _id: string;
+  user: {
+    _id: string;
+    username: string;
+    email: string;
   };
+  orderItems: IOrderItem[];
+  shippingAddress: ShippingAddress;
+  itemsPrice: number;
+  taxPrice: number;
+  shippingPrice: number;
+  totalPrice: number;
+  paymentMethod: string;
+  isPaid: boolean;
+  isDelivered: boolean;
+  createdAt: string;
+  updatedAt: string;
+  deliveredAt: string;
+  paidAt: string;
 };

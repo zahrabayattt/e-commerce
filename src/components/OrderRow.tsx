@@ -37,7 +37,7 @@ export default function OrderRow({ order, isAdmin }: { order: OrderRowModel; isA
       </TableCell>
       <TableCell className="mx-auto text-center">
         <Button
-          onClick={() => navigate(`${order._id}`)}
+          onClick={() => navigate(`/orders/${order._id}`)}
           variant="secondary"
           size="sm"
           className="bg-[#DB2777] text-white"
