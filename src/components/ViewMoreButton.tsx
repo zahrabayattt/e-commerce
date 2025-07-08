@@ -15,7 +15,7 @@ export default function ViewMoreButton({
   return (
     <button
       onClick={() => navigate(_id)}
-      className="flex items-center gap-2 px-3 py-2 bg-[#DB2777] text-white rounded-md hover:bg-[#c8206c] transition-colors text-sm cursor-pointer"
+      className="flex items-center gap-2 px-3 py-2 bg-[#DB2777] text-white rounded-md hover:bg-[#871849] transition-colors text-sm cursor-pointer"
     >
       {text}
       <ArrowLeft size={16} />

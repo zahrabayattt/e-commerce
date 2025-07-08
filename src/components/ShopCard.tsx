@@ -29,6 +29,7 @@ const ShopCard = ({product}:{product:ProductModel}) => {
         productBrand: product.category.name,
         price: product.price,
         quantity: 1,
+        countInStock: product.countInStock,
       })
     }
   }

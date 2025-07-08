@@ -18,6 +18,7 @@ import UsersPage from './pages/UsersPage';
 import CreateProduct from './pages/CreateProduct';
 import OrderShippingDetails from '@/components/OrderShippingDetails';
 import OrderSummary from '@/components/OrderSummary';
+import AllProducts from './pages/AllProducts';
 
 
 const router = createBrowserRouter([
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       { path: 'product/:id', Component: ProductPage },
       { path: 'shop', Component: ShopPage },
       { path: 'cart', Component: CartPage },
-      { path: 'favorite', Component: FavoritePage },
+      { path: 'favorites', Component: FavoritePage },
       {
         Component: PrivateRoutes,
         children: [
@@ -45,11 +46,15 @@ const router = createBrowserRouter([
             ],
           },
           { path: 'checkout', Component: CheckoutPage },
-          { path: 'orders', Component: OrdersPage },
-          { path: 'orderdetail', Component: OrderDetailsPage },
+          { path: 'orders', children: [
+              { index: true, Component: OrdersPage },
+              { path: ':id', Component: OrderDetailsPage }
+            ],
+          },
           { path: 'dashboard', Component: Dashboard },
           { path: 'users', Component: UsersPage },
-          { path: 'create-product', Component: CreateProduct }
+          { path: 'create-product', Component: CreateProduct },
+          {path: 'all-products', Component: AllProducts}
         ],
       },
     ],

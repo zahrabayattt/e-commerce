@@ -4,9 +4,11 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { useNavigate } from 'react-router-dom';
 
 // The main profile page component, now using imported UI elements.
 const ProfilePage = () => {
+  const navigate = useNavigate();
   return (
     // The main container, centered and styled for a clean look.
     <div
@@ -60,7 +62,7 @@ const ProfilePage = () => {
           <Button variant="default" size="lg">
             بروزرسانی
           </Button>
-          <Button variant="default" size="lg">
+          <Button variant="default" size="lg" onClick={() => navigate("/orders")}>
             سفارشات من
           </Button>
         </CardFooter>
