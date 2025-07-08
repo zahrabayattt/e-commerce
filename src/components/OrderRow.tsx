@@ -6,50 +6,54 @@ import usePersianNumbers from '@/hooks/use-persian-numbers';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '@/lib/utils';
 import useMakeOrderDelivered from '@/hooks/use-make-order-delivered';
+import useMakeOrderPaid from '@/hooks/use-make-order-paid';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+
+type MutateFn = (
+  id: string,
+  options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+  }
+) => void;
 
 const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }) => {
   const toPersianNumber = usePersianNumbers();
   const navigate = useNavigate();
   const [isDelivered, setIsDelivered] = useState(order.isDelivered);
   const [isPaid, setIsPaid] = useState(order.isPaid);
-  const { mutate, isPending } = useMakeOrderDelivered();
+
+  const { mutate: mutateDelivered, isPending: isDelivering } = useMakeOrderDelivered();
+  const { mutate: mutatePaid, isPending: isPaying } = useMakeOrderPaid();
   const queryClient = useQueryClient();
 
-  const handleClick = (_id: string,setState:React.Dispatch<React.SetStateAction<boolean>>) => {
-    if (isDelivered || isPending) return;
+  const handleClick = (
+    id: string,
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    mutateFn: MutateFn,
+    isProcessing: boolean,
+    currentState: boolean,
+    successMsg: string
+  ) => {
+    if (currentState || isProcessing) return;
 
-    mutate(_id, {
+    mutateFn(id, {
       onSuccess: () => {
         setState(true);
         queryClient.invalidateQueries({ queryKey: ['orders'] });
-        toast.success('تغییر وضعیت سفارش موفقیت آمیز بود.');
+        toast.success(successMsg);
       },
       onError: () => {
-        toast.error('تغییر وضعیت سفارش با خطا مواجه شد');
+        toast.error('تغییر وضعیت با خطا مواجه شد');
       },
     });
   };
 
-  // const handleClickPaying = (_id: string) => {
-  //   if (isPaid || isPending) return;
-
-  //   mutate(_id, {
-  //     onSuccess: () => {
-  //       setIsPaid(true);
-  //       queryClient.invalidateQueries({ queryKey: ['orders'] });
-  //       toast.success('تغییر وضعیت سفارش موفقیت آمیز بود.');
-  //     },
-  //     onError: () => {
-  //       toast.error('تغییر وضعیت سفارش با خطا مواجه شد');
-  //     },
-  //   });
-  // };
-
   const createdAt = formatDate(order.createdAt);
   const tax = 0.1;
+
   return (
     <TableRow className="border-none">
       <TableCell className="p-2">
@@ -67,7 +71,9 @@ const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }
       <TableCell className="mx-auto text-center">
         <Badge
           className={isPaid ? 'bg-[#22C55E]' : 'bg-[#B71D18] text-white cursor-pointer'}
-          onClick={() => handleClick(order._id, setIsPaid)}
+          onClick={() =>
+            handleClick(order._id, setIsPaid, mutatePaid, isPaying, isPaid, 'پرداخت با موفقیت انجام شد')
+          }
         >
           {isPaid ? 'پرداخت شده' : 'پرداخت نشده'}
         </Badge>
@@ -75,7 +81,9 @@ const OrderRow = ({ order, isAdmin }: { order: OrderRowModel; isAdmin: boolean }
       <TableCell className="mx-auto text-center">
         <Badge
           className={`${isDelivered ? 'bg-[#22C55E]' : 'bg-[#B71D18]'} text-white cursor-pointer`}
-          onClick={() => handleClick(order._id, setIsDelivered)}
+          onClick={() =>
+            handleClick(order._id, setIsDelivered, mutateDelivered, isDelivering, isDelivered, 'ارسال سفارش با موفقیت انجام شد')
+          }
         >
           {isDelivered ? 'ارسال شده' : 'ارسال نشده'}
         </Badge>
