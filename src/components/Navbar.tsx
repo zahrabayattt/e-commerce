@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { authNavItems, getAuthNavItems, NavbarItems } from '@/components/NavbarItems';
 import useLogout from '@/hooks/use-logout';
 import { useCartStore } from '@/store/use-cart-store';
+import ModToggle from './ModToggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +47,8 @@ const Navbar = () => {
         setIsOpen(false);
         setUserDropdownOpen(false);
       }}
-    > 
+    >
+      <ModToggle />
       <nav className="flex flex-col gap-2 p-2">
         {navbarItems.map((item) => (
           <div key={item.address} className="relative">
@@ -122,7 +124,6 @@ const Navbar = () => {
               </span>
               {dropdownIcon}
             </button>
-
             {userDropdownOpen && (
               <div className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-full dark:bg-gray-700 mt-1">
                 <ul
