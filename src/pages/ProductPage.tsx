@@ -120,24 +120,26 @@ const ProductPage = () => {
           </div>
 
           <div className="flex flex-row justify-between">
-            <Button size={'md'} onClick={() => handleAddClick()}>
-              افزودن به سبد خرید
-            </Button>
-            <Select onValueChange={handleQuantityClick} defaultValue="1">
-              <SelectTrigger className="w-20 bg-white">
-                <SelectValue placeholder="1" />
-              </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: product.quantity }).map((_, index) => {
-                  const value = (index + 1).toString();
-                  return (
-                    <SelectItem key={value} value={value}>
-                      {value}
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
+            <div className="flex flex-row gap-96">
+              <Button size={'md'} onClick={() => handleAddClick()}>
+                افزودن به سبد خرید
+              </Button>
+              <Select onValueChange={handleQuantityClick} defaultValue="1">
+                <SelectTrigger className="w-20 bg-white">
+                  <SelectValue placeholder="1" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from({ length: product.quantity }).map((_, index) => {
+                    const value = (index + 1).toString();
+                    return (
+                      <SelectItem key={value} value={value}>
+                        {value}
+                      </SelectItem>
+                    );
+                  })}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </div>
@@ -157,7 +159,7 @@ const ProductPage = () => {
             ))}
           </ul>
         </div>
-        <div className="m-8 absolute left-28">{renderComponenet()}</div>
+        <div className="m-8 left-28">{renderComponenet()}</div>
       </div>
     </section>
   );
