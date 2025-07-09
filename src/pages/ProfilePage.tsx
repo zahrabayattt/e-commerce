@@ -20,8 +20,7 @@ const ProfilePage = () => {
     if (user) {
       setName(user.username);
       setEmail(user.email);
-      setPassword('');
-      setConfirmPassword('');
+      
     }
   }, [user]);
 
