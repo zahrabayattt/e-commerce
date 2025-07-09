@@ -17,7 +17,7 @@ const OrderDetailItem = ({ label, value }: { label: string; value: number | stri
 
 const CheckoutPage = () => {
   const [searchParams] = useSearchParams();
-  const orderId = searchParams.get('id') || ''; 
+  const orderId = searchParams.get('id') || '';
   const { data: order, isLoading } = useGetOrderById(orderId);
   const navigate = useNavigate();
 
@@ -34,11 +34,10 @@ const CheckoutPage = () => {
           background: '#FDF2F8',
           borderRadius: '8px',
         },
-        
       });
 
       setTimeout(() => {
-        navigate('/');
+        navigate('/orders');
       }, 500);
     }
   };
@@ -56,9 +55,7 @@ const CheckoutPage = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {order?.orderItems?.map((item) => (
-            <OrderItemRow key={item._id} item={item} />
-          ))}
+          {order?.orderItems?.map((item) => <OrderItemRow key={item._id} item={item} />)}
         </TableBody>
       </Table>
 

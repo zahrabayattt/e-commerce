@@ -1,23 +1,48 @@
-import React, { useState } from 'react';
 import ProductForm from '@/components/ProductForm';
-import { useProductStore } from '@/store/use-create-product-store';
 import useGetCategories from '@/hooks/use-get-categories';
+import useUpdateProduct from '@/hooks/use-update-product';
 import useUploadImage from '@/hooks/use-upload-image';
-import useCreateProduct from '@/hooks/use-create-product';
+import { useProduct } from '@/hooks/use-Product';
+import { useProductStore } from '@/store/use-create-product-store';
 import type { CreateProductPayload } from '@/types/product.model';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const CreateProduct: React.FC = () => {
+const EditProduct = () => {
   const { productForm, setProductForm, resetProductForm } = useProductStore();
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
   const { data: categories = [] } = useGetCategories();
   const { mutateAsync: uploadImage } = useUploadImage();
-  const { mutate: createProduct, status } = useCreateProduct();
+  const { mutate: updateProduct, status } = useUpdateProduct();
+  const { id } = useParams();
+
+  const { data: product } = useProduct(id!);
+
+  useEffect(() => {
+    if (product) {
+      setProductForm('name', product.name);
+      setProductForm('price', product.price);
+      setProductForm('description', product.description);
+      setProductForm('category', product.category);
+      setProductForm('quantity', product.quantity);
+      setProductForm('image', product.image.split('uploads/')[1]);
+      if (product.image) {
+        setUploadedImageUrl(product.image.split('uploads/')[1]);
+      }
+    }
+  }, [product]);
+
+  if (!id) return <p className="mx-auto">شناسه معتبر نیست</p>;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const correctedValue = ['price', 'quantity'].includes(name) ? Number(value) : value;
-    setProductForm(name as keyof CreateProductPayload, correctedValue);
+
+    const fieldName = name as keyof CreateProductPayload;
+
+    const correctedValue =
+      fieldName === 'price' || fieldName === 'quantity' ? Number(value) : value;
+
+    setProductForm(fieldName, correctedValue as CreateProductPayload[typeof fieldName]);
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,19 +52,11 @@ const CreateProduct: React.FC = () => {
     setUploadedImageUrl(image);
     setProductForm('image', image);
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, description, price, quantity, category, image } = productForm;
-
-    if (!name || !description || !price || !quantity || !category || !image) {
-      toast.error('لطفاً همه فیلدها را کامل پر کنید.');
-      return;
-    }
-    createProduct(productForm);
+    updateProduct({ id, payload: productForm });
     resetProductForm();
   };
-
   return (
     <ProductForm
       formData={productForm}
@@ -51,9 +68,9 @@ const CreateProduct: React.FC = () => {
       onCategoryChange={(val) => setProductForm('category', val)}
       onQuantityChange={(val) => setProductForm('quantity', Number(val))}
       onSubmit={handleSubmit}
-      formType="Create"
+      formType="Edit"
     />
   );
 };
 
-export default CreateProduct;
+export default EditProduct;
