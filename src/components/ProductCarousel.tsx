@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/carousel';
 
 import { useQuery } from '@tanstack/react-query';
-import { useProducts } from '@/hooks/useProducts';
+import { useProducts } from '@/hooks/use-Products';
 
 const ProductCarousel = () => {
   const { data, isLoading, isError } = useQuery({

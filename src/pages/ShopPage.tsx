@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import ShopCard from '../components/ShopCard';
 import { useQuery } from '@tanstack/react-query';
-import { useProducts } from '@/hooks/useProducts';
+import { useProducts } from '@/hooks/use-Products';
 
 const ShopPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
