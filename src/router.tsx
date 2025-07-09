@@ -18,8 +18,8 @@ import UsersPage from './pages/UsersPage';
 import CreateProduct from './pages/CreateProduct';
 import OrderShippingDetails from '@/components/OrderShippingDetails';
 import OrderSummary from '@/components/OrderSummary';
+import CreateCategory from '@/pages/CreateCategory';
 import AllProducts from './pages/AllProducts';
-
 
 const router = createBrowserRouter([
   {
@@ -46,15 +46,18 @@ const router = createBrowserRouter([
             ],
           },
           { path: 'checkout', Component: CheckoutPage },
-          { path: 'orders', children: [
+          {
+            path: 'orders',
+            children: [
               { index: true, Component: OrdersPage },
-              { path: ':id', Component: OrderDetailsPage }
+              { path: ':id', Component: OrderDetailsPage },
             ],
           },
           { path: 'dashboard', Component: Dashboard },
           { path: 'users', Component: UsersPage },
           { path: 'create-product', Component: CreateProduct },
-          {path: 'all-products', Component: AllProducts}
+          { path: 'all-products', Component: AllProducts },
+          { path: 'category', Component: CreateCategory },
         ],
       },
     ],
