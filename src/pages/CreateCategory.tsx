@@ -32,15 +32,15 @@ const createCategory = () => {
     <div className="container mx-auto px-4 py-6 space-y-10">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="block mb-1 text-xl text-gray-700 font-bold pb-5">نام دسته‌بندی</label>
           <Input
             type="text"
+            className="py-6 text-[17px]"
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
             placeholder="نام دسته‌بندی را وارد نمایید"
           />
         </div>
-        <Button type="submit" className="mt-5">
+        <Button type="submit" className="mt-5 py-5 text-[17px]">
           ساخت دسته‌بندی جدید
         </Button>
       </form>
