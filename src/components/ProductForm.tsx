@@ -15,6 +15,7 @@ import useCreateProduct from '@/hooks/use-create-product';
 import type { CategoryResponseModel } from '@/types/category.model';
 import type { CreateProductPayload } from '@/types/product.model';
 import { Input } from './ui/input';
+import { useNavigate } from 'react-router';
 
 const ProductForm: React.FC = () => {
   const { productForm, setProductForm } = useProductStore();
@@ -22,6 +23,7 @@ const ProductForm: React.FC = () => {
   const { data: categories = [] } = useGetCategories();
   const { mutateAsync: uploadImage } = useUploadImage();
   const { mutate: createProduct, status } = useCreateProduct();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -120,7 +122,14 @@ const ProductForm: React.FC = () => {
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="icon">
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={() => {
+                  navigate('/category');
+                }}
+              >
                 <Plus className="w-4 h-4" />
               </Button>
             </div>
