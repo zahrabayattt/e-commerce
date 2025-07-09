@@ -1,12 +1,11 @@
 import { axiosInstance } from '@/lib/utils';
-import type { ProductModel } from '@/types/product.model';
+import type { UseProductType } from '@/types/product.model';
 import { useQuery } from '@tanstack/react-query';
 
-
 export const useProduct = (id: string) => {
- return useQuery({
+  return useQuery({
     queryKey: ['products', id],
-    queryFn: () => axiosInstance.get<ProductModel>(`/products/${id}`).then((res) => res.data),
+    queryFn: () => axiosInstance.get<UseProductType>(`/products/${id}`).then((res) => res.data),
     gcTime: 10 * 60 * 1000,
     staleTime: 10 * 60 * 1000,
   });

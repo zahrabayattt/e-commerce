@@ -55,3 +55,20 @@ export type ProductResponseModel = {
   updatedAt: Date;
   __v: number;
 };
+
+export type UseProductType = {
+  _id: string;
+  name: string;
+  image: string;
+  quantity: number;
+  category: string;
+  description: string;
+  rating: number;
+  numReviews: number;
+  price: number;
+  countInStock: number;
+  reviews: ReviewModel[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};

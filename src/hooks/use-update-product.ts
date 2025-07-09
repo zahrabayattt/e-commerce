@@ -11,15 +11,28 @@ const useUpdateProduct = () => {
 
   return useMutation({
     mutationFn: async ({ id, payload }: { id: string; payload: CreateProductPayload }) => {
-      const res = await axiosInstance.put<
-        CreateProductPayload,
-        AxiosResponse<ProductResponseModel>
-      >(`/products/${id}`, payload);
+      const formData = new FormData();
+      formData.append('name', payload.name);
+      formData.append('description', payload.description);
+      formData.append('price', String(payload.price));
+      formData.append('quantity', String(payload.quantity));
+      formData.append('category', payload.category);
+      formData.append('image', payload.image);
+      const res = await axiosInstance.put<FormData, AxiosResponse<ProductResponseModel>>(
+        `/products/${id}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
       return res.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products'] });
-      navigate('/products');
+      navigate('/all-products');
       toast.success('محصول با موفقیت به‌روزرسانی شد');
     },
     onError: () => {
