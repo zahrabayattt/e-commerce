@@ -3,6 +3,7 @@ import ViewMoreButton from './ViewMoreButton';
 import { formatDate } from '@/lib/utils';
 import { Trash, SquarePen } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductPreviewCardProps {
   _id: string;
@@ -15,6 +16,7 @@ interface ProductPreviewCardProps {
 
 const ProductPreviewCard = (props: ProductPreviewCardProps) => {
   const { mutate: deleteProduct, isPending } = useDeleteProduct();
+  const navigate = useNavigate();
 
   const handleDelete = (productId: string) => {
     const deleteToast = toast.loading('در حال حذف محصول...');
@@ -52,7 +54,10 @@ const ProductPreviewCard = (props: ProductPreviewCardProps) => {
             {props.price.toLocaleString('fa-IR')} تومان
           </p>
           <div className="flex">
-            <button className="hover:cursor-pointer hover:bg-[#871849] hover:text-white flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200">
+            <button
+              className="hover:cursor-pointer hover:bg-[#871849] hover:text-white flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200"
+              onClick={() => navigate(props._id)}
+            >
               <SquarePen />
             </button>
             <button

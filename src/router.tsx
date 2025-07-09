@@ -20,6 +20,7 @@ import OrderShippingDetails from '@/components/OrderShippingDetails';
 import OrderSummary from '@/components/OrderSummary';
 import CreateCategory from '@/pages/CreateCategory';
 import AllProducts from './pages/AllProducts';
+import EditProduct from './pages/EditProduct';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
           { path: 'users', Component: UsersPage },
           { path: 'create-product', Component: CreateProduct },
           { path: 'all-products', Component: AllProducts },
+          { path: 'all-products/:id', Component: EditProduct },
           { path: 'category', Component: CreateCategory },
         ],
       },
