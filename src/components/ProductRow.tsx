@@ -15,10 +15,12 @@ const ProductRow: React.FC = () => {
 
   return (
     <section>
-      <div className="grid grid-cols-2 gap-4 max-w-xl justify-center items-center">
-        {data?.slice(0, 4).map((product) => (
+      <div className="grid grid-cols-2 mx-auto gap-4 max-w-xl justify-center items-center">
+        {data
+          ?.slice(0, 4)
+          .map((product) => (
             <ProductCard key={product._id} product={product} componentSize="small" />
-        ))}
+          ))}
       </div>
     </section>
   );

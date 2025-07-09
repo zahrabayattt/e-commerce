@@ -45,7 +45,7 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
         case 'CommentSubmit':
           return <CommentSubmit product={product} />
         case 'CommentShow':
-          return <CommentShow product={product} />;
+          return <CommentShow productid={product._id}/>;
         case 'ProductRelated':
           return <ProductRelated />;
         default:
@@ -159,7 +159,7 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
         </div>
       </div>
 
-      <div className="flex flex-row fixed right-52 justify-around gap-24 mt-12">
+      <div className="flex flex-row justify-around w-full gap-24 mt-12">
         <div className="flex flex-col m-8">
           {tabs.map((tab) => (
             <p
