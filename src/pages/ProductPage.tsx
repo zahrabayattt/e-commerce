@@ -1,4 +1,10 @@
-import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/hooks/use-Product';
@@ -13,59 +19,57 @@ import StarRating from '@/components/StarRating';
 import { formatDate } from '@/lib/utils';
 
 const ProductPage = () => {
+  const { id } = useParams();
+  const { data: product, isLoading, error } = useProduct(id!);
+  const { addToCart } = useCartStore();
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [activeTab, setActiveTab] = useState('CommentSubmit');
 
-const { id } = useParams();
-const { data: product, isLoading, error } = useProduct(id!);
-const {addToCart} = useCartStore();
-const [selectedQuantity, setSelectedQuantity] = useState(1); 
-const [activeTab, setActiveTab] = useState('CommentSubmit');
-  
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت محصولات</p>;
   if (!product) return <p>محصولی یافت نشد</p>;
-
 
   const handleQuantityClick = (value: number) => {
     setSelectedQuantity(value);
   };
 
-  const handleAddClick=()=>{
-   const quantity=selectedQuantity;
-   const cartItem: CartItem = {
-     productId: product!._id,
-     productTitle: product!.name,
-     productBrand: '',
-     productImage: product!.image,
-     price: Number(product!.price),
-     quantity: Number(quantity),
-   };
-
-   addToCart(cartItem);
-  }
-
-    const renderComponenet = () => {
-      switch (activeTab) {
-        case 'CommentSubmit':
-          return <CommentSubmit product={product} />
-        case 'CommentShow':
-          return <CommentShow productid={product._id}/>;
-        case 'ProductRelated':
-          return <ProductRelated />;
-        default:
-          return null;
-      }
+  const handleAddClick = () => {
+    const quantity = selectedQuantity;
+    const cartItem: CartItem = {
+      productId: product!._id,
+      productTitle: product!.name,
+      productBrand: '',
+      productImage: product!.image,
+      price: Number(product!.price),
+      quantity: Number(quantity),
     };
 
-     const tabs = [
-       { id: 'CommentSubmit', label: 'ثبت نظر' },
-       { id: 'CommentShow', label: 'مشاهده نظرات' },
-       { id: 'ProductRelated', label: 'محصولات مرتبط' },
-     ];
+    addToCart(cartItem);
+  };
+
+  const renderComponenet = () => {
+    switch (activeTab) {
+      case 'CommentSubmit':
+        return <CommentSubmit product={product} />;
+      case 'CommentShow':
+        return <CommentShow productid={product._id} />;
+      case 'ProductRelated':
+        return <ProductRelated />;
+      default:
+        return null;
+    }
+  };
+
+  const tabs = [
+    { id: 'CommentSubmit', label: 'ثبت نظر' },
+    { id: 'CommentShow', label: 'مشاهده نظرات' },
+    { id: 'ProductRelated', label: 'محصولات مرتبط' },
+  ];
   return (
     <section>
       <div className="flex flex-row justify-around">
         <img className="w-2/6 rounded-lg" src={product.image} alt={product.name}></img>
-        <div className="flex flex-col w-2/5 justify-between gap-10">
+        <div className="flex flex-col w-3xl max-w-3xl justify-between gap-10">
           <h5>{product.name}</h5>
           <p>{product.description}</p>
           <h2 className="font-bold text-3xl">{product.price.toLocaleString()} تومان</h2>
@@ -112,7 +116,7 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
           <div className="flex flex-row justify-between">
             <div className="flex flex-row gap-2">
               <p> {product.numReviews} نظر</p>
-              <StarRating rating={product.rating}/>
+              <StarRating rating={product.rating} />
             </div>
           </div>
 
@@ -121,7 +125,7 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
               افزودن به سبد خرید
             </Button>
             <Select onValueChange={handleQuantityClick} defaultValue="1">
-              <SelectTrigger className="w-16 bg-white">
+              <SelectTrigger className="w-20 bg-white">
                 <SelectValue placeholder="1" />
               </SelectTrigger>
               <SelectContent>
@@ -139,20 +143,22 @@ const [activeTab, setActiveTab] = useState('CommentSubmit');
         </div>
       </div>
 
-      <div className="flex flex-row justify-around w-full gap-24 mt-12">
-        <div className="flex flex-col m-8">
-          {tabs.map((tab) => (
-            <p
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`cursor-pointer pb-1 transition-all duration-300 
+      <div className="flex flex-row  w-full gap-24 mt-12">
+        <div className="flex flex-col m-8 right-48">
+          <ul>
+            {tabs.map((tab) => (
+              <li
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`cursor-pointer pb-1 transition-all duration-300 
                 ${activeTab === tab.id ? 'font-extrabold' : 'font-normal'}`}
-            >
-              {tab.label}
-            </p>
-          ))}
+              >
+                {tab.label}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="m-8">{renderComponenet()}</div>
+        <div className="m-8 absolute left-28">{renderComponenet()}</div>
       </div>
     </section>
   );
