@@ -43,13 +43,14 @@ const ProductForm: React.FC<ProductFormProps> = ({
         </h2>
 
         <div className="w-full mb-6">
-          {uploadedImageUrl && (
+          {(uploadedImageUrl || formData.image) && (
             <img
-              src={baseUrl + uploadedImageUrl}
+              src={baseUrl + (uploadedImageUrl || formData.image)}
               alt="Uploaded"
               className="mb-4 h-96 w-full max-w-md rounded-lg object-cover shadow-lg mx-auto"
             />
           )}
+
           <label
             htmlFor="product-image"
             className="bg-white w-full cursor-pointer border-1 border-dashed border-gray-200 rounded-lg h-24 flex items-center justify-center text-gray-500 text-md"
@@ -96,32 +97,30 @@ const ProductForm: React.FC<ProductFormProps> = ({
           </div>
 
           <div className="flex items-center gap-2">
-              <Select
-                onValueChange={onCategoryChange}
-                value={formData.category}
-              >
-                <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-white" dir="rtl">
-                  <SelectValue placeholder="انتخاب دسته‌بندی" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((cat: CategoryResponseModel) => (
-                    <SelectItem key={cat._id} value={cat._id}>
-                      {cat.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  navigate('/category');
-                }}
-              >
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
+            <Select onValueChange={onCategoryChange} value={formData.category}>
+              <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-white" dir="rtl">
+                <SelectValue placeholder="انتخاب دسته‌بندی" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((cat: CategoryResponseModel) => (
+                  <SelectItem key={cat._id} value={cat._id}>
+                    {cat.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Button
+              className="py-6 px-6 cursor-pointer"
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => {
+                navigate('/category');
+              }}
+            >
+              <Plus className="w-6 h-6" />
+            </Button>
+          </div>
 
           <div>
             <label className="block mb-1 text-md">موجودی</label>

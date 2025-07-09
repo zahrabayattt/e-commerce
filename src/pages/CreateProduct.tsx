@@ -5,9 +5,10 @@ import useGetCategories from '@/hooks/use-get-categories';
 import useUploadImage from '@/hooks/use-upload-image';
 import useCreateProduct from '@/hooks/use-create-product';
 import type { CreateProductPayload } from '@/types/product.model';
+import toast from 'react-hot-toast';
 
 const CreateProduct: React.FC = () => {
-  const { productForm, setProductForm } = useProductStore();
+  const { productForm, setProductForm, resetProductForm } = useProductStore();
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
   const { data: categories = [] } = useGetCategories();
   const { mutateAsync: uploadImage } = useUploadImage();
@@ -29,7 +30,14 @@ const CreateProduct: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const { name, description, price, quantity, category, image } = productForm;
+
+    if (!name || !description || !price || !quantity || !category || !image) {
+      toast.error('لطفاً همه فیلدها را کامل پر کنید.');
+      return;
+    }
     createProduct(productForm);
+    resetProductForm();
   };
 
   return (
