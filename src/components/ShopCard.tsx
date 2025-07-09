@@ -8,17 +8,25 @@ import { Link } from 'react-router-dom';
 const ShopCard = ({ product }: { product: ProductModel }) => {
   const { image, name, price, description, category } = product;
   const addToCart = useCartStore((state) => state.addToCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const isInCart = useCartStore((state) =>
+    state.cartItems.some((item) => item.productId === product._id.toString())
+  );
 
   const handleCartClick = () => {
-    addToCart({
-      productId: product._id.toString(),
-      productTitle: product.name,
-      productImage: product.image,
-      productBrand: product.category.name,
-      price: product.price,
-      quantity: 1,
-      countInStock: product.countInStock,
-    });
+    if (isInCart) {
+      removeFromCart(product._id.toString());
+    } else {
+      addToCart({
+        productId: product._id.toString(),
+        productTitle: product.name,
+        productImage: product.image,
+        productBrand: product.category.name,
+        price: product.price,
+        quantity: 1,
+        countInStock: product.countInStock,
+      });
+    }
   };
 
   return (
@@ -39,7 +47,7 @@ const ShopCard = ({ product }: { product: ProductModel }) => {
               {price.toLocaleString()} تومان
             </span>
           </div>
-          <p className="text-xs text-gray-600 mt-2 line-clamp-2 leading-snug">{description}</p>
+          <p className="text-xs text-gray-600 mt-2 line-clamp-1 leading-snug">{description}</p>
         </div>
 
         <div className="flex items-center justify-between pt-3 pb-4">
@@ -52,7 +60,7 @@ const ShopCard = ({ product }: { product: ProductModel }) => {
 
           <ShoppingCart
             onClick={handleCartClick}
-            className="ml-4 cursor-pointer text-gray-700 hover:text-pink-700 transition-colors"
+            className={`ml-4 cursor-pointer transition-colors ${isInCart ? 'text-pink-600' : 'text-gray-700'}`}
           />
         </div>
       </div>
