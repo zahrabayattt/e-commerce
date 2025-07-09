@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useOrderStore } from '@/store/use-order-shipping-store';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const OrderShippingDetails = () => {
   const { orderShippingDetail, setOrderShippingDetail } = useOrderStore();
@@ -11,10 +12,20 @@ const OrderShippingDetails = () => {
     const { name, value } = event.target;
     setOrderShippingDetail(name, value);
   };
+  const handleNextStep = () => {
+    const { address, city, country, postalCode, paymentMethod } = orderShippingDetail;
+
+    if (!address || !city || !country || !postalCode || !paymentMethod) {
+      toast.error('لطفاً همه فیلدها را کامل پر کنید');
+      return;
+    }
+
+    navigate('/shopping-progress/summary');
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">
-      <form className="flex flex-col gap-4 w-[450px] mt-8">
+      <form className="flex flex-col gap-4 w-1/2 h-1/2 mt-8">
         <h3 className="font-bold">خرید</h3>
 
         <div className="flex flex-col space-y-1.5">
@@ -95,7 +106,7 @@ const OrderShippingDetails = () => {
           type="button"
           variant="default"
           size="lg"
-          onClick={() => navigate('/shopping-progress/summary')}
+          onClick={handleNextStep}
           className="bg-[#DB2777] rounded-xl"
         >
           ادامه
