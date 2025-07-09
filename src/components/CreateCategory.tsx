@@ -9,6 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Edit, Trash2 } from 'lucide-react';
+import { Input } from './ui/input';
 
 const CategoriesPage = () => {
   return (
@@ -22,7 +23,7 @@ const CategoriesPage = () => {
           <form className="space-y-5">
             <div>
               <label className="block mb-1 text-sm text-gray-700">نام دسته‌بندی</label>
-              <input
+              <Input
                 type="text"
                 // value={}
                 // onChange={}

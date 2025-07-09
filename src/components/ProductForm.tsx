@@ -54,7 +54,7 @@ const ProductForm: React.FC = () => {
             <img
               src={baseUrl + uploadedImageUrl}
               alt="Uploaded"
-              className="mb-4 h-96 w-full max-w-md rounded-lg object-cover shadow-lg mx-auto"
+              className="mb-4 h-1/3 w-2/3 rounded-lg object-cover object-center shadow-lg mx-auto"
             />
           )}
           <label
@@ -120,8 +120,8 @@ const ProductForm: React.FC = () => {
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="icon">
-                <Plus className="w-4 h-4" />
+              <Button variant="outline" size="icon" className='py-6 px-6'>
+                <Plus className="w-5 h-5" />
               </Button>
             </div>
           </div>
