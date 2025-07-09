@@ -9,8 +9,6 @@ const ProductRelated = () => {
     queryFn: useProducts,
   });
 
-  if (isLoading) return <p>در حال بارگذاری...</p>;
-  if (isError) return <p>خطا در دریافت محصولات</p>;
 
   return (
     <div className="grid grid-cols-3 gap-4 justify-center items-center max-w-3xl">
