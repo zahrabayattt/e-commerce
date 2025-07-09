@@ -14,7 +14,6 @@ import CommentSubmit from '@/components/CommentSubmit';
 import CommentShow from '@/components/CommentShow';
 import ProductRelated from '@/components/ProductRelated';
 import type { CartItem } from '@/types/cart.model';
-import { Star, StarHalf } from 'lucide-react';
 import StarRating from '@/components/StarRating';
 import { formatDate } from '@/lib/utils';
 

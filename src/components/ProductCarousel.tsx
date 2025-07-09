@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { products } from './ProductsForShow';
+import { Link } from 'react-router-dom';
 
 
 const ProductCarousel = () => {
@@ -24,25 +25,27 @@ const ProductCarousel = () => {
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
         {data?.slice(0, 3).map((p) => (
           <SwiperSlide className="z-10" key={p._id}>
-            <div className="flex justify-center mx-auto p-4">
-              <div className="bg-white rounded shadow border flex flex-col overflow-hidden">
-                <div className="w-2xl bg-gray-100 flex justify-center items-center">
-                  <img src={p.image} alt={p.name} className="w-full h-[300px] object-contain" />
-                </div>
-                <div className="p-4 text-right text-sm gap-2 flex flex-col">
-                  <h3 className="text-base font-bold">{p.name}</h3>
-                  <p className="text-sm font-semibold">{p.price.toLocaleString()} تومان</p>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-                    <span>⭐ امتیاز : {p.rating}</span>
-                    <span>تعداد : {p.quantity}</span>
-                    <span>🛒 موجودی : {p.countInStock}</span>
-                    <span>💬 نظرات : {p.numReviews}</span>
-                    <span>🕒 زمان بروزرسانی : چند لحظه قبل</span>
+            <Link to={`/product/${p._id}`} key={p._id}>
+              <div className="flex justify-center mx-auto p-4">
+                <div className="bg-white rounded shadow border flex flex-col overflow-hidden">
+                  <div className="w-2xl bg-gray-100 flex justify-center items-center">
+                    <img src={p.image} alt={p.name} className="w-full h-[300px] object-contain" />
                   </div>
-                  <p className="text-xs leading-5 mt-2 text-gray-600">{p.description}</p>
+                  <div className="p-4 text-right text-sm gap-2 flex flex-col">
+                    <h3 className="text-base font-bold">{p.name}</h3>
+                    <p className="text-sm font-semibold">{p.price.toLocaleString()} تومان</p>
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                      <span>⭐ امتیاز : {p.rating}</span>
+                      <span>تعداد : {p.quantity}</span>
+                      <span>🛒 موجودی : {p.countInStock}</span>
+                      <span>💬 نظرات : {p.numReviews}</span>
+                      <span>🕒 زمان بروزرسانی : چند لحظه قبل</span>
+                    </div>
+                    <p className="text-xs leading-5 mt-2 text-gray-600">{p.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

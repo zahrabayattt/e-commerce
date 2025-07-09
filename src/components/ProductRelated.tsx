@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ProductCard from './productCard';
 import { useQuery } from '@tanstack/react-query';
-import { useProducts } from '@/hooks/useProducts';
+import { useProducts } from '@/hooks/use-Products';
 
 const ProductRelated = () => {
   const { data, isLoading, isError } = useQuery({
