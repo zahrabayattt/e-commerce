@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const EditProduct = () => {
-  const { productForm, setProductForm } = useProductStore();
+  const { productForm, setProductForm, resetProductForm } = useProductStore();
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
   const { data: categories = [] } = useGetCategories();
   const { mutateAsync: uploadImage } = useUploadImage();
@@ -25,7 +25,7 @@ const EditProduct = () => {
       setProductForm('description', product.description);
       setProductForm('category', product.category);
       setProductForm('quantity', product.quantity);
-      setProductForm('image', product.image);
+      setProductForm('image', product.image.split('uploads/')[1]);
       if (product.image) {
         setUploadedImageUrl(product.image.split('uploads/')[1]);
       }
@@ -55,6 +55,7 @@ const EditProduct = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     updateProduct({ id, payload: productForm });
+    resetProductForm();
   };
   return (
     <ProductForm
