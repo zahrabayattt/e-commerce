@@ -2,7 +2,7 @@ import React from 'react';
 import ProductCard from './productCard';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useProducts } from '@/hooks/useProducts';
+import { useProducts } from '@/hooks/use-Products';
 
 const ProductRow: React.FC = () => {
   const { data, isLoading, isError } = useQuery({
