@@ -5,11 +5,11 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <div className="mr-14 px-8 py-8 min-h-screen bg-[#EEEFF1]">
+      <div className="mr-14 px-8 py-8 min-h-screen bg-[#EEEFF1] dark:bg-black">
         <Outlet />
       </div>
     </>
   );
 };
- 
+
 export default Layout;
