@@ -7,10 +7,10 @@ type Props = {
 const CommentShow = ({ productid }: Props) => {
   const { data: product, isLoading, error } = useProduct(productid!);
   return (
-    <div className="flex flex-col gap-6 justify-center items-center">
+    <div className="flex flex-col gap-6 w-3xl max-w-3xl">
       {product?.reviews.map((review) => {
         return (
-          <div className="flex flex-col w-10/12 bg-white rounded-xs">
+          <div className="flex flex-col bg-white rounded-xs">
             <div className="flex flex-row justify-between m-2 w-full">
               <p className="text-neutral-400">{review.name}</p>
               <p>{review.createdAt}</p>
@@ -40,7 +40,6 @@ const CommentShow = ({ productid }: Props) => {
           </div>
         );
       })}
-    
     </div>
   );
 };
