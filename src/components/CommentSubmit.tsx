@@ -53,10 +53,10 @@ const CommentSubmit = ({ product }: { product: ProductModel }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-[700px]">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-3xl max-w-3xl">
       <label className="font-medium">امتیاز</label>
       <Select onValueChange={handleRatingClick}>
-        <SelectTrigger className="w-[700px] bg-white">
+        <SelectTrigger className="w-3xl bg-white">
           <SelectValue placeholder="انتخاب امتیاز" />
         </SelectTrigger>
         <SelectContent className="bg-white">
@@ -72,7 +72,7 @@ const CommentSubmit = ({ product }: { product: ProductModel }) => {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="نظر خود را وارد نمایید"
-        className="w-[700px] bg-white"
+        className="w-w-3xl bg-white"
       />
       <Button size={'lg'}> {createReview.isPending ? 'در حال ارسال...' : 'ثبت نظر'}</Button>
     </form>
