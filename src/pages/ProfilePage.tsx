@@ -1,72 +1,131 @@
-// Import statements for ShadCN UI components.
-// These paths assume the standard ShadCN project structure.
-
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
+import useUserProfile from '@/hooks/use-user-profile';
+import useUpdateProfile from '@/hooks/use-update-profile';
+import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
-// The main profile page component, now using imported UI elements.
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const { data: user, isLoading } = useUserProfile();
+  const { mutate: updateProfile, isPending } = useUpdateProfile();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setName(user.username);
+      setEmail(user.email);
+      setPassword('');
+      setConfirmPassword('');
+    }
+  }, [user]);
+
+  const handleUpdate = () => {
+    if (password && password !== confirmPassword) {
+      toast.error('رمز عبور با تکرار آن مطابقت ندارد!', {
+        style: {
+          border: '1px solid #DB2777',
+          padding: '12px 16px',
+          color: '#DB2777',
+          background: '#FDF2F8',
+          borderRadius: '8px',
+        },
+      });
+      return;
+    }
+
+    updateProfile({
+      username: name,
+      email,
+      ...(password ? { password } : {}),
+    });
+  };
+
+  if (isLoading) return <p className="text-center">در حال بارگذاری...</p>;
+
   return (
-    // The main container, centered and styled for a clean look.
-    <div
-      className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-950 p-4 font-sans"
-      dir="rtl"
-    >
-      <Card className="w-full max-w-lg bg-white dark:bg-gray-900">
-        <CardHeader>
-          <CardTitle>بروز رسانی پروفایل</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className="grid w-full items-center gap-4">
-              {/* Name Input Field */}
-              <div className="flex flex-col space-y-1.5">
-                <label htmlFor="name" className="text-sm font-medium text-right">
-                  نام
-                </label>
-                <Input id="name" placeholder="نام خود را وارد نمایید" />
-              </div>
-              {/* Email Input Field */}
-              <div className="flex flex-col space-y-1.5">
-                <label htmlFor="email" className="text-sm font-medium text-right">
-                  ایمیل
-                </label>
-                <Input id="email" type="email" placeholder="ایمیل خود را وارد نمایید" />
-              </div>
-              {/* Password Input Field */}
-              <div className="flex flex-col space-y-1.5">
-                <label htmlFor="password" className="text-sm font-medium text-right">
-                  رمز عبور
-                </label>
-                <Input id="password" type="password" placeholder="رمز عبور خود را وارد نمایید" />
-              </div>
-              {/* Confirm Password Input Field */}
-              <div className="flex flex-col space-y-1.5">
-                <label htmlFor="confirm-password" className="text-sm font-medium text-right">
-                  تکرار رمز عبور
-                </label>
-                <Input
-                  id="confirm-password"
-                  type="password"
-                  placeholder="تکرار رمز عبور خود را وارد نمایید"
-                />
-              </div>
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className="w-full max-w-lg text-center mb-32 font-bold text-2xl dark:bg-gray-900">
+        <h2>بروزرسانی پروفایل</h2>
+        <div>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <label htmlFor="name" className="text-sm font-medium text-right pb-1">
+                نام
+              </label>
+              <Input
+                id="name"
+                value={name}
+                placeholder="نام خود را وارد نمایید"
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          {/* Button component */}
-          <Button variant="default" size="lg">
-            بروزرسانی
-          </Button>
-          <Button variant="default" size="lg" onClick={() => navigate("/orders")}>
+
+            <div className="flex flex-col space-y-1.5">
+              <label htmlFor="email" className="text-sm font-medium text-right">
+                ایمیل
+              </label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                placeholder="ایمیل خود را وارد نمایید"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <label htmlFor="password" className="text-sm font-medium text-right">
+                رمز عبور جدید
+              </label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="رمز عبور خود را وارد نمایید"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <label htmlFor="confirm-password" className="text-sm font-medium text-right">
+                تکرار رمز عبور
+              </label>
+              <Input
+                id="confirm-password"
+                type="password"
+                placeholder="تکرار رمز عبور خود را وارد نمایید"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between pt-5 ">
+          <Button
+            className="cursor-pointer"
+            variant="default"
+            size="lg"
+            onClick={() => navigate('/orders')}
+          >
             سفارشات من
           </Button>
-        </CardFooter>
-      </Card>
+          <Button
+            className="cursor-pointer"
+            variant="default"
+            size="lg"
+            onClick={handleUpdate}
+            disabled={isPending}
+          >
+            بروزرسانی
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
