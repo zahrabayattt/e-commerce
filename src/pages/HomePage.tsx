@@ -4,8 +4,8 @@ import SpecialProductsSection from "../components/SpecialProductsSection";
 
 export default function HomePage() {
   return (
-    <main className="container mx-auto p-2">
-      <div className="flex justify-between">
+    <main className="container mx-auto flex flex-col">
+      <div className="flex justify-around items-center">
       <ProductRow />
       <ProductCarousel />
       </div>

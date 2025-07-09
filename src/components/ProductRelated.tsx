@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ProductCard from './productCard';
 import { useQuery } from '@tanstack/react-query';
-import { useProducts } from '@/hooks/useProducts';
+import { useProducts } from '@/hooks/use-Products';
 
 const ProductRelated = () => {
   const { data, isLoading, isError } = useQuery({
@@ -13,7 +13,7 @@ const ProductRelated = () => {
   if (isError) return <p>خطا در دریافت محصولات</p>;
 
   return (
-    <div className="grid grid-cols-3 gap-6 justify-center items-center">
+    <div className="grid grid-cols-3 gap-4 justify-center items-center max-w-3xl">
       {data?.slice(0, 6).map((product) => (
         <Link to={`/product/${product._id}`} key={product._id}>
           <ProductCard product={product} componentSize="large" />

@@ -6,7 +6,7 @@ import useGetOrders from '@/hooks/use-get-orders';
 export default function OrdersPage() {
   const { isAdmin } = useAuthStore();
   const { data: orders } = useGetOrders(isAdmin);
-  
+
   if (!orders?.length) {
     return <p className="text-center mx-auto">سفارشی برای نمایش وجود ندارد.</p>;
   }
@@ -28,9 +28,8 @@ export default function OrdersPage() {
         {orders &&
           orders?.map((order) =>
             order.orderItems.map((orderItem) => {
-              console.log(order.user);
-              
-              const username = typeof order?.user === 'string' ? order?.user : order?.user?.username;
+              const username =
+                typeof order?.user === 'string' ? order?.user : order?.user?.username;
 
               return (
                 <OrderRow

@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const { id, isAdmin } = useAuthStore();
   const authItems = getAuthNavItems(isAdmin);
-  const navbarItems = NavbarItems(isAdmin);
+  const navbarItems = NavbarItems;
   const userNavItem = authItems[0];
 
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);

@@ -10,7 +10,7 @@ const ShoppingProgress = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="max-w-5xl mx-auto py-8 px-4">
       <Stepper currentStep={currentStep} />
       <Outlet />
     </div>

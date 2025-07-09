@@ -12,7 +12,7 @@ const OrderPriceFromCart = () => {
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = totalPrice * 0.2;
-  const shippingCost = 55000;
+  const shippingCost = 0;
   const totalAmount = totalPrice + tax + shippingCost;
 
   return (
