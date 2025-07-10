@@ -27,7 +27,7 @@ const ProductCarousel = () => {
           <SwiperSlide className="z-10" key={p._id}>
             <Link to={`/product/${p._id}`} key={p._id}>
               <div className="flex justify-center mx-auto p-4">
-                <div className="bg-white rounded shadow border flex flex-col overflow-hidden">
+                <div className="bg-white rounded-lg shadow border flex flex-col overflow-hidden p-4">
                   <div className="w-2xl bg-gray-100 flex justify-center items-center">
                     <img src={p.image} alt={p.name} className="w-full h-[300px] object-contain" />
                   </div>

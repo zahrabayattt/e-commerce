@@ -11,7 +11,7 @@ const ProductRelated = () => {
 
 
   return (
-    <div className="grid grid-cols-3 gap-4 justify-center items-center max-w-3xl">
+    <div className="grid grid-cols-3 gap-4 justify-center items-center w-3xl max-w-3xl">
       {data?.slice(0, 6).map((product) => (
         <Link to={`/product/${product._id}`} key={product._id}>
           <ProductCard product={product} componentSize="large" />
