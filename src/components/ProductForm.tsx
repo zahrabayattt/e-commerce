@@ -53,11 +53,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
           <label
             htmlFor="product-image"
-            className="bg-white w-full cursor-pointer border-1 border-dashed border-gray-200 rounded-lg h-24 flex items-center justify-center text-gray-500 text-md"
+            className="bg-white dark:bg-neutral-800 w-full cursor-pointer border-1 border-dashed border-gray-200 rounded-lg h-24 flex items-center justify-center text-gray-500 text-md"
           >
             آپلود عکس
           </label>
-          <Input id="product-image" type="file" className="hidden" onChange={onFileChange} />
+          <Input id="product-image" type="file" className="hidden " onChange={onFileChange} />
         </div>
 
         <form className="space-y-5" onSubmit={onSubmit}>
@@ -67,7 +67,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               type="text"
               name="name"
               placeholder="نام محصول"
-              className="py-6 text-md"
+              className="py-6 text-md dark:bg-neutral-800"
               value={formData.name}
               onChange={onChange}
             />
@@ -77,8 +77,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
             <label className="block mb-1 text-md">قیمت</label>
             <Input
               name="price"
-              placeholder="قیمت محصول"
-              className="py-6 text-md"
+              placeholder="قیمت محصول "
+              className="py-6 text-md dark:bg-neutral-800"
               value={formData.price}
               onChange={onChange}
             />
@@ -90,7 +90,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               name="description"
               placeholder="توضیحات محصول"
               rows={4}
-              className="bg-white w-full border border-gray-200 rounded-md px-3 py-6"
+              className="bg-white w-full border border-gray-200 rounded-md px-3 py-6 dark:bg-neutral-800"
               value={formData.description}
               onChange={onChange}
             />
@@ -98,7 +98,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
           <div className="flex items-center gap-2">
             <Select onValueChange={onCategoryChange} value={formData.category}>
-              <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-white" dir="rtl">
+              <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-whit" dir="rtl">
                 <SelectValue placeholder="انتخاب دسته‌بندی" />
               </SelectTrigger>
               <SelectContent>

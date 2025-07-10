@@ -10,7 +10,7 @@ const OrderDetailItem = ({ label, value }: { label: string; value: number | stri
   return (
     <div className="flex gap-1 text-[13px] text-[#58616C]">
       <p className="text-[#DB2777]">{label}</p>
-      <p className="text-black">{value}</p>
+      <p className="text-black dark:text-white">{value}</p>
     </div>
   );
 };
@@ -26,15 +26,7 @@ const CheckoutPage = () => {
 
   const handlePay = () => {
     if (order?._id) {
-      toast('پرداخت با موفقیت انجام شد', {
-        style: {
-          border: '1px solid #DB2777',
-          padding: '12px 16px',
-          color: '#DB2777',
-          background: '#FDF2F8',
-          borderRadius: '8px',
-        },
-      });
+      toast.success('پرداخت با موفقیت انجام شد');
 
       setTimeout(() => {
         navigate('/orders');
@@ -60,14 +52,14 @@ const CheckoutPage = () => {
       </Table>
 
       <div className="w-1/3">
-        <div className="flex flex-col justify-between gap-3">
+        <div className="flex flex-col justify-between gap-3 ">
           <h4 className="font-bold">آدرس دریافت</h4>
           <OrderDetailItem label="شماره سفارش :" value={order?._id || ''} />
           <OrderDetailItem label="نام :" value={order?.user.username || ''} />
           <OrderDetailItem label="ایمیل :" value={order?.user.email || ''} />
           <OrderDetailItem label="آدرس :" value={order?.shippingAddress.address || ''} />
           <OrderDetailItem label="درگاه پرداخت :" value="Pasargad" />
-          <span className="bg-[#E6E8EB] text-xs rounded-md px-3 py-2 mt-1">تکمیل نشده</span>
+          <span className="bg-[#E6E8EB] text-xs rounded-md px-3 py-2 mt-1 dark:bg-neutral-800">تکمیل نشده</span>
 
           <h3 className="my-2 font-bold">خلاصه خرید</h3>
           <OrderPriceSummary />

@@ -30,7 +30,7 @@ const ShopCard = ({ product }: { product: ProductModel }) => {
   };
 
   return (
-    <div className="bg-gray-200 rounded-2xl overflow-hidden flex flex-col w-full max-w-xs h-fit">
+    <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden flex flex-col w-full max-w-xs h-fit">
       <div className="relative">
         <img src={image} alt="" className="w-full aspect-[5/2] object-cover" />
         <FavoriteButton product={product} />
@@ -43,11 +43,11 @@ const ShopCard = ({ product }: { product: ProductModel }) => {
         <div>
           <div className="flex items-center justify-between font-medium">
             <h2 className="truncate text-[16px]">{name}</h2>
-            <span className="text-pink-700 whitespace-nowrap text-sm">
+            <span className="text-pink-700 dark:text-pink-500 whitespace-nowrap text-sm">
               {price.toLocaleString()} تومان
             </span>
           </div>
-          <p className="text-xs text-gray-600 mt-2 line-clamp-1 leading-snug">{description}</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 line-clamp-1 leading-snug">{description}</p>
         </div>
 
         <div className="flex items-center justify-between pt-3 pb-4">
@@ -60,7 +60,7 @@ const ShopCard = ({ product }: { product: ProductModel }) => {
 
           <ShoppingCart
             onClick={handleCartClick}
-            className={`ml-4 cursor-pointer transition-colors ${isInCart ? 'text-pink-600' : 'text-gray-700'}`}
+            className={`ml-4 cursor-pointer transition-colors ${isInCart ? 'text-pink-600 ' : 'text-gray-700 dark:text-white'}`}
           />
         </div>
       </div>

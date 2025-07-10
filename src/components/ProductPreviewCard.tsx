@@ -31,18 +31,18 @@ const ProductPreviewCard = (props: ProductPreviewCardProps) => {
     });
   };
   return (
-    <div className="bg-[#F8F9FA] p-3 flex flex-row rounded-md shadow-sm w-full">
+    <div className="bg-[#F8F9FA] dark:bg-gray-800 p-3 flex flex-row rounded-md shadow-sm w-full">
       <div className="w-24 aspect-square flex-shrink-0">
         <img src={props.image} alt={props.name} className="w-full h-full object-cover rounded-md" />
       </div>
 
       <div className="flex flex-col justify-between flex-1 px-4 py-1">
         <div className="flex justify-between items-center">
-          <p className="text-base font-semibold text-black">{props.name}</p>
-          <p className="text-sm text-[#58616C]">{formatDate(props.createdAt)}</p>
+          <p className="text-base font-semibold text-black dark:text-white">{props.name}</p>
+          <p className="text-sm text-[#58616C] dark:text-gray-400">{formatDate(props.createdAt)}</p>
         </div>
 
-        <p className="text-sm text-[#58616C] mt-1 leading-snug">
+        <p className="text-sm text-[#58616C] mt-1 leading-snug dark:text-gray-400 ">
           {props.description.length > 100
             ? props.description.slice(0, 90) + '...'
             : props.description}
@@ -50,7 +50,7 @@ const ProductPreviewCard = (props: ProductPreviewCardProps) => {
 
         <div className="flex justify-between items-center mt-2">
           <ViewMoreButton _id={props._id} />
-          <p className="text-sm font-bold text-black">
+          <p className="text-sm font-bold text-black dark:text-white">
             {props.price.toLocaleString('fa-IR')} تومان
           </p>
           <div className="flex">

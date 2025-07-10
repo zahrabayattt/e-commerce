@@ -29,7 +29,7 @@ const ProductCarousel = () => {
           <SwiperSlide key={p._id}>
             <Link to={`/product/${p._id}`} key={p._id}>
               <div className="flex justify-center mx-auto p-4">
-                <div className="bg-white rounded-lg shadow border flex flex-col overflow-hidden p-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow border flex flex-col overflow-hidden p-4">
                   <div className="w-xl bg-gray-100 flex justify-center items-center">
                     <img
                       src={p.image}
@@ -43,7 +43,7 @@ const ProductCarousel = () => {
                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
                       <div className="flex flex-row gap-2 items-center">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 dark:fill-white"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 576 512"
                         >
@@ -54,7 +54,7 @@ const ProductCarousel = () => {
 
                       <div className="flex flex-row items-center gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 dark:fill-white"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 576 512"
                         >
@@ -64,7 +64,7 @@ const ProductCarousel = () => {
                       </div>
                       <div className="flex flex-row gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 dark:fill-white"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 640 512"
                         >
@@ -76,7 +76,7 @@ const ProductCarousel = () => {
 
                       <div className="flex flex-row gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 dark:fill-white"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 576 512"
                         >
@@ -86,7 +86,7 @@ const ProductCarousel = () => {
                       </div>
                       <div className="flex flex-row gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 dark:fill-white"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 512 512"
                         >
@@ -96,7 +96,7 @@ const ProductCarousel = () => {
                         <p>زمان به روز رسانی:{formatDate(p.updatedAt)}</p>
                       </div>
                     </div>
-                    <p className="text-xs leading-5 mt-2 text-gray-600">{p.description}</p>
+                    <p className="text-xs leading-5 mt-2 text-gray-600 dark:text-neutral-300">{p.description}</p>
                   </div>
                 </div>
               </div>

@@ -59,7 +59,7 @@ const CommentSubmit = ({ product }: { product: ProductModel }) => {
         <SelectTrigger className="w-3xl bg-white">
           <SelectValue placeholder="انتخاب امتیاز" />
         </SelectTrigger>
-        <SelectContent className="bg-white">
+        <SelectContent className="bg-white dark:bg-neutral-800">
           <SelectItem value="5">عالی</SelectItem>
           <SelectItem value="4">خیلی خوب</SelectItem>
           <SelectItem value="3">خوب</SelectItem>

@@ -14,7 +14,7 @@ const CommentShow = ({ productid }: Props) => {
     <div className="flex flex-col gap-6 w-3xl max-w-3xl">
       {product?.reviews.map((review) => {
         return (
-          <div className="flex flex-col bg-white rounded-md">
+          <div className="flex flex-col bg-white dark:bg-neutral-800 rounded-md">
             <div className="flex flex-row justify-between p-2 w-full">
               <p className="text-neutral-400">{review.name}</p>
               <p>{formatDate(review.createdAt)}</p>

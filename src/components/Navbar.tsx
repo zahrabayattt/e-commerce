@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <aside
-      className={`bg-white fixed z-10 border-l border-gray-200 shadow-md h-screen 
+      className={`bg-white dark:bg-black fixed z-10 border-l border-gray-200 dark:border-gray-700 shadow-md h-screen 
         transition-all duration-500 ease-in-out ${isOpen ? 'w-45' : 'w-15'}
         flex flex-col`}
       onMouseEnter={() => setIsOpen(true)}
@@ -55,7 +55,7 @@ const Navbar = () => {
             <NavLink
               to={item.address ?? '#'}
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 ${
+                `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${
                   isActive ? 'text-red-500' : ''
                 }`
               }
@@ -91,7 +91,7 @@ const Navbar = () => {
               to={item.address ?? '#'}
               end
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 ${
+                `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100  ${
                   isActive ? 'text-red-500' : ''
                 }`
               }
@@ -110,7 +110,7 @@ const Navbar = () => {
           <div className="relative">
             <button
               onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-              className="hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full"
+              className="hover:bg-gray-200 dark:hover:bg-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full"
             >
               <span className="flex items-center gap-3">
                 {userNavItem.icon}
@@ -125,7 +125,7 @@ const Navbar = () => {
               {dropdownIcon}
             </button>
             {userDropdownOpen && (
-              <div className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-full dark:bg-gray-700 mt-1">
+              <div className="z-10 bg-white dark:bg-black divide-y divide-gray-100 rounded-lg shadow-sm w-full  mt-1">
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
@@ -137,7 +137,7 @@ const Navbar = () => {
                         {subItem.title === 'خروج از حساب' ? (
                           <button
                             onClick={() => logout.mutate()}
-                            className="block w-full text-right px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            className="block w-full text-right px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
                           >
                             {subItem.title}
                           </button>
@@ -145,7 +145,7 @@ const Navbar = () => {
                           <NavLink
                             to={subItem.address || '#'}
                             className={({ isActive }) =>
-                              `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 ${
+                              `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-800 ${
                                 isActive ? 'text-red-500' : ''
                               }`
                             }

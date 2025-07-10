@@ -20,8 +20,8 @@ const UserDataRow = ({
   const isEditingName = editingNameUser?._id === user._id;
 
   return (
-    <TableRow className="border-b border-gray-200 even:bg-gray-100 h-16">
-      <TableCell className="text-right  ">{user._id}</TableCell>
+    <TableRow className="border-b  border-gray-200 even:bg-gray-100 dark:even:bg-neutral-800">
+      <TableCell className="text-right dark:text-white ">{user._id}</TableCell>
       <TableCell className="text-right flex gap-3  py-6 ">
         {isEditingName ? (
           <>
@@ -31,7 +31,7 @@ const UserDataRow = ({
                      hover:bg-[#008bbd] cursor-pointer "
             />
             <input
-              className="bg-white p-2 rounded-md border border-gray-300 shadow-sm focus:outline-none "
+              className="bg-white dark:bg-[#3F4043]  p-2 rounded-md border border-gray-300 dark::border-gray-900 shadow-sm focus:outline-none "
               type="text"
               value={newName}
               placeholder={user.username}
@@ -59,7 +59,7 @@ const UserDataRow = ({
               />
               <input
                 autoFocus
-                className="bg-white p-2 rounded-md border border-gray-300 shadow-sm focus:outline-none"
+                className="bg-white dark:bg-[#3F4043]  p-2 rounded-md border border-gray-300 dark::border-gray-900 shadow-sm focus:outline-none"
                 type="text"
                 value={newEmail}
                 placeholder={user.email}
@@ -81,12 +81,12 @@ const UserDataRow = ({
         {user.isAdmin ? (
           <Check
             onClick={() => onToggleAdmin(user)}
-            className="text-green-700 hover:w-6 hover:h-6  w-4 h-4 cursor-pointer"
+            className="text-green-700 dark:text-green-500 hover:w-6 hover:h-6  w-4 h-4 cursor-pointer"
           />
         ) : (
           <X
             onClick={() => onToggleAdmin(user)}
-            className="text-red-700 w-4 h-4 cursor-pointer hover:w-6 hover:h-6"
+            className="text-red-700 dark:text-red-500 w-4 h-4 cursor-pointer hover:w-6 hover:h-6"
           />
         )}
       </TableCell>
