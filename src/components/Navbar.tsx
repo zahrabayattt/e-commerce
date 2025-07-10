@@ -1,52 +1,41 @@
 import useAuthStore from '@/store/use-auth-store';
 import { NavLink } from 'react-router-dom';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { authNavItems, getAuthNavItems, NavbarItems } from '@/components/NavbarItems';
 import useLogout from '@/hooks/use-logout';
 import { useCartStore } from '@/store/use-cart-store';
 import ModToggle from './ModToggle';
 
-const DropdownIcon = () => (
-  <svg
-    className="w-2.5 h-2.5 ms-3"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 10 6"
-  >
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="m1 1 4 4 4-4"
-    />
-  </svg>
-);
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+
+  const { cartItems } = useCartStore();
   const logout = useLogout();
 
-  const userId = useAuthStore((state) => state.id);
-  const isAdmin = useAuthStore((state) => state.isAdmin);
+  const { id, isAdmin } = useAuthStore();
+  const authItems = getAuthNavItems(isAdmin);
+  const navbarItems = NavbarItems;
+  const userNavItem = authItems[0];
 
-  const getUserCart = useCartStore((state) => state.getUserCart);
-  const cartItems = useMemo(() => getUserCart(), [getUserCart, userId]);
-
-  const totalQuantity = useMemo(
-    () => cartItems.reduce((total, item) => total + item.quantity, 0),
-    [cartItems]
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const dropdownIcon = (
+    <svg
+      className="w-2.5 h-2.5 ms-3"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 10 6"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m1 1 4 4 4-4"
+      />
+    </svg>
   );
-
-  const { navbarItems, userNavItem } = useMemo(() => {
-    const authItems = getAuthNavItems(isAdmin);
-    return {
-      navbarItems: NavbarItems,
-      userNavItem: authItems[0],
-    };
-  }, [isAdmin]);
 
   return (
     <aside
@@ -59,7 +48,7 @@ const Navbar = () => {
         setUserDropdownOpen(false);
       }}
     >
-<!--       <ModToggle /> -->
+      <ModToggle />
       <nav className="flex flex-col gap-2 p-2">
         {navbarItems.map((item) => (
           <div key={item.address} className="relative">
@@ -71,14 +60,12 @@ const Navbar = () => {
                 }`
               }
             >
-              {item.title === 'سبد خرید' ? (
+              {item.title === 'سبد خرید' && totalQuantity > 0 ? (
                 <div className="relative">
                   {item.icon}
-                  {totalQuantity > 0 && (
-                    <span className="absolute -top-3 -right-3 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {totalQuantity}
-                    </span>
-                  )}
+                  <span className="absolute -top-3 -right-3 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {totalQuantity}
+                  </span>
                 </div>
               ) : (
                 item.icon
@@ -97,7 +84,7 @@ const Navbar = () => {
       </nav>
 
       <div className="mt-auto p-2 border-t pt-3">
-        {!userId ? (
+        {!id ? (
           authNavItems.map((item) => (
             <NavLink
               key={item.address}
@@ -135,7 +122,7 @@ const Navbar = () => {
                   {userNavItem.title}
                 </span>
               </span>
-              <DropdownIcon />
+              {dropdownIcon}
             </button>
             {userDropdownOpen && (
               <div className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-full dark:bg-gray-700 mt-1">
