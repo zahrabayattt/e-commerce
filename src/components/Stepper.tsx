@@ -8,7 +8,7 @@ const Stepper = ({ currentStep }: IStepper) => {
       {steps.map((step, index) => (
         <div key={index} className="flex items-center gap-2">
           <div className="flex flex-col items-center gap-2">
-            <p className={`text-[#22C55E] text-sm ${index >= currentStep ? 'text-black' : ''}`}>
+            <p className={`text-[#22C55E] text-sm ${index >= currentStep ? 'text-black dark:text-white'  : ''}`}>
               {step}
             </p>
             {index < currentStep && <input type="checkbox" checked readOnly className="checkbox" />}
