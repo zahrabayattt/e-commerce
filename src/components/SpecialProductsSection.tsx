@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useProducts } from '@/hooks/use-Products';
 import { Badge } from './ui/badge';
+import { products } from './ProductsForShow';
 
 
 const SpecialProductsSection: React.FC = () => {
@@ -11,6 +12,8 @@ const SpecialProductsSection: React.FC = () => {
     queryKey: ['products'],
     queryFn: useProducts,
   });
+
+  const sortedRating = data?.sort((a, b) => a.price - b.price).slice(0, 8);
 
     if (isLoading) return <p>در حال بارگذاری...</p>;
     if (isError) return <p>خطا در دریافت محصولات</p>;
@@ -26,7 +29,7 @@ const SpecialProductsSection: React.FC = () => {
         </Link>
       </div>
       <div className="grid grid-cols-4 gap-4 w-11/12">
-        {data?.slice(0, 8).map((product) => (
+        {sortedRating?.slice(0, 8).map((product) => (
           <Link to={`/product/${product._id}`} key={product._id}>
             <ProductCard product={product} componentSize="small" />
           </Link>

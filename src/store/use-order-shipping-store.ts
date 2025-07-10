@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import type { IOrderShippingDetail } from '@/types/order.Shipping.model';
 
 interface IOrderState {
@@ -9,9 +8,24 @@ interface IOrderState {
   resetOrderShipping: () => void;
 }
 
-export const useOrderStore = create<IOrderState>()(
-  persist(
-    (set) => ({
+export const useOrderStore = create<IOrderState>()((set) => ({
+  orderShippingDetail: {
+    address: '',
+    city: '',
+    country: '',
+    postalCode: '',
+    paymentMethod: 'pasargad',
+  },
+  currentStep: 2,
+  setOrderShippingDetail: (name, value) =>
+    set((state) => ({
+      orderShippingDetail: {
+        ...state.orderShippingDetail,
+        [name]: value,
+      },
+    })),
+  resetOrderShipping: () =>
+    set({
       orderShippingDetail: {
         address: '',
         city: '',
@@ -20,27 +34,5 @@ export const useOrderStore = create<IOrderState>()(
         paymentMethod: 'pasargad',
       },
       currentStep: 2,
-      setOrderShippingDetail: (name, value) =>
-        set((state) => ({
-          orderShippingDetail: {
-            ...state.orderShippingDetail,
-            [name]: value,
-          },
-        })),
-      resetOrderShipping: () =>
-        set({
-          orderShippingDetail: {
-            address: '',
-            city: '',
-            country: '',
-            postalCode: '',
-            paymentMethod: 'pasargad',
-          },
-          currentStep: 2,
-        }),
     }),
-    {
-      name: 'order-shipping-storage',
-    }
-  )
-);
+}));
