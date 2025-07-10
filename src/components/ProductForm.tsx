@@ -98,7 +98,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
           <div className="flex items-center gap-2">
             <Select onValueChange={onCategoryChange} value={formData.category}>
-              <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-whit" dir="rtl">
+              <SelectTrigger className="w-full text-right text-md h-14 py-6 bg-white" dir="rtl">
                 <SelectValue placeholder="انتخاب دسته‌بندی" />
               </SelectTrigger>
               <SelectContent>
