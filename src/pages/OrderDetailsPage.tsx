@@ -40,13 +40,13 @@ const OrderDetailsPage = () => {
                 <TableRow key={item._id}>
                   <TableCell className="p-2 text-right w-20">
                     <div className="flex justify-center items-center h-full ">
-                      <img src={item.image} alt={item.name} className="w-10 h-10 object-cover" />
+                      <img src={`https://qbc9.liara.run/uploads/${item.image}`} alt={item.name} className="w-10 h-10 object-cover" />
                     </div>
                   </TableCell>
                   <TableCell className="text-right">{item.name}</TableCell>
                   <TableCell className="text-center">{item.qty}</TableCell>
-                  <TableCell className="text-center">${item.price.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">${(item.qty * item.price).toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{item.price.toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{(item.qty * item.price).toLocaleString()}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -58,11 +58,12 @@ const OrderDetailsPage = () => {
       <div className="w-2/6 px-4 flex flex-col gap-2 ml-[50px]">
         <div className='flex flex-col justify-between gap-3 text-black '>
           <h2 className="font-bold text-black mb-2">آدرس دریافت</h2>
-          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">شماره سفارش:</span> {order._id}</p>
-          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">نام:</span> {typeof order.user === 'object' && order.user !== null ? order.user.username : '-'}</p>
-          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">ایمیل:</span> {typeof order.user === 'object' && order.user !== null ? order.user.email : '-'}</p>
-          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">آدرس:</span> {order.shippingAddress.address}</p>
-          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">روش پرداخت:</span> {order.paymentMethod}</p>
+          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">شماره سفارش:</span> {order._id}</p>
+          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">نام:</span> {typeof order.user === 'object' && order.user !== null ? order.user.username : '-'}</p>
+          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">ایمیل:</span> {typeof order.user === 'object' && order.user !== null ? order.user.email : '-'}</p>
+          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">آدرس:</span> {order.shippingAddress.address}</p>
+          {/* <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">روش پرداخت:</span> {order.paymentMethod}</p> */}
+          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">روش پرداخت:</span>درگاه پرداخت پاسارگاد</p>
         </div>
 
         <div className='bg-[#E6E8EB] text-xs rounded-sm border border-gray-300 px-3 py-2 mt-2'>
@@ -71,7 +72,7 @@ const OrderDetailsPage = () => {
 
         <div>
           <h2 className="font-bold my-4">خلاصه خرید</h2>
-          <div className='flex flex-col gap-2 text-[10px]'>
+          <div className='flex flex-col gap-2 text-[12px]'>
             <div className="flex justify-between">
               <span className='text-[#58616C]'>قیمت محصولات:</span>
               <span>{totalPrice.toLocaleString()} تومان</span>
