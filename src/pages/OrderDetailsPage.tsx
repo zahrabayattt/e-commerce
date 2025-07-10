@@ -40,13 +40,13 @@ const OrderDetailsPage = () => {
                 <TableRow key={item._id}>
                   <TableCell className="p-2 text-right w-20">
                     <div className="flex justify-center items-center h-full ">
-                      <img src={item.image} alt={item.name} className="w-10 h-10 object-cover" />
+                      <img src={`https://qbc9.liara.run/uploads/${item.image}`} alt={item.name} className="w-10 h-10 object-cover" />
                     </div>
                   </TableCell>
                   <TableCell className="text-right">{item.name}</TableCell>
                   <TableCell className="text-center">{item.qty}</TableCell>
-                  <TableCell className="text-center">${item.price.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">${(item.qty * item.price).toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{item.price.toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{(item.qty * item.price).toLocaleString()}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -71,7 +71,7 @@ const OrderDetailsPage = () => {
 
         <div>
           <h2 className="font-bold my-4">خلاصه خرید</h2>
-          <div className='flex flex-col gap-2 text-[10px]'>
+          <div className='flex flex-col gap-2 text-[12px]'>
             <div className="flex justify-between">
               <span className='text-[#58616C]'>قیمت محصولات:</span>
               <span>{totalPrice.toLocaleString()} تومان</span>

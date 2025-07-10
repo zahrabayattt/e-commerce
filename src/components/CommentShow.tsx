@@ -1,15 +1,19 @@
 import { useProduct } from '@/hooks/use-Product';
 import { formatDate } from '@/lib/utils';
 import StarRating from './StarRating';
+import { useEffect } from 'react';
 
 
 type Props = {
   productid: string;
 };
 const CommentShow = ({ productid }: Props) => {
-  const { data: product, isLoading, error } = useProduct(productid!);
+  const { data: product, isLoading, error, refetch } = useProduct(productid!);
     if (isLoading) return <p>در حال بارگذاری...</p>;
     if (error) return <p>خطا در دریافت محصولات</p>;
+    useEffect(() => {
+      refetch();
+    }, []);
   return (
     <div className="flex flex-col gap-6 w-3xl max-w-3xl">
       {product?.reviews.map((review) => {
