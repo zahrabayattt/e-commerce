@@ -63,7 +63,7 @@ const Navbar = () => {
               {item.title === 'سبد خرید' && totalQuantity > 0 ? (
                 <div className="relative">
                   {item.icon}
-                  <span className="absolute -top-3 -right-3 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-3 -right-3 bg-red-600 text-white  text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {totalQuantity}
                   </span>
                 </div>
@@ -91,7 +91,7 @@ const Navbar = () => {
               to={item.address ?? '#'}
               end
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100  ${
+                `flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800  ${
                   isActive ? 'text-red-500' : ''
                 }`
               }

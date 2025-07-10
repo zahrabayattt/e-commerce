@@ -11,14 +11,10 @@ const ShopPage = () => {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [tempPrice, setTempPrice] = useState('');
 
-  
-
-const { data, isLoading, isError } = useQuery({
-  queryKey: ['products'],
-  queryFn: useProducts,
-});
-
-
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['products'],
+    queryFn: useProducts,
+  });
 
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (isError) return <p>خطا در دریافت محصولات</p>;
@@ -30,26 +26,23 @@ const { data, isLoading, isError } = useQuery({
   };
 
   const filteredProducts = data?.filter((product) => {
-    const matchCategory = selectedCategory.length === 0 || selectedCategory.includes(product.category._id);
+    const matchCategory =
+      selectedCategory.length === 0 || selectedCategory.includes(product.category._id);
     const matchPrice = maxPrice === null || product.price <= maxPrice;
     return matchCategory && matchPrice;
   });
 
   const categories: { _id: string; name: string }[] = [];
   data?.forEach((p) => {
-  if (!categories.some(c => c.name === p.category.name)) {
-    categories.push(p.category);
-  }
+    if (!categories.some((c) => c.name === p.category.name)) {
+      categories.push(p.category);
+    }
   });
-
 
   return (
     <div className="flex ">
-      
       <div className=" bg-gray-200 dark:bg-gray-800 min-w-[230px] h-[600px] px-6 py-6 flex flex-col mt-2 mr-4 rounded-xl ">
-        <div
-          className="bg-white dark:bg-gray-200 dark:text-gray-800 rounded-3xl text-sm text-center py-2 mb-4 shadow "
-        >
+        <div className="bg-white dark:bg-gray-200 dark:text-gray-800 rounded-3xl text-sm text-center py-2 mb-4 shadow ">
           <h2>فیلتر دسته بندی</h2>
         </div>
 
@@ -66,14 +59,12 @@ const { data, isLoading, isError } = useQuery({
             <span className="text-sm ">{category.name}</span>
           </div>
         ))}
-        
-        <div
-          className="bg-white dark:bg-gray-200 dark:text-gray-800  rounded-3xl text-sm text-center py-2 shadow mt-4 "
-        >
+
+        <div className="bg-white dark:bg-gray-200 dark:text-gray-800  rounded-3xl text-sm text-center py-2 shadow mt-4 ">
           <h2> فیلتر قیمت </h2>
         </div>
         <Input
-          className="mt-5 bg-white dark:bg-gray-200 placeholder:text-[12px] "
+          className="mt-5 bg-white dark:bg-gray-200 dark:text-black placeholder:text-[12px] "
           value={tempPrice}
           onChange={(e) => {
             const value = e.target.value;
@@ -96,7 +87,7 @@ const { data, isLoading, isError } = useQuery({
         </Button>
       </div>
       <div className=" grid grid-cols-3 gap-6 mt-2  mr-14 ml-10">
-        {(filteredProducts??[]).slice(0, 10).map((product) => (
+        {(filteredProducts ?? []).slice(0, 10).map((product) => (
           <ShopCard key={product._id} product={product} />
         ))}
       </div>
