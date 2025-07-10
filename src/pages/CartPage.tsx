@@ -14,7 +14,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="bg-[#EEEFF1] dark:bg-black w-full">
+    <div className="bg-[#EEEFF1] dark:bg-[#0F0F10] w-full">
       <div className="w-2/3 py-4 mx-auto">
         {cartItems.length === 0 ? (
           <p className="text-center mt-10 mx-auto">سبد خرید شما خالی است</p>
@@ -22,7 +22,7 @@ const CartPage = () => {
           cartItems.map((item) => (
             <div
               key={item.productId}
-              className="flex justify-around items-center border-1 rounded-lg py-4 my-2 dark:bg-black"
+              className="flex justify-around items-center border-1 rounded-lg py-4 my-2 dark:bg-[#0F0F10]"
             >
               {/* Right: Product Card */}
               <div className="flex items-center gap-4 space-y-1 text-s w-3/4">
