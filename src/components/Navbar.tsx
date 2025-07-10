@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <aside
-      className={`bg-white dark:bg-black fixed z-10 border-l border-gray-200 dark:border-gray-700 shadow-md h-screen 
+      className={`bg-white dark:bg-[#0F0F10] fixed z-10 border-l border-gray-200 dark:border-gray-700 shadow-md h-screen 
         transition-all duration-500 ease-in-out ${isOpen ? 'w-45' : 'w-15'}
         flex flex-col`}
       onMouseEnter={() => setIsOpen(true)}
@@ -48,7 +48,6 @@ const Navbar = () => {
         setUserDropdownOpen(false);
       }}
     >
-      <ModToggle />
       <nav className="flex flex-col gap-2 p-2">
         {navbarItems.map((item) => (
           <div key={item.address} className="relative">
@@ -82,6 +81,7 @@ const Navbar = () => {
           </div>
         ))}
       </nav>
+      <ModToggle />
 
       <div className="mt-auto p-2 border-t pt-3">
         {!id ? (
@@ -124,6 +124,7 @@ const Navbar = () => {
               </span>
               {dropdownIcon}
             </button>
+            
             {userDropdownOpen && (
               <div className="z-10 bg-white dark:bg-black divide-y divide-gray-100 rounded-lg shadow-sm w-full  mt-1">
                 <ul
