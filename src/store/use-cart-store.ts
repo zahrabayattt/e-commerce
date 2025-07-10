@@ -1,57 +1,99 @@
-import type { CartState } from '@/types/cart.model';
-import toast from 'react-hot-toast';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import toast from 'react-hot-toast';
+import useAuthStore from './use-auth-store';
+import type { CartItem, CartState } from '@/types/cart.model';
 
 export const useCartStore = create<CartState>()(
-  persist(
+  persist<CartState>(
     (set, get) => ({
-      cartItems: [],
-      addToCart: (item) => {
-        const existingItem = get().cartItems.find((i) => i.productId === item.productId);
+      cartItems: {},
+
+      getUserCart: () => {
+        const userId = useAuthStore.getState().id;
+        return userId ? get().cartItems[userId] || [] : [];
+      },
+
+      addToCart: (item: CartItem) => {
+        const userId = useAuthStore.getState().id;
+        if (!userId) return;
+
+        const currentCart = get().cartItems[userId] || [];
+        const existingItem = currentCart.find((i) => i.productId === item.productId);
+
         if (existingItem) {
           const totalQuantity = existingItem.quantity + item.quantity;
           if (totalQuantity > item.countInStock) {
             toast.error('موجودی کافی نیست');
             return;
           }
-          set({
-            cartItems: get().cartItems.map((i) =>
-              i.productId === item.productId ? { ...i, quantity: totalQuantity } : i
-            ),
-          });
-          toast.success('محصول با موفقیت به سبد خرید اضافه شد');
+
+          const updatedCart = currentCart.map((i) =>
+            i.productId === item.productId ? { ...i, quantity: totalQuantity } : i
+          );
+
+          set((state) => ({
+            cartItems: { ...state.cartItems, [userId]: updatedCart },
+          }));
         } else {
           if (item.quantity > item.countInStock) {
             toast.error('موجودی کافی نیست');
             return;
           }
-          set({ cartItems: [...get().cartItems, item] });
-          toast.success('محصول با موفقیت به سبد خرید اضافه شد');
+
+          set((state) => ({
+            cartItems: { ...state.cartItems, [userId]: [...currentCart, item] },
+          }));
         }
+
+        toast.success('محصول با موفقیت به سبد خرید اضافه شد');
       },
-      removeFromCart: (productId) => {
-        set({
-          cartItems: get().cartItems.filter((item) => item.productId !== productId),
-        }),
-        toast.success("محصول  از سبد خرید حذف شد")
+
+      removeFromCart: (productId: string) => {
+        const userId = useAuthStore.getState().id;
+        if (!userId) return;
+
+        const currentCart = get().cartItems[userId] || [];
+        const updatedCart = currentCart.filter((i) => i.productId !== productId);
+
+        set((state) => ({
+          cartItems: { ...state.cartItems, [userId]: updatedCart },
+        }));
+
+        toast.success('محصول از سبد خرید حذف شد');
       },
+
       updateQuantity: (productId: string, quantity: number) => {
-        const item = get().cartItems.find((i) => i.productId === productId);
+        const userId = useAuthStore.getState().id;
+        if (!userId) return;
+
+        const currentCart = get().cartItems[userId] || [];
+        const item = currentCart.find((i) => i.productId === productId);
         if (!item) return;
+
         if (quantity > item.countInStock) {
           toast.error('تعداد بیشتر از موجودی است');
           return;
-        };
-        set({
-          cartItems: get().cartItems.map((i) =>
-            i.productId === productId ? { ...i, quantity } : i
-          ),
-        });
+        }
+
+        const updatedCart = currentCart.map((i) =>
+          i.productId === productId ? { ...i, quantity } : i
+        );
+
+        set((state) => ({
+          cartItems: { ...state.cartItems, [userId]: updatedCart },
+        }));
+
         toast.success('تعداد محصول به‌روزرسانی شد');
       },
+
       clearCart: () => {
-        set({ cartItems: [] });
+        const userId = useAuthStore.getState().id;
+        if (!userId) return;
+
+        set((state) => ({
+          cartItems: { ...state.cartItems, [userId]: [] },
+        }));
       },
     }),
     {
@@ -59,3 +101,7 @@ export const useCartStore = create<CartState>()(
     }
   )
 );
+export const useUserCart = () => {
+  const userId = useAuthStore((state) => state.id);
+  return useCartStore((state) => (userId ? state.cartItems[userId] || [] : []));
+};

@@ -1,13 +1,28 @@
-import { useCartStore } from '@/store/use-cart-store';
+import useAuthStore from '@/store/use-auth-store';
+import { useCartStore, useUserCart } from '@/store/use-cart-store';
 import { Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart, updateQuantity } = useCartStore();
+  const userId = useAuthStore((state) => state.id);
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
+
+  const cart = useUserCart();
+
+  if (!userId) {
+    return <div className="text-center mt-10 text-red-600">لطفاً ابتدا وارد حساب کاربری شوید</div>;
+  }
+
+  const totalPrice = Array.isArray(cart)
+    ? cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    : 0;
+
+  const totalQuantity = Array.isArray(cart)
+    ? cart.reduce((total, item) => total + item.quantity, 0)
+    : 0;
 
   const handleProceedToOrderPage = () => {
     navigate('/shopping-progress/address');
@@ -16,10 +31,10 @@ const CartPage = () => {
   return (
     <div className="bg-[#EEEFF1] w-full">
       <div className="w-2/3 py-4 mx-auto">
-        {cartItems.length === 0 ? (
+        {cart.length === 0 ? (
           <p className="text-center mt-10 mx-auto">سبد خرید شما خالی است</p>
         ) : (
-          cartItems.map((item) => (
+          cart.map((item) => (
             <div
               key={item.productId}
               className="flex justify-around items-center border-1 rounded-lg py-4 my-2"
