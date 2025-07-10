@@ -17,7 +17,7 @@ const ProductCard = ({ product, componentSize }: IProductCard) => {
       </div>
       <Link to={`/product/${product._id}`} key={product._id}>
         <div
-          className={`relative rounded-lg shadow-md overflow-hidden border${isSmall ? 'w-64 h-64' : 'w-80 h-80'}flex flex-col bg-white`}
+          className={`relative rounded-lg shadow-md overflow-hidden border${isSmall ? 'w-64 h-64' : 'w-80 h-80'}flex flex-col bg-white dark:bg-gray-800`}
         >
           <div className={`${isSmall ? 'h-44' : 'h-48'} w-full relative overflow-hidden`}>
             <img
@@ -27,7 +27,7 @@ const ProductCard = ({ product, componentSize }: IProductCard) => {
             />
           </div>
           <div className="p-2 flex flex-col justify-between flex-1">
-            <p className="text-base font-medium line-clamp-2">{product.name}</p>
+            <p className="text-base font-medium line-clamp-2 dark:text-neutral-300">{product.name}</p>
             <div className="flex justify-between items-center mt-2">
               <Badge variant="primary" className="text-sm">
                 {product.price.toLocaleString()} تومان

@@ -33,7 +33,7 @@ const CategoryDataRow = ({ category }: ICategory) => {
   };
 
   return (
-    <TableRow className="even:bg-gray-100">
+    <TableRow className="even:bg-gray-100 dark:even:bg-neutral-800">
       <TableCell className="text-right">
         {isEditing ? (
           <div className="flex items-center gap-3">

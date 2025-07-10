@@ -48,7 +48,7 @@ const ProfilePage = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <div className="w-full max-w-lg text-center mb-32 font-bold text-2xl dark:bg-gray-900">
+      <div className="w-full max-w-lg text-center mb-32 font-bold text-2xl ">
         <h2>بروزرسانی پروفایل</h2>
         <div>
           <div className="grid w-full items-center gap-4">
@@ -61,10 +61,11 @@ const ProfilePage = () => {
                 value={name}
                 placeholder="نام خود را وارد نمایید"
                 onChange={(e) => setName(e.target.value)}
+                className='dark:bg-[#3F4043]'
               />
             </div>
 
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-col space-y-1.5 ">
               <label htmlFor="email" className="text-sm font-medium text-right">
                 ایمیل
               </label>
@@ -74,6 +75,7 @@ const ProfilePage = () => {
                 value={email}
                 placeholder="ایمیل خود را وارد نمایید"
                 onChange={(e) => setEmail(e.target.value)}
+                className='dark:bg-[#3F4043]'
               />
             </div>
 
@@ -87,6 +89,7 @@ const ProfilePage = () => {
                 placeholder="رمز عبور خود را وارد نمایید"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className='dark:bg-[#3F4043]'
               />
             </div>
 
@@ -100,6 +103,7 @@ const ProfilePage = () => {
                 placeholder="تکرار رمز عبور خود را وارد نمایید"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                className='dark:bg-[#3F4043]'
               />
             </div>
           </div>

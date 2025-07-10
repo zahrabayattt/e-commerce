@@ -56,17 +56,16 @@ const OrderDetailsPage = () => {
 
       {/* orders details */}
       <div className="w-2/6 px-4 flex flex-col gap-2 ml-[50px]">
-        <div className='flex flex-col justify-between gap-3 text-black '>
-          <h2 className="font-bold text-black mb-2">آدرس دریافت</h2>
-          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">شماره سفارش:</span> {order._id}</p>
-          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">نام:</span> {typeof order.user === 'object' && order.user !== null ? order.user.username : '-'}</p>
-          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">ایمیل:</span> {typeof order.user === 'object' && order.user !== null ? order.user.email : '-'}</p>
-          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">آدرس:</span> {order.shippingAddress.address}</p>
-          {/* <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">روش پرداخت:</span> {order.paymentMethod}</p> */}
-          <p className='text-[13px]'><span className="font-semibold text-[#DB2777]">روش پرداخت:</span>درگاه پرداخت پاسارگاد</p>
+        <div className='flex flex-col justify-between gap-3 text-black dark:text-white '>
+          <h2 className="font-bold text-black  mb-2">آدرس دریافت</h2>
+          <p className='text-[11px] '><span className="font-semibold text-[#DB2777]">شماره سفارش:</span> {order._id}</p>
+          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">نام:</span> {typeof order.user === 'object' && order.user !== null ? order.user.username : '-'}</p>
+          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">ایمیل:</span> {typeof order.user === 'object' && order.user !== null ? order.user.email : '-'}</p>
+          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">آدرس:</span> {order.shippingAddress.address}</p>
+          <p className='text-[11px]'><span className="font-semibold text-[#DB2777]">روش پرداخت:</span> {order.paymentMethod}</p>
         </div>
 
-        <div className='bg-[#E6E8EB] text-xs rounded-sm border border-gray-300 px-3 py-2 mt-2'>
+        <div className='bg-[#E6E8EB] dark:bg-neutral-800 text-xs rounded-sm border border-gray-300 px-3 py-2 mt-2'>
           <h3 className="font-bold text-xs">{!order.isPaid ? 'پرداخت نشده' : !order.isDelivered ? 'در حال ارسال' : 'ارسال شده'}</h3>
         </div>
 

@@ -63,7 +63,7 @@ const UsersPage: React.FC = () => {
   };
 
   return (
-    <Table className="mt-10 mr-10">
+    <Table className="mt-10 ">
       <TableHeader>
         <TableRow>
           <TableHead className="text-right text-2xl font-bold pb-4 ">ID</TableHead>

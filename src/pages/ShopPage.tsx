@@ -46,11 +46,11 @@ const { data, isLoading, isError } = useQuery({
   return (
     <div className="flex ">
       
-      <div className=" bg-gray-200 min-w-[230px] h-[600px] px-6 py-6 flex flex-col mt-2 mr-4 rounded-xl ">
+      <div className=" bg-gray-200 dark:bg-gray-800 min-w-[230px] h-[600px] px-6 py-6 flex flex-col mt-2 mr-4 rounded-xl ">
         <div
-          className="bg-white rounded-3xl text-sm text-center py-2 mb-4 shadow "
+          className="bg-white dark:bg-gray-200 dark:text-gray-800 rounded-3xl text-sm text-center py-2 mb-4 shadow "
         >
-          <h2>فیلتر برند</h2>
+          <h2>فیلتر دسته بندی</h2>
         </div>
 
         {categories.map((category) => (
@@ -68,12 +68,12 @@ const { data, isLoading, isError } = useQuery({
         ))}
         
         <div
-          className="bg-white rounded-3xl text-sm text-center py-2 shadow mt-4 "
+          className="bg-white dark:bg-gray-200 dark:text-gray-800  rounded-3xl text-sm text-center py-2 shadow mt-4 "
         >
           <h2> فیلتر قیمت </h2>
         </div>
         <Input
-          className="mt-5 bg-white placeholder:text-[12px] "
+          className="mt-5 bg-white dark:bg-gray-200 placeholder:text-[12px] "
           value={tempPrice}
           onChange={(e) => {
             const value = e.target.value;
